@@ -23,8 +23,90 @@ h3 {
 }
 
 #result {
-    background-color: rgb(240, 240, 240);
+    background-color: #fafafa;
     padding: 20px;
+    border-radius: 15px;
+
+}
+
+/* NEEDS SURGERY */
+
+h3 {
+    font-weight: 300;
+    font-size: 28px;
+    margin-bottom: 32px;
+}
+
+.test {
+    background-color: rgb(221, 221, 221);
+    font-size: larger;
+    padding: 20px;
+    border-radius: 15px;
+    margin: 25px 0;
+}
+
+.test .blog-card {
+    display: grid;
+    gap: 32px;
+    grid-template-columns: 1fr;
+    max-height: 420px;
+
+
+
+    /* /-----* TO BE ADDED *-----/ */
+
+    /* @media(min-width: 500px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media(min-width: 900px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media(min-width: 1200px) {
+        grid-template-columns: repeat(4, 1fr);
+    } */
+}
+
+
+.test .linkedin-post {
+    overflow: hidden;
+    display: flex;
+    justify-content: flex-start;
+        row-gap: 150px;
+    border-radius: 8px;
+    width: 299px;
+    margin-right: -10px;
+    z-index: 1;
+
+    display: flex;
+    background-color: #fafafa;
+    transition: .3s ease all;
+
+    /* border: 1px solid #d3d3d3; */
+
+    
+}
+
+.linkedin-post:hover {
+        transform: scale(1.04);
+        box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
+        0 15px 40px rgba(166, 173, 201, 0.2);
+}
+
+.filling-empty-space-childs {
+    width: 299px; /*the width of the images in this example*/
+    height:auto; /*Important! for the divs to collapse should they fall in a new row*/
+}
+
+.container {
+    display: flex;
+    justify-content: space-evenly;
+    row-gap: 150px;
+    gap: 50px 30px;
+    padding: 30px;
+    flex-wrap: wrap;
+    background-color: #fafafa;
     border-radius: 15px;
 
 }

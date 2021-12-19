@@ -44,9 +44,9 @@ onSnapshot(q, (snapshot) => {
     console.log(posts)
     document.getElementById('result').innerHTML = `
     <h3>Results (${posts.length})</h3>
-    ${posts.map(function() {
-      return 'hello'
-    }).join('')}
+    ${posts.map(function(grabData) {
+      return grabData.date
+    }).join(' ')}
     <p class="subtitle">Please enjoy reading through my most recent posts</p>
     `
 })

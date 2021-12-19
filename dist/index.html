@@ -1,4 +1,5 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -6,23 +7,24 @@
     <link rel="stylesheet" href="style.css">
     <title>Portfolio.io</title>
 </head>
+
 <body>
     <h1>Building Blocks of Potfolio.io</h1>
 
     <div class="mini-app">
-        <h3>Firebase Firestore Mini-App</h3>
+        <h3>Firebase Firestore Mini-App:</h3>
         <form class="add">
-          <label for="topic">Topic:</label>
-          <input type="text" name="topic" required>
-          <label for="date">Date:</label>
-          <input type="date" name="date" required>
-        
-          <button>Add a Post Entry</button>
+            <label for="topic">Topic:</label>
+            <input type="text" name="topic" required>
+            <label for="date">Date:</label>
+            <input type="date" name="date" required>
+
+            <button>Add a Post Entry</button>
         </form>
         <form class="delete">
-          <label for="id">Document ID:</label>
-          <input type="text" name="id" required>
-          <button>Delete a Post Entry</button>
+            <label for="id">Document ID:</label>
+            <input type="text" name="id" required>
+            <button>Delete a Post Entry</button>
         </form>
         <form class="update">
             <label for="id">Document ID:</label>
@@ -31,16 +33,63 @@
         </form>
     </div>
 
-    
+
     <div class="mini-app">
-        <div class="container">
-            <h3>Recent Posts Mini-App:</h3>
-            <div class="blog-cards">
-                <div id="result"></div>
-            </div>
+        <h3>Post Logic Mini-App:</h3>
+        <div class="blog-cards">
+            <div id="result"></div>
         </div>
     </div>
 
+
+    <div class="test">
+        <h3>Posts as Tiles Mini-App:</h3>
+        <div class="container">
+            <div class="blog-card">
+                <div class="linkedin-post">
+                    <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:6835038759290052608"
+                        height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
+                </div>
+            </div>
+            <div class="blog-card">
+                <div class="linkedin-post">
+                    <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:6843764354060570624"
+                        height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
+                </div>
+            </div>
+            <div class="blog-card">
+                <div class="linkedin-post">
+                    <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:6837693251592556544"
+                        height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
+                </div>
+            </div>
+            <div class="blog-card">
+                <div class="linkedin-post">
+                    <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:6654643811295330304"
+                        height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
+                </div>
+            </div>
+            <div class="blog-card">
+                <div class="linkedin-post">
+                    <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:6827770881079685120"
+                        height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
+                </div>
+            </div>
+            <div class="blog-card">
+                <div class="linkedin-post">
+                    <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:6664059890320977921"
+                        height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
+                </div>
+            </div>
+            <div class="filling-empty-space-childs"></div>
+            <div class="filling-empty-space-childs"></div>
+            <div class="filling-empty-space-childs"></div>
+            <div class="filling-empty-space-childs"></div>
+        </div>
+    </div>
+
+
     <script src="bundle.js"></script>
 </body>
+
 </html>
