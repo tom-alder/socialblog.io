@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Besley:ital,wght@0,400;1,900&display=swap');
+
+body {
+    font-family: Helvetica, sans-serif;
+    margin: 20;
+}
+
+h3 {
+    margin-bottom: 30px;
+    margin-top: 10px
+}
+
+.mini-app {
+    background-color: rgb(221, 221, 221);
+    font-size: larger;
+    padding: 20px;
+    border-radius: 15px;
+    margin: 25px 0;
+}
+
+.subtitle {
+    color: rgb(97, 97, 97)
+}
+
+#result {
+    background-color: rgb(240, 240, 240);
+    padding: 20px;
+    border-radius: 15px;
+
+}

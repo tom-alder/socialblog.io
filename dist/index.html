@@ -1,0 +1,46 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Portfolio.io</title>
+</head>
+<body>
+    <h1>Building Blocks of Potfolio.io</h1>
+
+    <div class="mini-app">
+        <h3>Firebase Firestore Mini-App</h3>
+        <form class="add">
+          <label for="topic">Topic:</label>
+          <input type="text" name="topic" required>
+          <label for="date">Date:</label>
+          <input type="date" name="date" required>
+        
+          <button>Add a Post Entry</button>
+        </form>
+        <form class="delete">
+          <label for="id">Document ID:</label>
+          <input type="text" name="id" required>
+          <button>Delete a Post Entry</button>
+        </form>
+        <form class="update">
+            <label for="id">Document ID:</label>
+            <input type="text" name="id" required>
+            <button>Update a Post</button>
+        </form>
+    </div>
+
+    
+    <div class="mini-app">
+        <div class="container">
+            <h3>Recent Posts Mini-App:</h3>
+            <div class="blog-cards">
+                <div id="result"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="bundle.js"></script>
+</body>
+</html>
