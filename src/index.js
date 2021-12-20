@@ -35,21 +35,63 @@ const q = query(colRef, orderBy('date', 'desc'))
 // querying to filter for certain topics and sort by date
 // const q = query(colRef, where("topic", "==", "social media"), orderBy('date', 'desc'))
 
-// get collection data
+// Get collection data - individual datapoints
 onSnapshot(q, (snapshot) => {
     let posts = []
     snapshot.docs.forEach((doc) => {
       posts.push({ ...doc.data(), id: doc.id })
     })
     console.log(posts)
-    document.getElementById('result').innerHTML = `
+    document.getElementById('datapoint').innerHTML = `
     <h3>Results (${posts.length})</h3>
     ${posts.map(function(grabData) {
-      return grabData.date
-    }).join(' ')}
+      return grabData.topic
+    }).join(' - ')}
     <p class="subtitle">Please enjoy reading through my most recent posts</p>
     `
 })
+
+// Get collection data - TESTING postcard (Only 1??)
+// onSnapshot(q, (snapshot) => {
+//     let posts = []
+//     snapshot.docs.forEach((doc) => {
+//       posts.push({ ...doc.data(), id: doc.id })
+//     })
+//     console.log(posts)
+//     document.getElementById('postcard').innerHTML = `
+  
+//     ${posts.map(function(grabData) {
+//       return `
+//       <iframe src="${grabData.link}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
+//       `
+//     }).join(' - ')}
+//     <p class="subtitle">Please enjoy reading through my most recent posts</p>
+//     `
+// })
+
+// Get collection data - TESTING postcard (Lets make a grid)
+onSnapshot(q, (snapshot) => {
+    let posts = []
+    snapshot.docs.forEach((doc) => {
+      posts.push({ ...doc.data(), id: doc.id })
+    })
+    console.log(posts)
+    document.getElementById('postcard').innerHTML = `
+  
+    ${posts.map(function(grabData) {
+      return `
+
+        <div class="blog-card">
+          <div class="linkedin-post">
+          <iframe src="${grabData.link}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
+          </div>
+        </div> 
+
+      `
+    }).join('')}
+    `
+})
+
 
 // adding docs
 const addPostForm = document.querySelector('.add')
@@ -59,6 +101,7 @@ addPostForm.addEventListener('submit', (e) => {
   addDoc(colRef, {
       topic: addPostForm.topic.value,
       date: addPostForm.date.value,
+      link: addPostForm.link.value,
     })
     .then(() => {
     addPostForm.reset()

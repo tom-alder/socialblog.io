@@ -18,6 +18,8 @@
             <input type="text" name="topic" required>
             <label for="date">Date:</label>
             <input type="date" name="date" required>
+            <label for="link">Link:</label>
+            <input type="text" name="link" required>
 
             <button>Add a Post Entry</button>
         </form>
@@ -35,14 +37,34 @@
 
 
     <div class="mini-app">
-        <h3>Post Logic Mini-App:</h3>
-        <div class="blog-cards">
-            <div id="result"></div>
-        </div>
+        <h3>Pull Data From Posts Mini-App:</h3>
+        <div id="datapoint"></div>
     </div>
 
+    <!-- ONLY MAKES A SINGLE CARD 
+        <div class="postcard-mini-app">
+        <h3>Create Cards From Firestore Mini-App:</h3>
+        <div class="container">
+            <div class="blog-card">
+                <div class="linkedin-post" id="postcard">
+                </div>
+            </div>
+        </div>
+    </div> -->
 
-    <div class="test">
+    <div class="postcard-mini-app">
+        <h3>Create Cards From Firestore Mini-App:</h3>
+        <!-- <div class="container"> -->
+                <div id="postcard">
+                </div>
+                <div class="filling-empty-space-childs"></div>
+            <div class="filling-empty-space-childs"></div>
+            <div class="filling-empty-space-childs"></div>
+            <div class="filling-empty-space-childs"></div>
+        <!-- </div> -->
+    </div>
+
+    <div class="postcard-mini-app">
         <h3>Posts as Tiles Mini-App:</h3>
         <div class="container">
             <div class="blog-card">
@@ -85,6 +107,7 @@
             <div class="filling-empty-space-childs"></div>
             <div class="filling-empty-space-childs"></div>
             <div class="filling-empty-space-childs"></div>
+
         </div>
     </div>
 
