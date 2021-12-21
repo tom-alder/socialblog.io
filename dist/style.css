@@ -30,7 +30,6 @@ h3 {
 
 
 
-/* NEEDS SURGERY */
 
 h3 {
     font-weight: 300;
@@ -62,7 +61,9 @@ h3 {
 
 .postcard-mini-app .blog-card {
     display: grid;
-    gap: 32px;
+    grid-template-columns: repeat(auto-fill, 100px);
+    justify-content: space-between;
+    grid-gap: 20px;
     grid-template-columns: 1fr;
     max-height: 420px;
 
@@ -81,37 +82,12 @@ h3 {
     } */
 }
 
-
-.postcard-mini-app .linkedin-post {
-    overflow: hidden;
-    display: flex;
-    justify-content: flex-start;
-        row-gap: 150px;
-    border-radius: 8px;
-    width: 299px;
-    margin-right: -10px;
-    z-index: 1;
-
-    display: flex;
-    background-color: #fafafa;
-    transition: .25s ease all;
-
-    /* border: 1px solid #d3d3d3; */
-
-    
-}
-
-.linkedin-post:hover {
-        transform: scale(1.04);
-        box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
-        0 15px 40px rgba(166, 173, 201, 0.2);
-}
-
-
 /* Posts as tiles */
 .filling-empty-space-childs {
-    width: 298.99px; /*the width of the images in this example*/
-    height: auto; /*Important! for the divs to collapse should they fall in a new row*/
+    width: 298.99px;
+    /*the width of the images in this example*/
+    height: auto;
+    /*Important! for the divs to collapse should they fall in a new row*/
     background-color: red;
     display: grid;
     gap: 32px;
@@ -126,6 +102,46 @@ h3 {
     gap: 50px 30px;
     padding: 30px;
     flex-wrap: wrap;
+    background-color: #fafafa;
+    border-radius: 15px;
+}
+
+
+
+/* PERFECT ALIGNING RULES */
+
+#postcard-testing {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 300px);
+    justify-content: space-evenly;
+    grid-gap: 50px 30px;
+}
+
+.postcard-mini-app .linkedin-post {
+    overflow: hidden;
+    display: flex;
+    justify-content: flex-start;
+    row-gap: 150px;
+    border-radius: 8px;
+    width: 300px;
+    margin-right: -10px;
+    z-index: 1;
+    background-color: #fafafa;
+    transition: .25s ease all;
+
+    /* border: 1px solid #d3d3d3; */
+}
+
+/* STYLING */
+
+.linkedin-post:hover {
+    transform: scale(1.04);
+    box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
+        0 15px 40px rgba(166, 173, 201, 0.2);
+}
+
+.grey-box {
+    padding: 30px;
     background-color: #fafafa;
     border-radius: 15px;
 }

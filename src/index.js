@@ -45,31 +45,14 @@ onSnapshot(q, (snapshot) => {
     document.getElementById('datapoint').innerHTML = `
     <h3>Results (${posts.length})</h3>
     ${posts.map(function(grabData) {
-      return grabData.topic
+      return grabData.topic + ' (' + grabData.id + ')'
     }).join(' - ')}
     <p class="subtitle">Please enjoy reading through my most recent posts</p>
     `
 })
 
-// Get collection data - TESTING postcard (Only 1??)
-// onSnapshot(q, (snapshot) => {
-//     let posts = []
-//     snapshot.docs.forEach((doc) => {
-//       posts.push({ ...doc.data(), id: doc.id })
-//     })
-//     console.log(posts)
-//     document.getElementById('postcard').innerHTML = `
-  
-//     ${posts.map(function(grabData) {
-//       return `
-//       <iframe src="${grabData.link}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
-//       `
-//     }).join(' - ')}
-//     <p class="subtitle">Please enjoy reading through my most recent posts</p>
-//     `
-// })
 
-// Get collection data - TESTING postcard (Lets make a grid)
+// Get collection data - TESTING postcard (Grid behaviour doesnt work as planned)
 onSnapshot(q, (snapshot) => {
     let posts = []
     snapshot.docs.forEach((doc) => {
@@ -85,7 +68,34 @@ onSnapshot(q, (snapshot) => {
           <div class="linkedin-post">
           <iframe src="${grabData.link}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
           </div>
+          
         </div> 
+      `
+    }).join('')}
+    `
+})
+
+
+// Get collection data - TESTING postcard (Lets make a functioning grid)
+onSnapshot(q, (snapshot) => {
+    let posts = []
+    snapshot.docs.forEach((doc) => {
+      posts.push({ ...doc.data(), id: doc.id })
+    })
+    console.log(posts)
+    document.getElementById('postcard-testing').innerHTML = `
+  
+    ${posts.map(function(grabData) {
+      return `
+      <div class="blog-card">
+      <div class="linkedin-post">
+      <iframe src="${grabData.link}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
+      </div>
+      
+    </div> 
+
+
+          
 
       `
     }).join('')}
