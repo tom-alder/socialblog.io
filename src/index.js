@@ -1,3 +1,5 @@
+// NOTE: You get console 'Uncaught TypeError' if you render pages that dont use all of these js functions
+
 import { initializeApp } from 'firebase/app'
 import {
     getFirestore, collection, onSnapshot,
@@ -34,7 +36,7 @@ const colRef = collection(db, 'posts')
 const q = query(colRef, orderBy('date'))
 
 // querying to filter for certain topics and sort by date
-// const q = query(colRef, where("topic", "==", "social media"), orderBy('date', 'desc'))
+// const q = query(colRef, where("topic", "==", "test"), orderBy('date', 'desc'))
 
 // Get collection data - individual datapoints
 onSnapshot(q, (snapshot) => {
@@ -42,7 +44,6 @@ onSnapshot(q, (snapshot) => {
     snapshot.docs.forEach((doc) => {
       posts.push({ ...doc.data(), id: doc.id })
     })
-    console.log(posts)
     document.getElementById('datapoint').innerHTML = `
     <h3>Results (${posts.length})</h3>
     ${posts.map(function(grabData) {
@@ -51,31 +52,6 @@ onSnapshot(q, (snapshot) => {
     <p class="subtitle">Please enjoy reading through my most recent posts</p>
     `
 })
-
-
-// Get collection data - OLD postcard (Grid behaviour doesnt work as planned)
-onSnapshot(q, (snapshot) => {
-    let posts = []
-    snapshot.docs.forEach((doc) => {
-      posts.push({ ...doc.data(), id: doc.id })
-    })
-    console.log(posts)
-    document.getElementById('postcard').innerHTML = `
-  
-    ${posts.map(function(grabData) {
-      return `
-
-        <div class="blog-card">
-          <div class="linkedin-post">
-          <iframe src="${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
-          </div>
-          
-        </div> 
-      `
-    }).join('')}
-    `
-})
-
 
 // Get collection data - WORKING postcard no labels
 // onSnapshot(q, (snapshot) => {
@@ -167,13 +143,13 @@ deletePostForm.addEventListener('submit', (e) => {
 })
 
 // get a single document
+// Need to replace 'CBZoVLAvkVOpBsR3mL2x' with a valid ID
 
-const docRef = doc(db, 'posts', 'CBZoVLAvkVOpBsR3mL2x')
-
-getDoc(docRef)
-    .then((doc) => {
-        console.log(doc.data(), doc.id)
-    })
+// const docRef = doc(db, 'posts', 'CBZoVLAvkVOpBsR3mL2x')
+// getDoc(docRef)
+//     .then((doc) => {
+//         console.log(doc.data(), doc.id)
+//     })
 
 // updating a document
 const updateForm = document.querySelector('.update')
