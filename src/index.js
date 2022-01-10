@@ -30,7 +30,8 @@ const db = getFirestore()
 const colRef = collection(db, 'posts')
 
 // querying to sort by date
-const q = query(colRef, orderBy('date', 'desc'))
+// NOTE This means you NEED a date datapoint in firebase
+const q = query(colRef, orderBy('date'))
 
 // querying to filter for certain topics and sort by date
 // const q = query(colRef, where("topic", "==", "social media"), orderBy('date', 'desc'))
@@ -52,7 +53,7 @@ onSnapshot(q, (snapshot) => {
 })
 
 
-// Get collection data - TESTING postcard (Grid behaviour doesnt work as planned)
+// Get collection data - OLD postcard (Grid behaviour doesnt work as planned)
 onSnapshot(q, (snapshot) => {
     let posts = []
     snapshot.docs.forEach((doc) => {
@@ -66,7 +67,7 @@ onSnapshot(q, (snapshot) => {
 
         <div class="blog-card">
           <div class="linkedin-post">
-          <iframe src="${grabData.link}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
+          <iframe src="${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
           </div>
           
         </div> 
@@ -76,7 +77,37 @@ onSnapshot(q, (snapshot) => {
 })
 
 
-// Get collection data - TESTING postcard (Lets make a functioning grid)
+// Get collection data - WORKING postcard no labels
+// onSnapshot(q, (snapshot) => {
+//     let posts = []
+//     snapshot.docs.forEach((doc) => {
+//       posts.push({ ...doc.data(), id: doc.id })
+//     })
+//     console.log(posts)
+//     document.getElementById('postcard-testing').innerHTML = `
+  
+//     ${posts.map(function(grabData) {
+//       return `
+//       <div class="blog-card">
+//       <div class="linkedin-post">
+//       <iframe src="${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
+
+   
+//       </div>
+//       <div>
+//       ${grabData.company}
+//       </div>
+//       <div>
+//       ${grabData.id}
+//       </div>
+//     </div> 
+
+//       `
+//     }).join('')}
+//     `
+// })
+
+// Get collection data - BUILDING postcard with labels
 onSnapshot(q, (snapshot) => {
     let posts = []
     snapshot.docs.forEach((doc) => {
@@ -89,13 +120,17 @@ onSnapshot(q, (snapshot) => {
       return `
       <div class="blog-card">
       <div class="linkedin-post">
-      <iframe src="${grabData.link}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
+      <iframe src="${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
+
+   
       </div>
-      
+      <div>
+      ${grabData.company}
+      </div>
+      <div>
+      ${grabData.id}
+      </div>
     </div> 
-
-
-          
 
       `
     }).join('')}
@@ -103,7 +138,7 @@ onSnapshot(q, (snapshot) => {
 })
 
 
-// adding docs
+// adding docs 
 const addPostForm = document.querySelector('.add')
 addPostForm.addEventListener('submit', (e) => {
   e.preventDefault()
@@ -111,7 +146,7 @@ addPostForm.addEventListener('submit', (e) => {
   addDoc(colRef, {
       topic: addPostForm.topic.value,
       date: addPostForm.date.value,
-      link: addPostForm.link.value,
+      embedlink: addPostForm.embedlink.value,
     })
     .then(() => {
     addPostForm.reset()

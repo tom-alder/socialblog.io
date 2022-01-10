@@ -40,48 +40,6 @@ h3 {
 
 /* FireStore Postcards */
 
-#postcard {
-    display: flex;
-    justify-content: space-evenly;
-
-    gap: 50px 30px;
-    padding: 30px;
-    flex-wrap: wrap;
-    background-color: #fafafa;
-    border-radius: 15px;
-}
-
-.postcard-mini-app {
-    background-color: rgb(221, 221, 221);
-    font-size: larger;
-    padding: 20px;
-    border-radius: 15px;
-    margin: 25px 0;
-}
-
-.postcard-mini-app .blog-card {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 100px);
-    justify-content: space-between;
-    grid-gap: 20px;
-    grid-template-columns: 1fr;
-    max-height: 420px;
-
-    /* /-----* TO BE ADDED *-----/ */
-
-    /* @media(min-width: 500px) {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    @media(min-width: 900px) {
-        grid-template-columns: repeat(3, 1fr);
-    }
-
-    @media(min-width: 1200px) {
-        grid-template-columns: repeat(4, 1fr);
-    } */
-}
-
 /* Posts as tiles */
 .filling-empty-space-childs {
     width: 298.99px;
@@ -130,6 +88,38 @@ h3 {
     transition: .25s ease all;
 
     /* border: 1px solid #d3d3d3; */
+}
+
+
+.postcard-mini-app {
+    background-color: rgb(221, 221, 221);
+    font-size: larger;
+    padding: 20px;
+    border-radius: 15px;
+    margin: 25px 0;
+}
+
+.postcard-mini-app .blog-card {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 100px);
+    justify-content: space-between;
+    grid-gap: 20px;
+    grid-template-columns: 1fr;
+    max-height: 520px;
+
+    /* /-----* TO BE ADDED *-----/ */
+
+    /* @media(min-width: 500px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media(min-width: 900px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media(min-width: 1200px) {
+        grid-template-columns: repeat(4, 1fr);
+    } */
 }
 
 /* STYLING */

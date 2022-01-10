@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="dist/style.css">
-    <title>Portfolio.io</title>
+    <title>Portfolio.io | DevTools</title>
 </head>
 
 <body>
@@ -13,15 +13,17 @@
 
     <div class="mini-app">
         <h3>Firebase Firestore Mini-App:</h3>
+        
         <form class="add">
             <label for="topic">Topic:</label>
             <input type="text" name="topic" required>
-            <label for="date">Date:</label>
+            <label for="date">Date (YYYY-MM-DD):</label>
             <input type="date" name="date" required>
-            <label for="link">Link:</label>
-            <input type="text" name="link" required>
+            <label for="embedlink">Link:</label>
+            <input type="text" name="embedlink" required>
 
             <button>Add a Post Entry</button>
+
         </form>
         <form class="delete">
             <label for="id">Document ID:</label>
@@ -41,36 +43,15 @@
         <div id="datapoint"></div>
     </div>
 
-    <!-- ONLY MAKES A SINGLE CARD 
-        <div class="postcard-mini-app">
-        <h3>Create Cards From Firestore Mini-App:</h3>
-        <div class="container">
-            <div class="blog-card">
-                <div class="linkedin-post" id="postcard">
-                </div>
-            </div>
-        </div>
-    </div> -->
-
     <div class="postcard-mini-app">
         <h3>WORKING Create Cards From Firestore Mini-App:</h3>
         <div class="grey-box">
             <div class="postcard-grid">
-            <div id="postcard-testing">
-            </div>
+                <div id="postcard-testing">
                 </div>
+            </div>
         </div>
     </div>
-
-    <div class="postcard-mini-app">
-        <h3>Create Cards From Firestore Mini-App:</h3>
-        <!-- <div class="container"> -->
-        <div id="postcard">
-        </div>
-        <div class="filling-empty-space-childs"></div>
-        <!-- </div> -->
-    </div>
-
 
     <div class="postcard-mini-app">
         <h3>Posts as Tiles Mini-App:</h3>
