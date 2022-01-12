@@ -71,12 +71,6 @@ var filterNone = document.querySelector('.all')
           <div class="linkedin-post">
             <iframe src="${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
           </div>
-          <div>
-            ${grabData.company}
-          </div>
-          <div>
-            ${grabData.id}
-          </div>
         </div> 
       `
     }).join('')}
@@ -103,12 +97,6 @@ var filterCanva = document.querySelector('.canva')
         <div class="mix company-${grabData.company} blog-card" data-ref="item">
           <div class="linkedin-post">
             <iframe src="${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
-          </div>
-          <div>
-            ${grabData.company}
-          </div>
-          <div>
-            ${grabData.id}
           </div>
         </div> 
       `
