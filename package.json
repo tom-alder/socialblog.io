@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "mixitup": "^3.3.1",
     "webpack": "^5.65.0",
     "webpack-cli": "^4.9.1"
   },

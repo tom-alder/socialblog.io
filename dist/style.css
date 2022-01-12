@@ -29,14 +29,11 @@ h3 {
 }
 
 
-
-
 h3 {
     font-weight: 300;
     font-size: 28px;
     margin-bottom: 32px;
 }
-
 
 /* FireStore Postcards */
 
@@ -68,7 +65,7 @@ h3 {
 
 /* PERFECT ALIGNING RULES */
 
-#postcard-testing {
+#postcard-mixitup {
     display: grid;
     grid-template-columns: repeat(auto-fill, 300px);
     justify-content: space-evenly;
@@ -81,13 +78,14 @@ h3 {
     justify-content: flex-start;
     row-gap: 150px;
     border-radius: 8px;
+    /* Change to 299 if scrollbars are on. 300 if off. */
     width: 300px;
     margin-right: -10px;
     z-index: 1;
     background-color: #fafafa;
     transition: .25s ease all;
 
-    /* border: 1px solid #d3d3d3; */
+    /* border-bottom: 1px solid #d3d3d3; */
 }
 
 
@@ -135,3 +133,6 @@ h3 {
     background-color: #fafafa;
     border-radius: 15px;
 }
+
+
+/* MIXITUP CSS */
