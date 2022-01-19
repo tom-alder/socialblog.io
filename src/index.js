@@ -105,6 +105,33 @@ var filterCanva = document.querySelector('.canva')
   })
 })
 
+// Apple Filter TESTING
+var filterApple = document.querySelector('.apple')
+  filterApple.addEventListener('click', (e) => {
+  e.preventDefault()
+  q = query(colRef, where("company", "array-contains-any", ["apple"]))
+  console.log(q)
+  onSnapshot(q, (snapshot) => {
+    var posts = []
+    snapshot.docs.forEach((doc) => {
+      posts.push({ ...doc.data(), id: doc.id})
+    })
+    
+    console.log(posts)
+    document.getElementById('postcard-mixitup').innerHTML = `
+    ${posts.map(function(grabData) {
+      return `
+        <div class="mix company-${grabData.company} blog-card" data-ref="item">
+          <div class="linkedin-post">
+            <iframe src="${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
+          </div>
+        </div> 
+      `
+    }).join('')}
+    `
+  })
+})
+
 // *--- GET COLLECITON DATA ---* //
 
 // Get collection data (Point in time)
