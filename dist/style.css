@@ -130,7 +130,7 @@ h3 {
     row-gap: 150px;
     border-radius: 8px;
     /* Change to 299 if scrollbars are on. 300 if off. */
-    width: 300px;
+    width: 299px;
     margin-right: -10px;
     z-index: 1;
     background-color: #fafafa;

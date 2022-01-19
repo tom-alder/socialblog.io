@@ -105,34 +105,6 @@ var filterCanva = document.querySelector('.canva')
   })
 })
 
-// adding docs 
-// const addPostForm = document.querySelector('.add')
-// addPostForm.addEventListener('submit', (e) => {
-//   e.preventDefault()
-
-//   addDoc(colRef, {
-//       topic: addPostForm.topic.value,
-//       date: addPostForm.date.value,
-//       embedlink: addPostForm.embedlink.value,
-//     })
-//     .then(() => {
-//     addPostForm.reset()
-//   })
-// })
-
-// deleting docs
-// const deletePostForm = document.querySelector('.delete')
-// deletePostForm.addEventListener('submit', (e) => {
-//   e.preventDefault()
-
-//   const docRef = doc(db, 'posts', deletePostForm.id.value)
-
-//   deleteDoc(docRef)
-//     .then(() => {
-//       deletePostForm.reset()
-//     })
-// })
-
 // *--- GET COLLECITON DATA ---* //
 
 // Get collection data (Point in time)
