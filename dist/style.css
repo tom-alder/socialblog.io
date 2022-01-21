@@ -61,8 +61,10 @@ h3 {
     border-radius: 15px;
 }
 
+/* BUTTONS */
+
 .button-filter {
-    width: 150px;
+    width: auto;
     height: 60px;
     align-items: center;
     background-color: #FFFFFF;
@@ -73,7 +75,7 @@ h3 {
     color: rgba(0, 0, 0, 0.85);
     cursor: pointer;
     display: inline-flex;
-    font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 16px;
     font-weight: 600;
     justify-content: center;
@@ -83,33 +85,73 @@ h3 {
     padding: calc(.875rem - 1px) calc(1.5rem - 1px);
     position: relative;
     text-decoration: none;
-    transition: all 250ms;
+    transition: all 300ms;
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
     vertical-align: baseline;
 }
 
-.button-filter:hover,
-.button-filter:focus {
-  border-color: rgba(0, 0, 0, 0.15);
-  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
-  color: rgba(0, 0, 0, 0.65);
-  background-color: #00c3ff17;
-  
-}
-
 .button-filter:hover {
-  transform: translateY(-1px);
-  background-color: #00c3ff17;
+    border-color: rgba(0, 0, 0, 0.15);
+    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+    color: rgba(0, 0, 0, 0.65);
+    transform: translateY(-2px);
+    /* background-color: #00c3ff17; */
+
 }
 
-.button-filter:active {
-  background-color: #00c3ff17;
-  border-color: rgba(0, 0, 0, 0.15);
-  box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
-  color: rgba(0, 0, 0, 0.65);
-  transform: translateY(0);
+.button-filter:focus {
+    border-color: rgba(0, 0, 0, 0.15);
+    /* box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px; */
+    color: rgba(0, 0, 0, 0.65);
+    background-color: #00c3ff17;
+}
+
+/* .button-filter:active {
+    background-color: #00c3ff17;
+    border-color: rgba(0, 0, 0, 0.15);
+    box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+    color: rgba(0, 0, 0, 0.65);
+    transform: translateY(0);
+} */
+
+.active {
+    background-color: #00c3ff17;
+    border-color: rgba(0, 0, 0, 0.15);
+    /* box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px; */
+    color: rgba(0, 0, 0, 0.65);
+    transform: translateY(0);
+}
+
+.clear {
+    width: auto;
+    height: 60px;
+    align-items: center;
+    background-color: #fafafa;
+    border: 0px;
+    color: rgba(107, 107, 107, 0.85);
+    cursor: pointer;
+    display: inline-flex;
+    font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 1.25;
+    margin: 0;
+    min-height: 3rem;
+    padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+    position: relative;
+    text-decoration: none;
+    transition: all 300ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+}
+
+.clear:hover {
+    color: black;
 }
 
 
@@ -186,4 +228,48 @@ h3 {
 }
 
 
-/* MIXITUP CSS */
+/* Radio Buttons */
+
+.donate-now {
+    list-style-type: none;
+    margin: 25px 0 0 0;
+    padding: 0;
+}
+
+.donate-now li {
+    float: left;
+    margin: 0 5px 0 0;
+}
+
+.donate-now label {
+    padding: 5px;
+    border: 1px solid #CCC;
+    cursor: pointer;
+}
+
+/* .donate-now label:hover {
+    background: #DDD;
+}
+
+.donate-now label:valid {
+    color: red !important;
+} */
+
+input[name="amount"] {
+    display: none;
+}
+
+.donate-now:hover input:checked ~ label{
+    background:#666 !important;
+}
+
+
+.donate-now input:checked ~ label,
+.donate-now label:hover ~ label,
+.donate-now label:hover,
+.donate-now input:checked ~ label:hover ~ label, /* added */
+.donate-now input:checked ~ label:hover,         /* added */
+.donate-now label:hover ~ input:checked ~ label{ /* added */
+    background:seagreen;
+}
+

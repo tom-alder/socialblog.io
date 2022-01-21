@@ -52,7 +52,7 @@ console.log(q);
 //  *--- FUNCTIONS TO RUN QUERIES ---* //
 
 // No Filter WORKING
-var filterNone = document.querySelector('.all')
+var filterNone = document.querySelector('.clear')
   filterNone.addEventListener('click', (e) => {
   e.preventDefault()
   q = query(colRef)
