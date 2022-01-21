@@ -1,28 +1,35 @@
 // NOTE: You get console 'Uncaught TypeError' if you render pages that dont use all of these js functions
 
-import { initializeApp } from 'firebase/app'
 import {
-    getFirestore, collection, onSnapshot,
-    addDoc, deleteDoc, doc, 
-    query, where,
-    orderBy,
-    getDoc,
-    updateDoc,
-    getDocs
+  initializeApp
+} from 'firebase/app'
+import {
+  getFirestore,
+  collection,
+  onSnapshot,
+  addDoc,
+  deleteDoc,
+  doc,
+  query,
+  where,
+  orderBy,
+  getDoc,
+  updateDoc,
+  getDocs
 } from 'firebase/firestore'
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyAduE2GkMxli8LVcVyp2oSWyqIueqfW-Us",
-    authDomain: "linkedin-portfolio-v2.firebaseapp.com",
-    projectId: "linkedin-portfolio-v2",
-    storageBucket: "linkedin-portfolio-v2.appspot.com",
-    messagingSenderId: "575135045635",
-    appId: "1:575135045635:web:08e3811e7803e06e129636",
-    measurementId: "G-ZDJ82ELVP8"
-  };
+  apiKey: "AIzaSyAduE2GkMxli8LVcVyp2oSWyqIueqfW-Us",
+  authDomain: "linkedin-portfolio-v2.firebaseapp.com",
+  projectId: "linkedin-portfolio-v2",
+  storageBucket: "linkedin-portfolio-v2.appspot.com",
+  messagingSenderId: "575135045635",
+  appId: "1:575135045635:web:08e3811e7803e06e129636",
+  measurementId: "G-ZDJ82ELVP8"
+};
 
- 
+
 // init firebase app
 initializeApp(firebaseConfig)
 
@@ -51,27 +58,66 @@ console.log(q);
 
 //  *--- FUNCTIONS TO RUN QUERIES ---* //
 
-// No Filter WORKING
+// Get collection data - WORKING postcard with labels
+onSnapshot(q, (snapshot) => {
+  var posts = []
+  snapshot.docs.forEach((doc) => {
+    posts.push({
+      ...doc.data(),
+      id: doc.id
+    })
+  })
+
+  console.log(posts)
+  document.getElementById('postcard-mixitup').innerHTML = `
+    ${posts.map(function(grabData) {
+      return `
+        <div class="mix company-${grabData.company} blog-card" data-ref="item">
+        
+          <div class="linkedin-post">
+            <div class="card-border"></div>
+            <iframe src="${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post">
+            </iframe>
+          </div>
+          <div>
+            ${grabData.company}
+          </div>
+        </div> 
+      `
+    }).join('')}
+    `
+})
+
+// Clear Filter WORKING
 var filterNone = document.querySelector('.clear')
-  filterNone.addEventListener('click', (e) => {
+filterNone.addEventListener('click', (e) => {
   e.preventDefault()
   q = query(colRef)
   console.log(q)
   onSnapshot(q, (snapshot) => {
     var posts = []
     snapshot.docs.forEach((doc) => {
-      posts.push({ ...doc.data(), id: doc.id})
+      posts.push({
+        ...doc.data(),
+        id: doc.id
+      })
     })
-    
+
     console.log(posts)
     document.getElementById('postcard-mixitup').innerHTML = `
     ${posts.map(function(grabData) {
       return `
-        <div class="mix company-${grabData.company} blog-card" data-ref="item">
-          <div class="linkedin-post">
-            <iframe src="${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
-          </div>
-        </div> 
+      <div class="mix company-${grabData.company} blog-card" data-ref="item">
+        
+      <div class="linkedin-post">
+        <div class="card-border"></div>
+        <iframe src="${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post">
+        </iframe>
+      </div>
+      <div>
+        ${grabData.company}
+      </div>
+    </div>
       `
     }).join('')}
     `
@@ -80,52 +126,68 @@ var filterNone = document.querySelector('.clear')
 
 // Canva Filter WORKING
 var filterCanva = document.querySelector('.canva')
-  filterCanva.addEventListener('click', (e) => {
+filterCanva.addEventListener('click', (e) => {
   e.preventDefault()
   q = query(colRef, where("company", "==", ["canva"]))
   console.log(q)
   onSnapshot(q, (snapshot) => {
     var posts = []
     snapshot.docs.forEach((doc) => {
-      posts.push({ ...doc.data(), id: doc.id})
+      posts.push({
+        ...doc.data(),
+        id: doc.id
+      })
     })
-    
+
     console.log(posts)
     document.getElementById('postcard-mixitup').innerHTML = `
     ${posts.map(function(grabData) {
       return `
-        <div class="mix company-${grabData.company} blog-card" data-ref="item">
-          <div class="linkedin-post">
-            <iframe src="${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
-          </div>
-        </div> 
+      <div class="mix company-${grabData.company} blog-card" data-ref="item">
+        <div class="linkedin-post">
+          <div class="card-border"></div>
+          <iframe src="${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post">
+          </iframe>
+        </div>
+        <div>
+          ${grabData.company}
+        </div>
+      </div>
       `
     }).join('')}
     `
   })
 })
 
-// Apple Filter TESTING
+// Apple Filter WORKING
 var filterApple = document.querySelector('.apple')
-  filterApple.addEventListener('click', (e) => {
+filterApple.addEventListener('click', (e) => {
   e.preventDefault()
   q = query(colRef, where("company", "array-contains-any", ["apple"]))
   console.log(q)
   onSnapshot(q, (snapshot) => {
     var posts = []
     snapshot.docs.forEach((doc) => {
-      posts.push({ ...doc.data(), id: doc.id})
+      posts.push({
+        ...doc.data(),
+        id: doc.id
+      })
     })
-    
+
     console.log(posts)
     document.getElementById('postcard-mixitup').innerHTML = `
     ${posts.map(function(grabData) {
       return `
-        <div class="mix company-${grabData.company} blog-card" data-ref="item">
-          <div class="linkedin-post">
-            <iframe src="${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
-          </div>
-        </div> 
+      <div class="mix company-${grabData.company} blog-card" data-ref="item">
+        <div class="linkedin-post">
+          <div class="card-border"></div>
+          <iframe src="${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post">
+          </iframe>
+        </div>
+        <div>
+          ${grabData.company}
+        </div>
+      </div> 
       `
     }).join('')}
     `
@@ -152,11 +214,14 @@ var filterApple = document.querySelector('.apple')
 // Get collection data - individual datapoints
 // This updates in real time
 onSnapshot(q, (snapshot) => {
-    let posts = []
-    snapshot.docs.forEach((doc) => {
-      posts.push({ ...doc.data(), id: doc.id })
+  let posts = []
+  snapshot.docs.forEach((doc) => {
+    posts.push({
+      ...doc.data(),
+      id: doc.id
     })
-    document.getElementById('datapoint').innerHTML = `
+  })
+  document.getElementById('datapoint').innerHTML = `
     <h3>Results (${posts.length})</h3>
     ${posts.map(function(grabData) {
       return grabData.topic + ' (' + grabData.id + ')'
@@ -172,7 +237,7 @@ onSnapshot(q, (snapshot) => {
 //     })
 //     console.log(posts)
 //     document.getElementById('postcard-mixitup').innerHTML = `
-  
+
 //     ${posts.map(function(grabData) {
 //       return `
 //       <div class="blog-card">
@@ -191,32 +256,7 @@ onSnapshot(q, (snapshot) => {
 //     `
 // })
 
-// Get collection data - WORKING postcard with labels
-onSnapshot(q, (snapshot) => {
-    var posts = []
-    snapshot.docs.forEach((doc) => {
-      posts.push({ ...doc.data(), id: doc.id})
-    })
-    
-    console.log(posts)
-    document.getElementById('postcard-mixitup').innerHTML = `
-    ${posts.map(function(grabData) {
-      return `
-        <div class="mix company-${grabData.company} blog-card" data-ref="item">
-          <div class="linkedin-post">
-            <iframe src="${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
-          </div>
-          <div>
-            ${grabData.company}
-          </div>
-          <div>
-            ${grabData.id}
-          </div>
-        </div> 
-      `
-    }).join('')}
-    `
-})
+
 
 // adding docs 
 const addPostForm = document.querySelector('.add')
@@ -229,8 +269,8 @@ addPostForm.addEventListener('submit', (e) => {
       embedlink: addPostForm.embedlink.value,
     })
     .then(() => {
-    addPostForm.reset()
-  })
+      addPostForm.reset()
+    })
 })
 
 // deleting docs
@@ -258,15 +298,15 @@ deletePostForm.addEventListener('submit', (e) => {
 // updating a document
 const updateForm = document.querySelector('.update')
 updateForm.addEventListener('submit', (e) => {
-    e.preventDefault()
+  e.preventDefault()
 
-    const docRef = doc(db, 'posts', updateForm.id.value)
+  const docRef = doc(db, 'posts', updateForm.id.value)
 
-    updateDoc(docRef, {
-        topic: 'updated topic'
+  updateDoc(docRef, {
+      topic: 'updated topic'
     })
     .then(() => {
-        updateForm.reset()
+      updateForm.reset()
     })
 
 })

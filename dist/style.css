@@ -50,12 +50,23 @@ h3 {
     max-height: 420px;
 }
 
-.container {
+.container-space {
     display: flex;
     justify-content: space-evenly;
     row-gap: 150px;
     gap: 50px 30px;
     padding: 30px;
+    flex-wrap: wrap;
+    background-color: #fafafa;
+    border-radius: 15px;
+}
+
+.container-center {
+    display: flex;
+    justify-content: center;
+    row-gap: 150px;
+    gap: 50px 30px;
+    padding: 30px 100px;
     flex-wrap: wrap;
     background-color: #fafafa;
     border-radius: 15px;
@@ -72,7 +83,7 @@ h3 {
     border-radius: .50rem;
     box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
     box-sizing: border-box;
-    color: rgba(0, 0, 0, 0.85);
+    color: rgba(0, 0, 0, 0.65);
     cursor: pointer;
     display: inline-flex;
     font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -92,15 +103,6 @@ h3 {
     vertical-align: baseline;
 }
 
-.button-filter:hover {
-    border-color: rgba(0, 0, 0, 0.15);
-    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
-    color: rgba(0, 0, 0, 0.65);
-    transform: translateY(-2px);
-    /* background-color: #00c3ff17; */
-
-}
-
 .button-filter:focus {
     border-color: rgba(0, 0, 0, 0.15);
     /* box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px; */
@@ -108,13 +110,13 @@ h3 {
     background-color: #00c3ff17;
 }
 
-/* .button-filter:active {
-    background-color: #00c3ff17;
+.button-filter:hover {
     border-color: rgba(0, 0, 0, 0.15);
-    box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
-    color: rgba(0, 0, 0, 0.65);
-    transform: translateY(0);
-} */
+    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+    color: rgba(0, 0, 0);
+    transform: translateY(-2px);
+    /* background-color: #00c3ff17; */
+}
 
 .active {
     background-color: #00c3ff17;
@@ -172,11 +174,12 @@ h3 {
     row-gap: 150px;
     border-radius: 8px;
     /* Change to 299 if scrollbars are on. 300 if off. */
-    width: 299px;
+    width: 300px;
     margin-right: -10px;
     z-index: 1;
     background-color: #fafafa;
     transition: .25s ease all;
+    position: relative;
 
     /* border-bottom: 1px solid #d3d3d3; */
 }
@@ -227,49 +230,13 @@ h3 {
     border-radius: 15px;
 }
 
-
-/* Radio Buttons */
-
-.donate-now {
-    list-style-type: none;
-    margin: 25px 0 0 0;
-    padding: 0;
-}
-
-.donate-now li {
-    float: left;
-    margin: 0 5px 0 0;
-}
-
-.donate-now label {
-    padding: 5px;
-    border: 1px solid #CCC;
-    cursor: pointer;
-}
-
-/* .donate-now label:hover {
-    background: #DDD;
-}
-
-.donate-now label:valid {
-    color: red !important;
-} */
-
-input[name="amount"] {
-    display: none;
-}
-
-.donate-now:hover input:checked ~ label{
-    background:#666 !important;
-}
-
-
-.donate-now input:checked ~ label,
-.donate-now label:hover ~ label,
-.donate-now label:hover,
-.donate-now input:checked ~ label:hover ~ label, /* added */
-.donate-now input:checked ~ label:hover,         /* added */
-.donate-now label:hover ~ input:checked ~ label{ /* added */
-    background:seagreen;
+.card-border {
+    width: 298px;
+    height: 418px;
+    z-index: 100;
+    position: absolute;
+    border: 1px solid rgb(223, 223, 223);
+    pointer-events: none;
+    border-radius: 8px;
 }
 
