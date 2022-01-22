@@ -76,7 +76,7 @@ onSnapshot(q, (snapshot) => {
         
           <div class="linkedin-post">
             <div class="card-border"></div>
-            <iframe src="${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post">
+            <iframe src="https://www.linkedin.com/embed/feed/update/${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post">
             </iframe>
           </div>
           <div>
@@ -111,7 +111,7 @@ filterNone.addEventListener('click', (e) => {
         
       <div class="linkedin-post">
         <div class="card-border"></div>
-        <iframe src="${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post">
+        <iframe src="https://www.linkedin.com/embed/feed/update/${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post">
         </iframe>
       </div>
       <div>
@@ -146,7 +146,7 @@ filterCanva.addEventListener('click', (e) => {
       <div class="mix company-${grabData.company} blog-card" data-ref="item">
         <div class="linkedin-post">
           <div class="card-border"></div>
-          <iframe src="${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post">
+          <iframe src="https://www.linkedin.com/embed/feed/update/${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post">
           </iframe>
         </div>
         <div>
@@ -181,7 +181,7 @@ filterApple.addEventListener('click', (e) => {
       <div class="mix company-${grabData.company} blog-card" data-ref="item">
         <div class="linkedin-post">
           <div class="card-border"></div>
-          <iframe src="${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post">
+          <iframe src="https://www.linkedin.com/embed/feed/update/${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post">
           </iframe>
         </div>
         <div>
