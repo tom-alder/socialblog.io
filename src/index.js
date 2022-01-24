@@ -80,116 +80,56 @@ onSnapshot(q, (snapshot) => {
 
 
 // SEE MORE BUTTON TUTORIAL
-const container = document.querySelector('.containerload');
+// const container = document.querySelector('.containerload');
 
-// Store last document
-let latestDoc = null;
+// // Store last document
+// let latestDoc = null;
 
+// const getNextReviews = async () => {
+//   // WORKING ascending
+//   // var load = query(colRef, orderBy('numViews', 'asc'), startAfter(latestDoc || 0), limit(5) )
 
-const getNextReviews = async () => {
-  // const ref = collection(db, 'posts-g-sheets-valid', orderBy('createdAt', 'desc'))
-  // var load = query(colRef, orderBy('numViews', 'desc'), limit(4))
-  var load = query(colRef, orderBy('numViews', 'asc'), startAfter(latestDoc || 0), limit(5), )
-  // var load = query(colRef, orderBy('numViews', 'desc'), limit(8))
-  const data = await getDocs(load);
+//   // TESTING descending
+//   var load = query(colRef, orderBy('numViews', 'desc'), endBefore(latestDoc || 0), limit(5) )
 
-  // Output docs
-  let template = '';
-  data.docs.forEach(doc => {
-    const grabData = doc.data();
-    template += `
-    <div class="card">
-      <h2>${grabData.summary}</h2>
-      <p>Views ${grabData.numViews}</p>
-      <p>Likes - ${grabData.numLikes}</p>
-    </div>
-    `
-  });
-  container.innerHTML += template; 
+//   const data = await getDocs(load);
 
-  // Update latestDoc
-  latestDoc = data.docs[data.docs.length-1]
+//   // Output docs
+//   let template = '';
+//   data.docs.forEach(doc => {
+//     const grabData = doc.data();
+//     template += `
+//     <div class="card">
+//       <h2>${grabData.summary}</h2>
+//       <p>Views ${grabData.numViews}</p>
+//       <p>Likes - ${grabData.numLikes}</p>
+//     </div>
+//     `
+//   });
+//   container.innerHTML += template; 
 
-  // unattach event listeners if no more documents
-  if (data.empty) {
-    loadMore.removeEventListener('click',handleClick)
-  }
+//   // Update latestDoc
+//   latestDoc = -data.docs[data.docs.length-1]
 
-}
-
-// Load more docs (button)
-const loadMore = document.querySelector('.load-more button');
-
-const handleClick = () => {
-  getNextReviews();
-}
-
-loadMore.addEventListener('click', handleClick);
-
-
-
-
-// wait for DOM content to load
-window.addEventListener('DOMContentLoaded', () => getNextReviews());
-
-// async function main() {
-
-// // Query the first page of docs
-// const first = query(colRef, orderBy('numViews', 'desc'), limit(8))
-// const documentSnapshots = await getDocs(q);
-// console.log("first", first);
-
-// // // // Get the last visible document
-// const lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1];
-// console.log("last", lastVisible);
-
-// // // // Construct a new query starting at this document,
-// // // // get the next 25 cities.
-// const next = query(collection(db, 'posts-g-sheets-valid'),
-//   orderBy('numViews', 'desc'),
-//   startAfter(lastVisible),
-//   limit(8));
-//   console.log("next", next);
+//   // unattach event listeners if no more documents
+//   if (data.empty) {
+//     loadMore.removeEventListener('click',handleClick)
+//   }
 
 // }
-// main()
 
-// Load More TESTING
-// var loadMore = document.querySelector('.next')
-// loadMore.addEventListener('click', (e) => {
-//   e.preventDefault()
-//   main().then(
-//     console.log(next)
+// // Load more docs (button)
+// const loadMore = document.querySelector('.load-more button');
 
-//   )
+// const handleClick = () => {
+//   getNextReviews();
+// }
 
-//   onSnapshot(next, (snapshot) => {
-//     var posts = []
-//     snapshot.docs.forEach((doc) => {
-//       posts.push({
-//         ...doc.data(),
-//         id: doc.id
-//       })
-//     })
-//     console.log(posts)
-//     document.getElementById('postcard-mixitup').innerHTML = `
-//     ${posts.map(function(grabData) {
-//       return `
-//       <div class="mix company-${grabData.company} blog-card" data-ref="item">
-//         <div class="linkedin-post">
-//           <div class="card-border"></div>
-//           <iframe src="https://www.linkedin.com/embed/feed/update/${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post">
-//           </iframe>
-//         </div>
-//         <div>
-//           ${grabData.company}
-//         </div>
-//       </div>
-//       `
-//     }).join('')}
-//     `
-//   })
-// })
+// // loadMore.addEventListener('click', handleClick);
+
+// wait for DOM content to load
+// window.addEventListener('DOMContentLoaded', () => getNextReviews());
+
 
 
 //  *--- FUNCTIONS TO RUN QUERIES ---* //
@@ -228,7 +168,7 @@ onSnapshot(q, (snapshot) => {
 var filterNone = document.querySelector('.clear')
 filterNone.addEventListener('click', (e) => {
   e.preventDefault()
-  q = query(colRef)
+  q = query(colRef, orderBy('numViews', 'desc'), limit(8))
   console.log(q)
   onSnapshot(q, (snapshot) => {
     var posts = []
