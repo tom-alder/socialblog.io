@@ -15,8 +15,15 @@ import {
   orderBy,
   getDoc,
   updateDoc,
-  getDocs
+  getDocs,
+  limit,
+  startAfter,
+  startAt, 
+  get,
+  endBefore
 } from 'firebase/firestore'
+
+
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -30,14 +37,15 @@ const firebaseConfig = {
 };
 
 
+
 // init firebase app
 initializeApp(firebaseConfig)
 
 // init services
 const db = getFirestore()
 
-// collection ref
-const colRef = collection(db, 'posts')
+// collection ref - CHANGE THIS TO CHANGE THE FIRESTORE COLLECTION YOU PULL FROM
+const colRef = collection(db, 'posts-g-sheets-valid')
 
 
 // *--- QUERIES ---* //
@@ -48,13 +56,141 @@ const colRef = collection(db, 'posts')
 
 // No filter
 // var q;
-var q = query(colRef);
+// var q = query(colRef);
 // var q = query(colRef, where("topic", "==", "test"))
-
-console.log(q);
 
 // querying to filter for certain topics and sort by date
 // var q = query(colRef, where("topic", "==", "test"), orderBy('date', 'desc'))
+// var q = query(colRef, orderBy('numViews', 'desc'), limit(8))
+var q = query(colRef, orderBy('numViews', 'desc'), limit(8))
+
+
+
+// CLEAN CONSOLE LOG FOR THE VALUE OF Q:
+onSnapshot(q, (snapshot) => {
+  var consoleData = []
+  snapshot.docs.forEach((doc) => {
+    consoleData.push({
+      ...doc.data(),
+      id: doc.id
+    })
+  })
+  console.log(consoleData)
+})
+
+
+// SEE MORE BUTTON TUTORIAL
+const container = document.querySelector('.containerload');
+
+// Store last document
+let latestDoc = null;
+
+
+const getNextReviews = async () => {
+  // const ref = collection(db, 'posts-g-sheets-valid', orderBy('createdAt', 'desc'))
+  // var load = query(colRef, orderBy('numViews', 'desc'), limit(4))
+  var load = query(colRef, orderBy('numViews', 'asc'), startAfter(latestDoc || 0), limit(5), )
+  // var load = query(colRef, orderBy('numViews', 'desc'), limit(8))
+  const data = await getDocs(load);
+
+  // Output docs
+  let template = '';
+  data.docs.forEach(doc => {
+    const grabData = doc.data();
+    template += `
+    <div class="card">
+      <h2>${grabData.summary}</h2>
+      <p>Views ${grabData.numViews}</p>
+      <p>Likes - ${grabData.numLikes}</p>
+    </div>
+    `
+  });
+  container.innerHTML += template; 
+
+  // Update latestDoc
+  latestDoc = data.docs[data.docs.length-1]
+
+  // unattach event listeners if no more documents
+  if (data.empty) {
+    loadMore.removeEventListener('click',handleClick)
+  }
+
+}
+
+// Load more docs (button)
+const loadMore = document.querySelector('.load-more button');
+
+const handleClick = () => {
+  getNextReviews();
+}
+
+loadMore.addEventListener('click', handleClick);
+
+
+
+
+// wait for DOM content to load
+window.addEventListener('DOMContentLoaded', () => getNextReviews());
+
+// async function main() {
+
+// // Query the first page of docs
+// const first = query(colRef, orderBy('numViews', 'desc'), limit(8))
+// const documentSnapshots = await getDocs(q);
+// console.log("first", first);
+
+// // // // Get the last visible document
+// const lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1];
+// console.log("last", lastVisible);
+
+// // // // Construct a new query starting at this document,
+// // // // get the next 25 cities.
+// const next = query(collection(db, 'posts-g-sheets-valid'),
+//   orderBy('numViews', 'desc'),
+//   startAfter(lastVisible),
+//   limit(8));
+//   console.log("next", next);
+
+// }
+// main()
+
+// Load More TESTING
+// var loadMore = document.querySelector('.next')
+// loadMore.addEventListener('click', (e) => {
+//   e.preventDefault()
+//   main().then(
+//     console.log(next)
+
+//   )
+
+//   onSnapshot(next, (snapshot) => {
+//     var posts = []
+//     snapshot.docs.forEach((doc) => {
+//       posts.push({
+//         ...doc.data(),
+//         id: doc.id
+//       })
+//     })
+//     console.log(posts)
+//     document.getElementById('postcard-mixitup').innerHTML = `
+//     ${posts.map(function(grabData) {
+//       return `
+//       <div class="mix company-${grabData.company} blog-card" data-ref="item">
+//         <div class="linkedin-post">
+//           <div class="card-border"></div>
+//           <iframe src="https://www.linkedin.com/embed/feed/update/${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post">
+//           </iframe>
+//         </div>
+//         <div>
+//           ${grabData.company}
+//         </div>
+//       </div>
+//       `
+//     }).join('')}
+//     `
+//   })
+// })
+
 
 //  *--- FUNCTIONS TO RUN QUERIES ---* //
 
@@ -76,7 +212,7 @@ onSnapshot(q, (snapshot) => {
         
           <div class="linkedin-post">
             <div class="card-border"></div>
-            <iframe src="https://www.linkedin.com/embed/feed/update/${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post">
+            <iframe src="https://www.linkedin.com/embed/feed/update/${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post" loading="lazy">
             </iframe>
           </div>
           <div>
@@ -193,6 +329,9 @@ filterApple.addEventListener('click', (e) => {
     `
   })
 })
+
+
+
 
 // *--- GET COLLECITON DATA ---* //
 
