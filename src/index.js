@@ -17,10 +17,13 @@ import {
   updateDoc,
   getDocs,
   limit,
+  limitToLast,
+  limitToFirst,
   startAfter,
   startAt, 
   get,
-  endBefore
+  endBefore,
+  endAt
 } from 'firebase/firestore'
 
 
@@ -79,56 +82,62 @@ onSnapshot(q, (snapshot) => {
 })
 
 
-// SEE MORE BUTTON TUTORIAL
-// const container = document.querySelector('.containerload');
+// LOAD MORE BUTTON 
+const container = document.querySelector('.containerload');
 
-// // Store last document
-// let latestDoc = null;
+// Store last document
+let latestDoc = null;
 
-// const getNextReviews = async () => {
-//   // WORKING ascending
-//   // var load = query(colRef, orderBy('numViews', 'asc'), startAfter(latestDoc || 0), limit(5) )
+const getNextReviews = async () => {
+  // WORKING ascending
+  // var load = query(colRef, orderBy('numViews', 'asc'), startAfter(latestDoc || 0), limit(5))
 
-//   // TESTING descending
-//   var load = query(colRef, orderBy('numViews', 'desc'), endBefore(latestDoc || 0), limit(5) )
+  // TESTING descending
+  // var load = query(colRef, orderBy('numViews', 'desc'), endBefore(latestDoc), limit(5) )
+  var load = query(colRef, orderBy('numViews', 'desc'), endBefore(latestDoc || 0), limit(5) )
+  // var load = query(colRef, orderBy('numViews', 'desc'), startAfter( latestDoc || 0), limit(5) )
 
-//   const data = await getDocs(load);
 
-//   // Output docs
-//   let template = '';
-//   data.docs.forEach(doc => {
-//     const grabData = doc.data();
-//     template += `
-//     <div class="card">
-//       <h2>${grabData.summary}</h2>
-//       <p>Views ${grabData.numViews}</p>
-//       <p>Likes - ${grabData.numLikes}</p>
-//     </div>
-//     `
-//   });
-//   container.innerHTML += template; 
+  const data = await getDocs(load);
 
-//   // Update latestDoc
-//   latestDoc = -data.docs[data.docs.length-1]
+  // Output docs
+  let template = '';
+  data.docs.forEach(doc => {
+    const grabData = doc.data();
+    template += `
+    <div class="card">
+      <h2>${grabData.summary}</h2>
+      <p>Views ${grabData.numViews}</p>
+      <p>Likes - ${grabData.numLikes}</p>
+    </div>
+    `
+  });
+  container.innerHTML += template; 
 
-//   // unattach event listeners if no more documents
-//   if (data.empty) {
-//     loadMore.removeEventListener('click',handleClick)
-//   }
+  // Update latestDoc
+  latestDoc =  data.docs[data.docs.length] - 1
+  // latestDoc = data.docs[100]
 
-// }
+  // unattach event listeners if no more documents
+  if (data.empty) {
+    loadMore.removeEventListener('click',handleClick)
+  }
 
-// // Load more docs (button)
-// const loadMore = document.querySelector('.load-more button');
+}
 
-// const handleClick = () => {
-//   getNextReviews();
-// }
+// Load more docs (button)
+const loadMore = document.querySelector('.load-more button');
 
-// // loadMore.addEventListener('click', handleClick);
+const handleClick = () => {
+  getNextReviews();
+  console.log(latestDoc);
+}
+
+// For some reason this breakds grid page...
+loadMore.addEventListener('click', handleClick);
 
 // wait for DOM content to load
-// window.addEventListener('DOMContentLoaded', () => getNextReviews());
+window.addEventListener('DOMContentLoaded', () => getNextReviews());
 
 
 
