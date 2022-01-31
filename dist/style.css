@@ -74,7 +74,7 @@ h3 {
 
 /* BUTTONS */
 
-.button-filter {
+.button-clean {
     width: auto;
     height: 60px;
     align-items: center;
@@ -103,14 +103,14 @@ h3 {
     vertical-align: baseline;
 }
 
-.button-filter:focus {
+.button-clean:focus {
     border-color: rgba(0, 0, 0, 0.15);
     /* box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px; */
     color: rgba(0, 0, 0, 0.65);
     background-color: #00c3ff17;
 }
 
-.button-filter:hover {
+.button-clean:hover {
     border-color: rgba(0, 0, 0, 0.15);
     box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
     color: rgba(0, 0, 0);
@@ -162,6 +162,13 @@ h3 {
 /* PERFECT ALIGNING RULES */
 
 #postcard-mixitup {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 300px);
+    justify-content: space-evenly;
+    grid-gap: 50px 30px;
+}
+
+.containerload {
     display: grid;
     grid-template-columns: repeat(auto-fill, 300px);
     justify-content: space-evenly;

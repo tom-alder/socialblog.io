@@ -48,7 +48,7 @@ initializeApp(firebaseConfig)
 const db = getFirestore()
 
 // collection ref - CHANGE THIS TO CHANGE THE FIRESTORE COLLECTION YOU PULL FROM
-const colRef = collection(db, 'posts-g-sheets-valid')
+const colRef = collection(db, 'posts-g-sheets-6')
 
 
 // *--- QUERIES ---* //
@@ -92,30 +92,50 @@ const getNextReviews = async () => {
   // WORKING ascending
   // var load = query(colRef, orderBy('numViews', 'asc'), startAfter(latestDoc || 0), limit(5))
 
+  // WORKING descending (note use of numViewsNeg)
+  var load = query(colRef, orderBy('numLikesNeg', 'asc'), startAfter(latestDoc), limit(8) )
+
   // TESTING descending
-  // var load = query(colRef, orderBy('numViews', 'desc'), endBefore(latestDoc), limit(5) )
-  var load = query(colRef, orderBy('numViews', 'desc'), endBefore(latestDoc || 0), limit(5) )
-  // var load = query(colRef, orderBy('numViews', 'desc'), startAfter( latestDoc || 0), limit(5) )
+  // var load = query(colRef, orderBy('numViewsNeg', 'desc'), endBefore(latestDoc || 0), limit(5) )
+  // var load = query(colRef, orderBy('numViewsNeg', 'desc'), startAfter( latestDoc || 0), limit(5) )
 
 
   const data = await getDocs(load);
 
-  // Output docs
+  // Output docs TESTING
   let template = '';
   data.docs.forEach(doc => {
     const grabData = doc.data();
     template += `
-    <div class="card">
-      <h2>${grabData.summary}</h2>
-      <p>Views ${grabData.numViews}</p>
-      <p>Likes - ${grabData.numLikes}</p>
-    </div>
-    `
+    <div class="mix company-${grabData.company} blog-card" data-ref="item">
+    
+      <div class="linkedin-post">
+        <div class="card-border"></div>
+        <iframe src="https://www.linkedin.com/embed/feed/update/${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post" loading="lazy">
+        </iframe>
+      </div>
+    </div> 
+  `
   });
   container.innerHTML += template; 
 
+  // // Output docs WORKING plain text
+  // let template = '';
+  // data.docs.forEach(doc => {
+  //   const grabData = doc.data();
+  //   template += `
+  //   <div class="card">
+  //     <h2>${grabData.summary}</h2>
+  //     <p>Views: ${grabData.numViews}</p>
+  //     <p>Likes: ${grabData.numLikes}</p>
+  //   </div>
+  //   `
+  // });
+  // container.innerHTML += template; 
+
   // Update latestDoc
-  latestDoc =  data.docs[data.docs.length] - 1
+  // latestDoc =  data.docs[data.docs.length]
+  latestDoc =  data.docs[data.docs.length-1]
   // latestDoc = data.docs[100]
 
   // unattach event listeners if no more documents
@@ -133,7 +153,7 @@ const handleClick = () => {
   console.log(latestDoc);
 }
 
-// For some reason this breakds grid page...
+// For some reason this breakss grid page...
 loadMore.addEventListener('click', handleClick);
 
 // wait for DOM content to load
