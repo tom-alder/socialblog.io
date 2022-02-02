@@ -17,10 +17,13 @@ import {
   updateDoc,
   getDocs,
   limit,
+  limitToLast,
+  limitToFirst,
   startAfter,
   startAt, 
   get,
-  endBefore
+  endBefore,
+  endAt
 } from 'firebase/firestore'
 
 
@@ -45,7 +48,7 @@ initializeApp(firebaseConfig)
 const db = getFirestore()
 
 // collection ref - CHANGE THIS TO CHANGE THE FIRESTORE COLLECTION YOU PULL FROM
-const colRef = collection(db, 'posts-g-sheets-valid')
+const colRef = collection(db, 'posts-g-sheets-6')
 
 
 // *--- QUERIES ---* //
@@ -62,7 +65,7 @@ const colRef = collection(db, 'posts-g-sheets-valid')
 // querying to filter for certain topics and sort by date
 // var q = query(colRef, where("topic", "==", "test"), orderBy('date', 'desc'))
 // var q = query(colRef, orderBy('numViews', 'desc'), limit(8))
-var q = query(colRef, orderBy('numViews', 'desc'), limit(8))
+var q = query(colRef, orderBy('numComments', 'desc'), limit(8))
 
 
 
@@ -79,56 +82,82 @@ onSnapshot(q, (snapshot) => {
 })
 
 
-// SEE MORE BUTTON TUTORIAL
-// const container = document.querySelector('.containerload');
+// LOAD MORE BUTTON 
+const container = document.querySelector('.containerload');
 
-// // Store last document
-// let latestDoc = null;
+// Store last document
+let latestDoc = null;
 
-// const getNextReviews = async () => {
-//   // WORKING ascending
-//   // var load = query(colRef, orderBy('numViews', 'asc'), startAfter(latestDoc || 0), limit(5) )
+const getNextReviews = async () => {
+  // WORKING ascending
+  // var load = query(colRef, orderBy('numViews', 'asc'), startAfter(latestDoc || 0), limit(5))
 
-//   // TESTING descending
-//   var load = query(colRef, orderBy('numViews', 'desc'), endBefore(latestDoc || 0), limit(5) )
+  // WORKING descending (note use of numViewsNeg)
+  var load = query(colRef, orderBy('numCommentsNeg', 'asc'), startAfter(latestDoc), limit(8) )
 
-//   const data = await getDocs(load);
+  // TESTING descending
+  // var load = query(colRef, orderBy('numViewsNeg', 'desc'), endBefore(latestDoc || 0), limit(5) )
+  // var load = query(colRef, orderBy('numViewsNeg', 'desc'), startAfter( latestDoc || 0), limit(5) )
 
-//   // Output docs
-//   let template = '';
-//   data.docs.forEach(doc => {
-//     const grabData = doc.data();
-//     template += `
-//     <div class="card">
-//       <h2>${grabData.summary}</h2>
-//       <p>Views ${grabData.numViews}</p>
-//       <p>Likes - ${grabData.numLikes}</p>
-//     </div>
-//     `
-//   });
-//   container.innerHTML += template; 
 
-//   // Update latestDoc
-//   latestDoc = -data.docs[data.docs.length-1]
+  const data = await getDocs(load);
 
-//   // unattach event listeners if no more documents
-//   if (data.empty) {
-//     loadMore.removeEventListener('click',handleClick)
-//   }
+  // Output docs TESTING
+  let template = '';
+  data.docs.forEach(doc => {
+    const grabData = doc.data();
+    template += `
+    <div class="mix company-${grabData.company} blog-card" data-ref="item">
+    
+      <div class="linkedin-post">
+        <div class="card-border"></div>
+        <iframe src="https://www.linkedin.com/embed/feed/update/${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post" loading="lazy">
+        </iframe>
+      </div>
+    </div> 
+  `
+  });
+  container.innerHTML += template; 
 
-// }
+  // // Output docs WORKING plain text
+  // let template = '';
+  // data.docs.forEach(doc => {
+  //   const grabData = doc.data();
+  //   template += `
+  //   <div class="card">
+  //     <h2>${grabData.summary}</h2>
+  //     <p>Views: ${grabData.numViews}</p>
+  //     <p>Likes: ${grabData.numLikes}</p>
+  //   </div>
+  //   `
+  // });
+  // container.innerHTML += template; 
 
-// // Load more docs (button)
-// const loadMore = document.querySelector('.load-more button');
+  // Update latestDoc
+  // latestDoc =  data.docs[data.docs.length]
+  latestDoc =  data.docs[data.docs.length-1]
+  // latestDoc = data.docs[100]
 
-// const handleClick = () => {
-//   getNextReviews();
-// }
+  // unattach event listeners if no more documents
+  if (data.empty) {
+    loadMore.removeEventListener('click',handleClick)
+  }
 
-// // loadMore.addEventListener('click', handleClick);
+}
+
+// Load more docs (button)
+const loadMore = document.querySelector('.load-more button');
+
+const handleClick = () => {
+  getNextReviews();
+  console.log(latestDoc);
+}
+
+// For some reason this breaks grid page...
+loadMore.addEventListener('click', handleClick);
 
 // wait for DOM content to load
-// window.addEventListener('DOMContentLoaded', () => getNextReviews());
+window.addEventListener('DOMContentLoaded', () => getNextReviews());
 
 
 
