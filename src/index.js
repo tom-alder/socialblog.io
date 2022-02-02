@@ -65,7 +65,7 @@ const colRef = collection(db, 'posts-g-sheets-6')
 // querying to filter for certain topics and sort by date
 // var q = query(colRef, where("topic", "==", "test"), orderBy('date', 'desc'))
 // var q = query(colRef, orderBy('numViews', 'desc'), limit(8))
-var q = query(colRef, orderBy('numViews', 'desc'), limit(8))
+var q = query(colRef, orderBy('numComments', 'desc'), limit(8))
 
 
 
@@ -93,7 +93,7 @@ const getNextReviews = async () => {
   // var load = query(colRef, orderBy('numViews', 'asc'), startAfter(latestDoc || 0), limit(5))
 
   // WORKING descending (note use of numViewsNeg)
-  var load = query(colRef, orderBy('numLikesNeg', 'asc'), startAfter(latestDoc), limit(8) )
+  var load = query(colRef, orderBy('numCommentsNeg', 'asc'), startAfter(latestDoc), limit(8) )
 
   // TESTING descending
   // var load = query(colRef, orderBy('numViewsNeg', 'desc'), endBefore(latestDoc || 0), limit(5) )
@@ -153,7 +153,7 @@ const handleClick = () => {
   console.log(latestDoc);
 }
 
-// For some reason this breakss grid page...
+// For some reason this breaks grid page...
 loadMore.addEventListener('click', handleClick);
 
 // wait for DOM content to load
