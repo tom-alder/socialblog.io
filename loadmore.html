@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="dist/style.css">
     <title>Portfolio.io | Load More</title>
     <script src="src/index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 </head>
 
 <body>
@@ -14,13 +16,12 @@
         <div class="grey-box">
             <div class="postcard-grid">
                 <div class= "containerload">
-                <!-- <div class= "containerload" id="postcard-mixitup"> -->
                     
                 </div>
             </div>
         
         <div class="load-more container-center">
-            <button class="button-clean">Load More</button>
+            <button class="button-clean" onclick="loadAfterSecondTime()">Load More</button>
         </div>
     </div>
     </div>
@@ -31,5 +32,27 @@
    
 </body>
 <script src="dist/bundle.js"></script>
+<script>
+    window.onload = function(){
+    setTimeout(loadAfterTime, 4000)
+ };
+ 
+ function loadAfterTime() { 
+ // code you need to execute goes here. 
+ console.log('4 seconds')
+ $(function () {
+    $('.iframe').css('opacity', '1')
+  })
+ }
+ 
+ function loadAfterSecondTime() { 
+    $(function () {
+    $('.iframe').css('opacity', '0')
+  })
+    setTimeout(loadAfterTime, 4000)
+ }
+    
+</script>
+
 
 </html>

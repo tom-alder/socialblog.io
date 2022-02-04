@@ -20,7 +20,7 @@ import {
   limitToLast,
   limitToFirst,
   startAfter,
-  startAt, 
+  startAt,
   get,
   endBefore,
   endAt
@@ -93,7 +93,7 @@ const getNextReviews = async () => {
   // var load = query(colRef, orderBy('numViews', 'asc'), startAfter(latestDoc || 0), limit(5))
 
   // WORKING descending (note use of numViewsNeg)
-  var load = query(colRef, orderBy('numCommentsNeg', 'asc'), startAfter(latestDoc), limit(8) )
+  var load = query(colRef, orderBy('numCommentsNeg', 'asc'), startAfter(latestDoc), limit(8))
 
   // TESTING descending
   // var load = query(colRef, orderBy('numViewsNeg', 'desc'), endBefore(latestDoc || 0), limit(5) )
@@ -108,16 +108,36 @@ const getNextReviews = async () => {
     const grabData = doc.data();
     template += `
     <div class="mix company-${grabData.company} blog-card" data-ref="item">
-    
       <div class="linkedin-post">
-        <div class="card-border"></div>
-        <iframe src="https://www.linkedin.com/embed/feed/update/${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post" loading="lazy">
-        </iframe>
+        <div class="card-preloader" id="card-preloader">
+        <div class="card-loader card-loader--tabs">
+        <div class="skeleton-content-coumn">
+            <div class="skeleton-header-line">
+              <div class="skeleton-type-icon"></div>  
+              <div class="skeleton-title"></div>
+            </div>
+            <div class="skeleton-content-1"></div>
+            <div class="skeleton-content-2"></div>
+            <div class="skeleton-content-3"></div>
+            <div class="skeleton-content-4"></div>
+
+            <div class="skeleton-content-6"></div>
+            <div class="skeleton-content-7"></div>
+            <div class="skeleton-content-8"></div>
+
+        </div>
       </div>
-    </div> 
-  `
+    </div>
+    <iframe src="https://www.linkedin.com/embed/feed/update/${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post" loading="lazy" class="iframe" style="opacity: 0">
+    </iframe>
+    <div class="card-border"></div>
+  </div>
+</div> 
+`
   });
-  container.innerHTML += template; 
+  container.innerHTML += template;
+
+
 
   // // Output docs WORKING plain text
   // let template = '';
@@ -135,12 +155,12 @@ const getNextReviews = async () => {
 
   // Update latestDoc
   // latestDoc =  data.docs[data.docs.length]
-  latestDoc =  data.docs[data.docs.length-1]
+  latestDoc = data.docs[data.docs.length - 1]
   // latestDoc = data.docs[100]
 
   // unattach event listeners if no more documents
   if (data.empty) {
-    loadMore.removeEventListener('click',handleClick)
+    loadMore.removeEventListener('click', handleClick)
   }
 
 }
