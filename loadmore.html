@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>Portfolio.io | Load More</title>
-    <script src="dist/bundle.js"></script>
     <script src="src/index.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -48,7 +47,7 @@
                     <div class="btn-group">
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Sort <span class="caret"></span></button>
                         <ul class="dropdown-menu scrollable-menu dropdown-menu-right" role="menu">
-                            <li><a class="popular" id="myLink" title="Click to do something" href="#"
+                            <li><a id="mostPopularID" title="Click to do something" href="#"
                                 onclick="mostPopular();return false;">Most Popular</a></li>
                             <li><a href="#">Most views</a></li>
                             <li><a href="#">Most comments</a></li>
@@ -78,7 +77,9 @@
 
    
 </body>
+<script src="dist/bundle.js"></script>
 <script>
+    
     window.onload = function(){
     setTimeout(loadAfterTime, 4000)
  };
@@ -98,6 +99,8 @@
     setTimeout(loadAfterTime, 4000)
  }
     
+
+
 </script>
 
 

@@ -81,15 +81,29 @@ onSnapshot(q, (snapshot) => {
   console.log(consoleData)
 })
 
+
+
+var globalVariable;
+
+
 // LOAD MORE BUTTON 
 const container = document.querySelector('.containerload');
+
 
 // Store last document
 let latestDoc = null;
 
+
+
 const getNextReviews = async () => {
+  console.log('getNextReviews has run');
+
+  // TESTING toggle
+  
   // WORKING ascending
-  var load = query(colRef, orderBy('numViews', 'asc'), startAfter(latestDoc || 0), limit(5))
+  var load = query(colRef, orderBy('numViews', 'asc'), startAfter(latestDoc), limit(8));
+  // var load = globalVariable;
+  
 
   // WORKING descending (note use of numViewsNeg)
   // var load = query(colRef, orderBy('numCommentsNeg', 'asc'), startAfter(latestDoc), limit(8))
@@ -137,12 +151,7 @@ const getNextReviews = async () => {
 `
 });
 
-
-
-
-  container.innerHTML += template;
-
-
+container.innerHTML += template;
 
   // // Output docs WORKING plain text
   // let template = '';
@@ -168,7 +177,89 @@ const getNextReviews = async () => {
     loadMore.removeEventListener('click', handleClick)
   }
 
+  console.log(globalVariable);
+
 }
+
+// Sort by most Popular BUILDING
+
+const mostPopular = async () => {
+  globalVariable=query(colRef, orderBy('numViewsNeg', 'asc'), startAfter(latestDoc), limit(8));
+  console.log('mostPopular has run');
+  console.log(globalVariable);
+
+  var load = query(colRef, orderBy('numViewsNeg', 'asc'), startAfter(latestDoc), limit(8));
+  // var load = globalVariable;
+  
+  const data = await getDocs(load);
+
+  // Output docs TESTING
+  let template = '';
+  data.docs.forEach(doc => {
+    const grabData = doc.data();
+    template += `
+    <div class="mix company-${grabData.company} blog-card" data-ref="item">
+      <div class="linkedin-post">
+        <div class="card-preloader" id="card-preloader">
+          <div class="card-loader card-loader--tabs">
+            <div class="skeleton-content-coumn">
+              <div class="skeleton-header-line">
+                <div class="skeleton-type-icon">
+                </div>  
+                <div class="skeleton-title">
+                </div>
+              </div>
+              <div class="skeleton-content-1"></div>
+              <div class="skeleton-content-2"></div>
+              <div class="skeleton-content-3"></div>
+              <div class="skeleton-content-4"></div>
+
+              <div class="skeleton-content-6"></div>
+              <div class="skeleton-content-7"></div>
+              <div class="skeleton-content-8"></div>
+            </div>
+          </div>
+      </div>
+      <iframe src="https://www.linkedin.com/embed/feed/update/${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post" loading="lazy" class="iframe" style="opacity: 0">
+      </iframe>
+      <div class="card-border">
+    </div>
+  </div>
+</div> 
+`
+});
+
+container.innerHTML += template;
+  latestDoc = data.docs[data.docs.length - 1]
+
+  // unattach event listeners if no more documents
+  if (data.empty) {
+    loadMore.removeEventListener('click', handleClick)
+  }
+
+  getNextReviews();
+}
+
+
+
+// mostPopular();
+
+function leastPopular()
+{
+  globalVariable=query(colRef, orderBy('numViews', 'asc'), startAfter(latestDoc), limit(8));
+  getNextReviews();
+}
+
+// mostPopular();
+leastPopular();
+
+
+var test = document.getElementById('mostPopularID');
+test.onclick = function() {
+    console.log('Sort by most popular');
+    mostPopular();
+}
+
 
 // Load more docs (button)
 const loadMore = document.querySelector('.load-more button');
