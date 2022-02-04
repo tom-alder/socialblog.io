@@ -81,7 +81,6 @@ onSnapshot(q, (snapshot) => {
   console.log(consoleData)
 })
 
-
 // LOAD MORE BUTTON 
 const container = document.querySelector('.containerload');
 
@@ -90,10 +89,10 @@ let latestDoc = null;
 
 const getNextReviews = async () => {
   // WORKING ascending
-  // var load = query(colRef, orderBy('numViews', 'asc'), startAfter(latestDoc || 0), limit(5))
+  var load = query(colRef, orderBy('numViews', 'asc'), startAfter(latestDoc || 0), limit(5))
 
   // WORKING descending (note use of numViewsNeg)
-  var load = query(colRef, orderBy('numCommentsNeg', 'asc'), startAfter(latestDoc), limit(8))
+  // var load = query(colRef, orderBy('numCommentsNeg', 'asc'), startAfter(latestDoc), limit(8))
 
   // TESTING descending
   // var load = query(colRef, orderBy('numViewsNeg', 'desc'), endBefore(latestDoc || 0), limit(5) )
@@ -110,31 +109,37 @@ const getNextReviews = async () => {
     <div class="mix company-${grabData.company} blog-card" data-ref="item">
       <div class="linkedin-post">
         <div class="card-preloader" id="card-preloader">
-        <div class="card-loader card-loader--tabs">
-        <div class="skeleton-content-coumn">
-            <div class="skeleton-header-line">
-              <div class="skeleton-type-icon"></div>  
-              <div class="skeleton-title"></div>
+          <div class="card-loader card-loader--tabs">
+            <div class="skeleton-content-coumn">
+              <div class="skeleton-header-line">
+                <div class="skeleton-type-icon">
+                </div>  
+                <div class="skeleton-title">
+                </div>
+              </div>
+              <div class="skeleton-content-1"></div>
+              <div class="skeleton-content-2"></div>
+              <div class="skeleton-content-3"></div>
+              <div class="skeleton-content-4"></div>
+
+              <div class="skeleton-content-6"></div>
+              <div class="skeleton-content-7"></div>
+              <div class="skeleton-content-8"></div>
             </div>
-            <div class="skeleton-content-1"></div>
-            <div class="skeleton-content-2"></div>
-            <div class="skeleton-content-3"></div>
-            <div class="skeleton-content-4"></div>
-
-            <div class="skeleton-content-6"></div>
-            <div class="skeleton-content-7"></div>
-            <div class="skeleton-content-8"></div>
-
-        </div>
+          </div>
       </div>
+      <iframe src="https://www.linkedin.com/embed/feed/update/${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post" loading="lazy" class="iframe" style="opacity: 0">
+      </iframe>
+      <div class="card-border">
     </div>
-    <iframe src="https://www.linkedin.com/embed/feed/update/${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post" loading="lazy" class="iframe" style="opacity: 0">
-    </iframe>
-    <div class="card-border"></div>
   </div>
 </div> 
 `
-  });
+});
+
+
+
+
   container.innerHTML += template;
 
 

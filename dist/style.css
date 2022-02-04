@@ -72,6 +72,29 @@ h3 {
     border-radius: 15px;
 }
 
+.filter-button-row {
+
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+    row-gap: 20px;
+    /* gap: 80px 30px; */
+    flex-wrap: wrap;
+    background-color: #fafafa;
+    border-radius: 15px;
+}
+
+/* .dropdown-menu .scrollable-menu {
+    background-color: red;
+} */
+.scrollable-menu {
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+
+
+
 /* BUTTONS */
 
 .button-clean {
@@ -236,13 +259,39 @@ h3 {
     padding: 30px;
     background-color: #fafafa;
     border-radius: 15px;
+    /* display: flex; */
+    align-items: center;
+    /* flex-direction: column; */
+}
+
+/* .postcard-width {
+
+} */
+
+/* SORT MENU */
+
+.dropdown-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}
+
+.scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}
+
+.btn {
+    border-radius: 10px;
 }
 
 /* CARD PRELOADERS */
+/* BOOTSTRAP SIZING FIXED */
 
 .card-border {
-    width: 298px;
-    height: 418px;
+    width: 300px;
+    height: 420px;
     z-index: 100;
     position: absolute;
     border: 1px solid rgb(223, 223, 223);
@@ -251,8 +300,8 @@ h3 {
 }
 
 .card-preloader {
-    width: 298px;
-    height: 418px;
+    width: 300px;
+    height: 420px;
     z-index: -5;
     position: absolute;
     border: 1px solid rgb(223, 223, 223);
