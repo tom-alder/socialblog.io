@@ -12,7 +12,6 @@
     <!-- BOOTSTRAP -->
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-    <!-- <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
 
     <link rel="stylesheet" href="dist/style.css">
 
@@ -27,6 +26,7 @@
                         <div class="btn-group">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Company <span class="caret"></span></button>
                             <ul class="dropdown-menu scrollable-menu" role="menu">
+                                <!-- FOR COMPANIES - point to a filtered db collection with colRef, so you can sort over the top  -->
                                 <li><a href="#">None</a></li>
                                 <li><a href="#">Canva</a></li>
                                 <li><a href="#">Apple</a></li>
@@ -48,7 +48,7 @@
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Sort <span class="caret"></span></button>
                         <ul class="dropdown-menu scrollable-menu dropdown-menu-right" role="menu">
                             <li><a id="mostPopularID" title="Click to do something" href="#"
-                                onclick="mostPopular();return false;">Most Popular</a></li>
+                                onclick="mostPopular();return false;">Most popular</a></li>
                             <li><a href="#">Most views</a></li>
                             <li><a href="#">Most comments</a></li>
                             <li><a href="#">Most recent</a></li>
@@ -58,13 +58,13 @@
                 
                 </div>
             </div>
-            <!-- <div class="postcard-width"> -->
-                <div class="postcard-grid">
-                    <div class= "containerload">
-                
-                    </div>
+
+            <div class="postcard-grid">
+                <div class= "containerload">
+            
                 </div>
-            <!-- </div> -->
+            </div>
+
         
         <div class="load-more container-center">
             <button class="button-clean" onclick="loadAfterSecondTime();return false;">Load More</button>

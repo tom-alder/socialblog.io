@@ -64,8 +64,8 @@ const colRef = collection(db, 'posts-g-sheets-6')
 
 // querying to filter for certain topics and sort by date
 // var q = query(colRef, where("topic", "==", "test"), orderBy('date', 'desc'))
-// var q = query(colRef, orderBy('numViews', 'desc'), limit(8))
-var q = query(colRef, orderBy('numComments', 'desc'), limit(8))
+// var q = query(colRef, orderBy('numViews', 'desc'), limit(6))
+var q = query(colRef, orderBy('numComments', 'desc'), limit(6))
 
 
 
@@ -83,37 +83,58 @@ onSnapshot(q, (snapshot) => {
 
 
 
-var globalVariable;
-
+// var template;
+// var load;
+// var data;
 
 // LOAD MORE BUTTON 
 const container = document.querySelector('.containerload');
-
 
 // Store last document
 let latestDoc = null;
 
 
+var currentQuery = query(colRef, orderBy('numViews', 'asc'), startAfter(latestDoc), limit(6));
+// var currentQuery;
 
-const getNextReviews = async () => {
-  console.log('getNextReviews has run');
+var orderCol = 'numViews';
+var leastViews = query(colRef, orderBy(orderCol, 'asc'), startAfter(latestDoc), limit(6));
 
-  // TESTING toggle
-  
+function recalcQuery () {
+  currentQuery = query(colRef, orderBy(orderCol, 'asc'), startAfter(latestDoc), limit(6));
+}
+
+
+const getNextPosts = async () => {
+  console.log('getNextPosts has run');
+  console.log(latestDoc);
+  console.log('^ on getNextPosts run');
+  loadAfterSecondTime();
+
   // WORKING ascending
-  var load = query(colRef, orderBy('numViews', 'asc'), startAfter(latestDoc), limit(8));
-  // var load = globalVariable;
+  // IMPORTANT NOTE: declaring load as full query here breaks mostPopular button
+  // But declaring it as currentQuery breaks load more button
+  // var load = query(colRef, orderBy('numViews', 'asc'), startAfter(latestDoc), limit(6));
+  // var load = query(colRef, orderBy(orderCol, 'asc'), startAfter(latestDoc), limit(6));
+  // var load = var1;
+
+  // currentQuery (recalc) based on latestDoc
+  recalcQuery();
+  var load = currentQuery;
+  // load = currentQuery;
+
+  console.log(latestDoc);
+  console.log('^ after load = currentQuery');
   
 
   // WORKING descending (note use of numViewsNeg)
-  // var load = query(colRef, orderBy('numCommentsNeg', 'asc'), startAfter(latestDoc), limit(8))
+  // var load = query(colRef, orderBy('numCommentsNeg', 'asc'), startAfter(latestDoc), limit(6))
 
-  // TESTING descending
-  // var load = query(colRef, orderBy('numViewsNeg', 'desc'), endBefore(latestDoc || 0), limit(5) )
-  // var load = query(colRef, orderBy('numViewsNeg', 'desc'), startAfter( latestDoc || 0), limit(5) )
-
-
+  // const data = await getDocs(currentQuery);
   const data = await getDocs(load);
+
+  console.log(latestDoc);
+  console.log('^ after await getDocs');
 
   // Output docs TESTING
   let template = '';
@@ -150,10 +171,9 @@ const getNextReviews = async () => {
 </div> 
 `
 });
-
 container.innerHTML += template;
 
-  // // Output docs WORKING plain text
+  // Output docs WORKING plain text
   // let template = '';
   // data.docs.forEach(doc => {
   //   const grabData = doc.data();
@@ -165,115 +185,82 @@ container.innerHTML += template;
   //   </div>
   //   `
   // });
-  // container.innerHTML += template; 
+  // container.innerHTML += template;
 
-  // Update latestDoc
+  // // Update latestDoc
   // latestDoc =  data.docs[data.docs.length]
-  latestDoc = data.docs[data.docs.length - 1]
+  latestDoc = data.docs[data.docs.length -1]
   // latestDoc = data.docs[100]
+  console.log(latestDoc);
+  console.log('^ after latestDoc updated');
 
   // unattach event listeners if no more documents
   if (data.empty) {
     loadMore.removeEventListener('click', handleClick)
   }
 
-  console.log(globalVariable);
-
+  console.log(currentQuery);
 }
 
-// Sort by most Popular BUILDING
+// // // Sort by most Popular BUILDING
 
 const mostPopular = async () => {
-  globalVariable=query(colRef, orderBy('numViewsNeg', 'asc'), startAfter(latestDoc), limit(8));
+  orderCol = 'numViewsNeg';
+  clear();
+  currentQuery=query(colRef, orderBy('numViewsNeg', 'asc'), startAfter(latestDoc), limit(6));
   console.log('mostPopular has run');
-  console.log(globalVariable);
-
-  var load = query(colRef, orderBy('numViewsNeg', 'asc'), startAfter(latestDoc), limit(8));
-  // var load = globalVariable;
+  console.log(currentQuery);
+  
+  var load = query(colRef, orderBy('numViewsNeg', 'asc'), startAfter(latestDoc), limit(6));
+  // var load = currentQuery;
   
   const data = await getDocs(load);
-
-  // Output docs TESTING
-  let template = '';
-  data.docs.forEach(doc => {
-    const grabData = doc.data();
-    template += `
-    <div class="mix company-${grabData.company} blog-card" data-ref="item">
-      <div class="linkedin-post">
-        <div class="card-preloader" id="card-preloader">
-          <div class="card-loader card-loader--tabs">
-            <div class="skeleton-content-coumn">
-              <div class="skeleton-header-line">
-                <div class="skeleton-type-icon">
-                </div>  
-                <div class="skeleton-title">
-                </div>
-              </div>
-              <div class="skeleton-content-1"></div>
-              <div class="skeleton-content-2"></div>
-              <div class="skeleton-content-3"></div>
-              <div class="skeleton-content-4"></div>
-
-              <div class="skeleton-content-6"></div>
-              <div class="skeleton-content-7"></div>
-              <div class="skeleton-content-8"></div>
-            </div>
-          </div>
-      </div>
-      <iframe src="https://www.linkedin.com/embed/feed/update/${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post" loading="lazy" class="iframe" style="opacity: 0">
-      </iframe>
-      <div class="card-border">
-    </div>
-  </div>
-</div> 
-`
-});
-
-container.innerHTML += template;
-  latestDoc = data.docs[data.docs.length - 1]
-
-  // unattach event listeners if no more documents
-  if (data.empty) {
-    loadMore.removeEventListener('click', handleClick)
-  }
-
-  getNextReviews();
+  getNextPosts();
 }
 
-
-
-// mostPopular();
 
 function leastPopular()
 {
-  globalVariable=query(colRef, orderBy('numViews', 'asc'), startAfter(latestDoc), limit(8));
-  getNextReviews();
+  currentQuery = query(colRef, orderBy('numViews', 'asc'), startAfter(latestDoc), limit(6));
+  // recalcQuery('numViews');
+  // currentQuery = query(colRef, orderBy('numViews', 'asc'), limit(6));
+  getNextPosts();
+}
+
+function clear() {
+  container.innerHTML = '';
+  latestDoc = null;
+  // currentQuery = null;
+  // template = '';
+  // load = '';
+  // data = '';
 }
 
 // mostPopular();
-leastPopular();
+// leastPopular();
+// mostRecent();
 
 
-var test = document.getElementById('mostPopularID');
-test.onclick = function() {
+var mostPopularButton = document.getElementById('mostPopularID');
+mostPopularButton.onclick = function() {
     console.log('Sort by most popular');
     mostPopular();
 }
-
 
 // Load more docs (button)
 const loadMore = document.querySelector('.load-more button');
 
 const handleClick = () => {
-  getNextReviews();
   console.log(latestDoc);
+  console.log('^ on load more button');
+  getNextPosts();
 }
 
 // For some reason this breaks grid page...
 loadMore.addEventListener('click', handleClick);
 
 // wait for DOM content to load
-window.addEventListener('DOMContentLoaded', () => getNextReviews());
+window.addEventListener('DOMContentLoaded', () => leastPopular());
 
 
 
@@ -313,7 +300,7 @@ onSnapshot(q, (snapshot) => {
 var filterNone = document.querySelector('.clear')
 filterNone.addEventListener('click', (e) => {
   e.preventDefault()
-  q = query(colRef, orderBy('numViews', 'desc'), limit(8))
+  q = query(colRef, orderBy('numViews', 'desc'), limit(6))
   console.log(q)
   onSnapshot(q, (snapshot) => {
     var posts = []
