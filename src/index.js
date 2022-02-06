@@ -1,3 +1,5 @@
+// // // *--- INITIALISATION ---* // // //
+
 // NOTE: You get console 'Uncaught TypeError' if you render pages that dont use all of these js functions
 
 import {
@@ -20,13 +22,11 @@ import {
   limitToLast,
   limitToFirst,
   startAfter,
-  startAt, 
+  startAt,
   get,
   endBefore,
   endAt
 } from 'firebase/firestore'
-
-
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -39,8 +39,6 @@ const firebaseConfig = {
   measurementId: "G-ZDJ82ELVP8"
 };
 
-
-
 // init firebase app
 initializeApp(firebaseConfig)
 
@@ -48,10 +46,11 @@ initializeApp(firebaseConfig)
 const db = getFirestore()
 
 // collection ref - CHANGE THIS TO CHANGE THE FIRESTORE COLLECTION YOU PULL FROM
-const colRef = collection(db, 'posts-g-sheets-6')
+const colRef = collection(db, 'posts-g-sheets-6');
+const q = query(collection(db, 'posts-g-sheets-6'));
 
 
-// *--- QUERIES ---* //
+// // // *--- QUERIES ---* // // //
 
 // querying to sort by date
 // NOTE This means you NEED a date datapoint in firebase
@@ -64,10 +63,8 @@ const colRef = collection(db, 'posts-g-sheets-6')
 
 // querying to filter for certain topics and sort by date
 // var q = query(colRef, where("topic", "==", "test"), orderBy('date', 'desc'))
-// var q = query(colRef, orderBy('numViews', 'desc'), limit(8))
-var q = query(colRef, orderBy('numComments', 'desc'), limit(8))
-
-
+// var q = query(colRef, orderBy('numViews', 'desc'), limit(6))
+// var q = query(colRef, orderBy('numComments', 'desc'), limit(6))
 
 // CLEAN CONSOLE LOG FOR THE VALUE OF Q:
 onSnapshot(q, (snapshot) => {
@@ -81,6 +78,7 @@ onSnapshot(q, (snapshot) => {
   console.log(consoleData)
 })
 
+// // //*--- LOAD MORE ---* // // //
 
 // LOAD MORE BUTTON 
 const container = document.querySelector('.containerload');
@@ -88,19 +86,24 @@ const container = document.querySelector('.containerload');
 // Store last document
 let latestDoc = null;
 
-const getNextReviews = async () => {
-  // WORKING ascending
-  // var load = query(colRef, orderBy('numViews', 'asc'), startAfter(latestDoc || 0), limit(5))
+// Set initial query
+var currentQuery = query(colRef, orderBy('numViews', 'asc'), startAfter(latestDoc), limit(6));
+var orderCol = 'numViews';
 
-  // WORKING descending (note use of numViewsNeg)
-  var load = query(colRef, orderBy('numCommentsNeg', 'asc'), startAfter(latestDoc), limit(8) )
+// function to update query
+function recalcQuery () {
+  currentQuery = query(colRef, orderBy(orderCol, 'asc'), startAfter(latestDoc), limit(6));
+}
 
-  // TESTING descending
-  // var load = query(colRef, orderBy('numViewsNeg', 'desc'), endBefore(latestDoc || 0), limit(5) )
-  // var load = query(colRef, orderBy('numViewsNeg', 'desc'), startAfter( latestDoc || 0), limit(5) )
-
-
+// Get next posts
+const getNextPosts = async () => {
+  console.log('getNextPosts has run');
+  loadAfterSecondTime();
+  recalcQuery();
+  var load = currentQuery;
   const data = await getDocs(load);
+  console.log(latestDoc);
+  console.log('^ after await getDocs');
 
   // Output docs TESTING
   let template = '';
@@ -108,16 +111,36 @@ const getNextReviews = async () => {
     const grabData = doc.data();
     template += `
     <div class="mix company-${grabData.company} blog-card" data-ref="item">
-    
       <div class="linkedin-post">
-        <div class="card-border"></div>
-        <iframe src="https://www.linkedin.com/embed/feed/update/${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post" loading="lazy">
+        <div class="card-preloader" id="card-preloader">
+          <div class="card-loader card-loader--tabs">
+            <div class="skeleton-content-coumn">
+              <div class="skeleton-header-line">
+                <div class="skeleton-type-icon">
+                </div>  
+                <div class="skeleton-title">
+                </div>
+              </div>
+              <div class="skeleton-content-1"></div>
+              <div class="skeleton-content-2"></div>
+              <div class="skeleton-content-3"></div>
+              <div class="skeleton-content-4"></div>
+
+              <div class="skeleton-content-6"></div>
+              <div class="skeleton-content-7"></div>
+              <div class="skeleton-content-8"></div>
+            </div>
+          </div>
+        </div>
+        <iframe src="https://www.linkedin.com/embed/feed/update/${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post" loading="lazy" class="iframe" style="opacity: 0">
         </iframe>
+        <div class="card-border">
+        </div>
       </div>
     </div> 
-  `
+    `
   });
-  container.innerHTML += template; 
+  container.innerHTML += template;
 
   // // Output docs WORKING plain text
   // let template = '';
@@ -131,37 +154,119 @@ const getNextReviews = async () => {
   //   </div>
   //   `
   // });
-  // container.innerHTML += template; 
+  // container.innerHTML += template;
 
-  // Update latestDoc
-  // latestDoc =  data.docs[data.docs.length]
-  latestDoc =  data.docs[data.docs.length-1]
-  // latestDoc = data.docs[100]
+  // // Update latestDoc
+  latestDoc = data.docs[data.docs.length -1]
+  console.log(latestDoc);
+  console.log('^ after latestDoc updated');
 
-  // unattach event listeners if no more documents
+  // // Unattach event listeners if no more documents
   if (data.empty) {
-    loadMore.removeEventListener('click',handleClick)
+    loadMore.removeEventListener('click', handleClick)
   }
+}
 
+// // // *--- SORT BY ---* // // //
+
+// Sort by least Views WORKING
+function leastViews() {
+  console.log('leastViews has run');
+  orderCol = 'numViews';
+  clear();
+  getNextPosts();
+}
+
+// Sort by most Views WORKING
+function mostViews() {
+  console.log('mostViews has run');
+  orderCol = 'numLikesNeg';
+  clear();
+  getNextPosts();
+}
+// Sort by most Comments WORKING
+function mostComments() {
+  console.log('mostComments has run');
+  orderCol = 'numCommentsNeg';
+  clear();
+  getNextPosts();
+}
+
+// Sort by most Comments WORKING
+// function mostComments() {
+//   console.log('mostComments has run');
+//   orderCol = 'numCommentsNeg';
+//   clear();
+//   getNextPosts();
+// }
+
+// Sort by most Recent BUILDING
+function mostRecent() {
+  console.log('mostRecent has run');
+  orderCol = 'createdAt';
+  clear();
+  getNextPosts();
+}
+
+// Clear latest doc and html container
+function clear() {
+  container.innerHTML = '';
+  latestDoc = null;
+}
+
+// // // *--- SORT AND FILTER TOGGLES ---* // // //
+
+// Filter Linkedin (dropdown)
+var filterLinkedInDropdown = document.getElementById('filterLinkedInID');
+filterLinkedInDropdown.onclick = function() {
+    console.log('Filter by LinkedIn');
+    filterLinkedIn();
+}
+
+// Most Views (dropdown)
+var mostViewsDropdown = document.getElementById('mostViewsID');
+mostViewsDropdown.onclick = function() {
+    console.log('Sort by most Views');
+    mostViews();
+}
+
+// Most comments (dropdown)
+var mostCommentsDropdown = document.getElementById('mostCommentsID');
+mostCommentsDropdown.onclick = function() {
+    console.log('Sort by most Comments');
+    mostComments();
+}
+
+// Most Recent (dropdown)
+var mostRecentDropdown = document.getElementById('mostRecentID');
+mostRecentDropdown.onclick = function() {
+    console.log('Sort by most Recent');
+    mostRecent();
 }
 
 // Load more docs (button)
 const loadMore = document.querySelector('.load-more button');
 
 const handleClick = () => {
-  getNextReviews();
   console.log(latestDoc);
+  console.log('^ on load more button');
+  getNextPosts();
 }
 
 // For some reason this breaks grid page...
 loadMore.addEventListener('click', handleClick);
 
 // wait for DOM content to load
-window.addEventListener('DOMContentLoaded', () => getNextReviews());
+window.addEventListener('DOMContentLoaded', () => leastViews());
+
+
+// // //
+// // // *--- NOT IN USE ---* // // //
+// // //
 
 
 
-//  *--- FUNCTIONS TO RUN QUERIES ---* //
+// // // *--- FUNCTIONS TO RUN QUERIES ---* // // //
 
 // Get collection data - WORKING postcard with labels
 onSnapshot(q, (snapshot) => {
@@ -197,7 +302,7 @@ onSnapshot(q, (snapshot) => {
 var filterNone = document.querySelector('.clear')
 filterNone.addEventListener('click', (e) => {
   e.preventDefault()
-  q = query(colRef, orderBy('numViews', 'desc'), limit(8))
+  q = query(colRef, orderBy('numViews', 'desc'), limit(6))
   console.log(q)
   onSnapshot(q, (snapshot) => {
     var posts = []
@@ -300,9 +405,7 @@ filterApple.addEventListener('click', (e) => {
 })
 
 
-
-
-// *--- GET COLLECITON DATA ---* //
+// // // *--- GET COLLECITON DATA ---* // // //
 
 // Get collection data (Point in time)
 // This does not update the page in real time as new docs are added
@@ -364,8 +467,6 @@ onSnapshot(q, (snapshot) => {
 //     `
 // })
 
-
-
 // adding docs 
 const addPostForm = document.querySelector('.add')
 addPostForm.addEventListener('submit', (e) => {
@@ -416,5 +517,4 @@ updateForm.addEventListener('submit', (e) => {
     .then(() => {
       updateForm.reset()
     })
-
 })
