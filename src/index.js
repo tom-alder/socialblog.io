@@ -1,3 +1,5 @@
+// // // *--- INITIALISATION ---* // // //
+
 // NOTE: You get console 'Uncaught TypeError' if you render pages that dont use all of these js functions
 
 import {
@@ -26,8 +28,6 @@ import {
   endAt
 } from 'firebase/firestore'
 
-
-
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyAduE2GkMxli8LVcVyp2oSWyqIueqfW-Us",
@@ -39,8 +39,6 @@ const firebaseConfig = {
   measurementId: "G-ZDJ82ELVP8"
 };
 
-
-
 // init firebase app
 initializeApp(firebaseConfig)
 
@@ -48,10 +46,11 @@ initializeApp(firebaseConfig)
 const db = getFirestore()
 
 // collection ref - CHANGE THIS TO CHANGE THE FIRESTORE COLLECTION YOU PULL FROM
-const colRef = collection(db, 'posts-g-sheets-6')
+const colRef = collection(db, 'posts-g-sheets-6');
+const q = query(collection(db, 'posts-g-sheets-6'));
 
 
-// *--- QUERIES ---* //
+// // // *--- QUERIES ---* // // //
 
 // querying to sort by date
 // NOTE This means you NEED a date datapoint in firebase
@@ -65,9 +64,7 @@ const colRef = collection(db, 'posts-g-sheets-6')
 // querying to filter for certain topics and sort by date
 // var q = query(colRef, where("topic", "==", "test"), orderBy('date', 'desc'))
 // var q = query(colRef, orderBy('numViews', 'desc'), limit(6))
-var q = query(colRef, orderBy('numComments', 'desc'), limit(6))
-
-
+// var q = query(colRef, orderBy('numComments', 'desc'), limit(6))
 
 // CLEAN CONSOLE LOG FOR THE VALUE OF Q:
 onSnapshot(q, (snapshot) => {
@@ -81,11 +78,7 @@ onSnapshot(q, (snapshot) => {
   console.log(consoleData)
 })
 
-
-
-// var template;
-// var load;
-// var data;
+// // //*--- LOAD MORE ---* // // //
 
 // LOAD MORE BUTTON 
 const container = document.querySelector('.containerload');
@@ -93,46 +86,22 @@ const container = document.querySelector('.containerload');
 // Store last document
 let latestDoc = null;
 
-
+// Set initial query
 var currentQuery = query(colRef, orderBy('numViews', 'asc'), startAfter(latestDoc), limit(6));
-// var currentQuery;
-
 var orderCol = 'numViews';
-var leastViews = query(colRef, orderBy(orderCol, 'asc'), startAfter(latestDoc), limit(6));
 
+// function to update query
 function recalcQuery () {
   currentQuery = query(colRef, orderBy(orderCol, 'asc'), startAfter(latestDoc), limit(6));
 }
 
-
+// Get next posts
 const getNextPosts = async () => {
   console.log('getNextPosts has run');
-  console.log(latestDoc);
-  console.log('^ on getNextPosts run');
   loadAfterSecondTime();
-
-  // WORKING ascending
-  // IMPORTANT NOTE: declaring load as full query here breaks mostPopular button
-  // But declaring it as currentQuery breaks load more button
-  // var load = query(colRef, orderBy('numViews', 'asc'), startAfter(latestDoc), limit(6));
-  // var load = query(colRef, orderBy(orderCol, 'asc'), startAfter(latestDoc), limit(6));
-  // var load = var1;
-
-  // currentQuery (recalc) based on latestDoc
   recalcQuery();
   var load = currentQuery;
-  // load = currentQuery;
-
-  console.log(latestDoc);
-  console.log('^ after load = currentQuery');
-  
-
-  // WORKING descending (note use of numViewsNeg)
-  // var load = query(colRef, orderBy('numCommentsNeg', 'asc'), startAfter(latestDoc), limit(6))
-
-  // const data = await getDocs(currentQuery);
   const data = await getDocs(load);
-
   console.log(latestDoc);
   console.log('^ after await getDocs');
 
@@ -162,18 +131,18 @@ const getNextPosts = async () => {
               <div class="skeleton-content-8"></div>
             </div>
           </div>
+        </div>
+        <iframe src="https://www.linkedin.com/embed/feed/update/${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post" loading="lazy" class="iframe" style="opacity: 0">
+        </iframe>
+        <div class="card-border">
+        </div>
       </div>
-      <iframe src="https://www.linkedin.com/embed/feed/update/${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post" loading="lazy" class="iframe" style="opacity: 0">
-      </iframe>
-      <div class="card-border">
-    </div>
-  </div>
-</div> 
-`
-});
-container.innerHTML += template;
+    </div> 
+    `
+  });
+  container.innerHTML += template;
 
-  // Output docs WORKING plain text
+  // // Output docs WORKING plain text
   // let template = '';
   // data.docs.forEach(doc => {
   //   const grabData = doc.data();
@@ -188,63 +157,91 @@ container.innerHTML += template;
   // container.innerHTML += template;
 
   // // Update latestDoc
-  // latestDoc =  data.docs[data.docs.length]
   latestDoc = data.docs[data.docs.length -1]
-  // latestDoc = data.docs[100]
   console.log(latestDoc);
   console.log('^ after latestDoc updated');
 
-  // unattach event listeners if no more documents
+  // // Unattach event listeners if no more documents
   if (data.empty) {
     loadMore.removeEventListener('click', handleClick)
   }
-
-  console.log(currentQuery);
 }
 
-// // // Sort by most Popular BUILDING
+// // // *--- SORT BY ---* // // //
 
-const mostPopular = async () => {
-  orderCol = 'numViewsNeg';
+// Sort by least Views WORKING
+function leastViews() {
+  console.log('leastViews has run');
+  orderCol = 'numViews';
   clear();
-  currentQuery=query(colRef, orderBy('numViewsNeg', 'asc'), startAfter(latestDoc), limit(6));
-  console.log('mostPopular has run');
-  console.log(currentQuery);
-  
-  var load = query(colRef, orderBy('numViewsNeg', 'asc'), startAfter(latestDoc), limit(6));
-  // var load = currentQuery;
-  
-  const data = await getDocs(load);
   getNextPosts();
 }
 
-
-function leastPopular()
-{
-  currentQuery = query(colRef, orderBy('numViews', 'asc'), startAfter(latestDoc), limit(6));
-  // recalcQuery('numViews');
-  // currentQuery = query(colRef, orderBy('numViews', 'asc'), limit(6));
+// Sort by most Views WORKING
+function mostViews() {
+  console.log('mostViews has run');
+  orderCol = 'numLikesNeg';
+  clear();
+  getNextPosts();
+}
+// Sort by most Comments WORKING
+function mostComments() {
+  console.log('mostComments has run');
+  orderCol = 'numCommentsNeg';
+  clear();
   getNextPosts();
 }
 
+// Sort by most Comments WORKING
+// function mostComments() {
+//   console.log('mostComments has run');
+//   orderCol = 'numCommentsNeg';
+//   clear();
+//   getNextPosts();
+// }
+
+// Sort by most Recent BUILDING
+function mostRecent() {
+  console.log('mostRecent has run');
+  orderCol = 'createdAt';
+  clear();
+  getNextPosts();
+}
+
+// Clear latest doc and html container
 function clear() {
   container.innerHTML = '';
   latestDoc = null;
-  // currentQuery = null;
-  // template = '';
-  // load = '';
-  // data = '';
 }
 
-// mostPopular();
-// leastPopular();
-// mostRecent();
+// // // *--- SORT AND FILTER TOGGLES ---* // // //
 
+// Filter Linkedin (dropdown)
+var filterLinkedInDropdown = document.getElementById('filterLinkedInID');
+filterLinkedInDropdown.onclick = function() {
+    console.log('Filter by LinkedIn');
+    filterLinkedIn();
+}
 
-var mostPopularButton = document.getElementById('mostPopularID');
-mostPopularButton.onclick = function() {
-    console.log('Sort by most popular');
-    mostPopular();
+// Most Views (dropdown)
+var mostViewsDropdown = document.getElementById('mostViewsID');
+mostViewsDropdown.onclick = function() {
+    console.log('Sort by most Views');
+    mostViews();
+}
+
+// Most comments (dropdown)
+var mostCommentsDropdown = document.getElementById('mostCommentsID');
+mostCommentsDropdown.onclick = function() {
+    console.log('Sort by most Comments');
+    mostComments();
+}
+
+// Most Recent (dropdown)
+var mostRecentDropdown = document.getElementById('mostRecentID');
+mostRecentDropdown.onclick = function() {
+    console.log('Sort by most Recent');
+    mostRecent();
 }
 
 // Load more docs (button)
@@ -260,11 +257,16 @@ const handleClick = () => {
 loadMore.addEventListener('click', handleClick);
 
 // wait for DOM content to load
-window.addEventListener('DOMContentLoaded', () => leastPopular());
+window.addEventListener('DOMContentLoaded', () => leastViews());
+
+
+// // //
+// // // *--- NOT IN USE ---* // // //
+// // //
 
 
 
-//  *--- FUNCTIONS TO RUN QUERIES ---* //
+// // // *--- FUNCTIONS TO RUN QUERIES ---* // // //
 
 // Get collection data - WORKING postcard with labels
 onSnapshot(q, (snapshot) => {
@@ -403,9 +405,7 @@ filterApple.addEventListener('click', (e) => {
 })
 
 
-
-
-// *--- GET COLLECITON DATA ---* //
+// // // *--- GET COLLECITON DATA ---* // // //
 
 // Get collection data (Point in time)
 // This does not update the page in real time as new docs are added
@@ -467,8 +467,6 @@ onSnapshot(q, (snapshot) => {
 //     `
 // })
 
-
-
 // adding docs 
 const addPostForm = document.querySelector('.add')
 addPostForm.addEventListener('submit', (e) => {
@@ -519,5 +517,4 @@ updateForm.addEventListener('submit', (e) => {
     .then(() => {
       updateForm.reset()
     })
-
 })
