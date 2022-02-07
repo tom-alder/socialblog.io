@@ -304,7 +304,7 @@ h3 {
 .card-preloader {
     width: 300px;
     height: 420px;
-    z-index: -5;
+    z-index: 5;
     position: absolute;
     border: 1px solid rgb(223, 223, 223);
     pointer-events: none;

@@ -85,13 +85,15 @@
         // code you need to execute goes here. 
         console.log('4 seconds')
         $(function () {
-            $('.iframe').css('opacity', '1')
+            // $('.iframe').css('opacity', '1')
+            $('.card-preloader').css('z-index', '-1')
         })
     }
 
     function loadAfterSecondTime() {
         $(function () {
-            $('.iframe').css('opacity', '0')
+            // $('.iframe').css('opacity', '0')
+            $('.card-preloader').css('z-index', '5')
         })
         setTimeout(loadAfterTime, 4000)
     }

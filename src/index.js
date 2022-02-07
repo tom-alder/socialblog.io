@@ -188,14 +188,13 @@ function renderPosts (data) {
               <div class="skeleton-content-2"></div>
               <div class="skeleton-content-3"></div>
               <div class="skeleton-content-4"></div>
-
               <div class="skeleton-content-6"></div>
               <div class="skeleton-content-7"></div>
               <div class="skeleton-content-8"></div>
             </div>
           </div>
         </div>
-        <iframe src="https://www.linkedin.com/embed/feed/update/${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post" loading="lazy" class="iframe" style="opacity: 0">
+        <iframe src="https://www.linkedin.com/embed/feed/update/${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post" loading="lazy" class="iframe">
         </iframe>
         <div class="card-border">
         </div>
