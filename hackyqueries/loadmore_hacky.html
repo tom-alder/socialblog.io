@@ -1,0 +1,112 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Portfolio.io | Load More</title>
+    <script src="src/index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- BOOTSTRAP -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="dist/style.css">
+
+</head>
+
+<body>
+    <div class="postcard-mini-app">
+        <div class="grey-box">
+            <div class="container-center">
+                <div class="filter-button-row">
+                    <div class="filter-button-row-left">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Company <span class="caret"></span></button>
+                            <ul class="dropdown-menu scrollable-menu" role="menu">
+                                <!-- FOR COMPANIES - point to a filtered db collection with colRef, so you can sort over the top  -->
+                                <li><a href="#">None</a></li>
+
+                                <li><a id="filterLinkedInID" title="Click to do filter by LinkedIn" href="#"
+                                    onclick="filterLinkedin();return false;">LinkedIn</a></li>
+                                <li><a href="#">Canva</a></li>
+                                <li><a href="#">Apple</a></li>
+                            </ul>
+                        </div>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Topic <span class="caret"></span></button>
+                            <ul class="dropdown-menu scrollable-menu" role="menu">
+                                <li><a href="#">Web3 (Crypto, NFTs, Metaverse)</a></li>
+                                <li><a href="#">Crypto</a></li>
+                                <li><a href="#">Fintech</a></li>
+                                <li><a href="#">Product Management</a></li>
+                                <li><a href="#">Strategy</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Sort <span class="caret"></span></button>
+                        <ul class="dropdown-menu scrollable-menu dropdown-menu-right" role="menu">
+                            <li><a id="mostViewsID" title="Click to do sort by most Views" href="#"
+                                onclick="mostViews();return false;">Most views</a></li>
+                            <li><a id="mostCommentsID" title="Click to do sort by most Comments" href="#"
+                                onclick="mostComments();return false;">Most comments</a></li>
+                            <li><a id="mostRecentID" title="Click to do sort by most recent" href="#"
+                                onclick="mostRecent();return false;">Oldest</a></li>
+                                <li><a href="#">----</a></li>
+                            <li><a href="#">Most recent</a></li>
+                            
+                        </ul>
+                    </div>
+                
+                </div>
+            </div>
+
+            <div class="postcard-grid">
+                <div class= "containerload">
+            
+                </div>
+            </div>
+
+        
+        <div class="load-more container-center">
+            <button class="button-clean" onclick="loadAfterSecondTime();return false;">Load More</button>
+        </div>
+    </div>
+    </div>
+    
+    <!-- <div class="containerload">
+    </div> -->
+
+   
+</body>
+<script src="dist/bundle.js"></script>
+<script>
+    
+    window.onload = function(){
+    setTimeout(loadAfterTime, 4000)
+ };
+ 
+ function loadAfterTime() { 
+ // code you need to execute goes here. 
+ console.log('4 seconds')
+ $(function () {
+    $('.iframe').css('opacity', '1')
+  })
+ }
+ 
+ function loadAfterSecondTime() { 
+    $(function () {
+    $('.iframe').css('opacity', '0')
+  })
+    setTimeout(loadAfterTime, 4000)
+ }
+    
+
+
+</script>
+
+
+</html>
