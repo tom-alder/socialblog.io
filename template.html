@@ -8,52 +8,59 @@
 
     <title>Portfolio.io | Template</title>
     <script src="src/index.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/e1e5245f06.js" crossorigin="anonymous"></script>
 
-    <!-- BOOTSTRAP -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="dist/style.css">
+    <!-- <link rel="stylesheet" href="dist/style.css"> -->
+    <link rel="stylesheet" href="dist/templatestyle.css">
 
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-        <div class="container-sm container-nav">
-          <a class="navbar-brand d-flex w-50 me-auto" href="#">TA</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-    
-          <div class="collapse navbar-collapse" id="navbarsExample07">
-            <ul class="navbar-nav mb-4 mb-lg-0 ms-auto">
-              <li class="nav-item mx-2">
-                <a class="nav-link" href="#">About</a>
-              </li>
-              <li class="nav-item mx-2">
-                <a class="nav-link" href="#">FAQ</a>
-              </li>
-              <li class="nav-item mx-2">
-                <button class="btn rounded ms-sm-2">Join Waitlist</button>
-              </li>
+    <header class="cd-header">
+		<div class="header-wrapper">
+			<div class="logo-wrap">
+				<a href="#" class="hover-target"><span>Join</span>Waitlist</a>
+			</div>
+			<div class="nav-but-wrap">
+				<div class="menu-icon hover-target">
+					<span class="menu-icon__line menu-icon__line-left"></span>
+					<span class="menu-icon__line"></span>
+					<span class="menu-icon__line menu-icon__line-right"></span>
+				</div>					
+			</div>					
+		</div>				
+	</header>
+
+    <div class="nav">
+        <div class="nav__content">
+            <ul class="nav__list">
+                <li class="nav__list-item"><a href="#" class="hover-target">Home</a></li>
+                <!-- <li class="nav__list-item active-nav"><a href="#" class="hover-target">Home</a></li> -->
+                <li class="nav__list-item"><a href="#" class="hover-target">About</a></li>
+                <li class="nav__list-item"><a href="#" class="hover-target">FAQ</a></li>
+                <li class="nav__list-item"><a href="#" class="hover-target"></a></li>
             </ul>
-              
-          </div>
         </div>
-      </nav>
-      
+    </div>
 
 
+	<div class="container">
+        <div class="section full-height over-hide">
+            <div class="switch-wrap">
+                <h1>Hey 👋</h1>
+                    <h1>My name is Tom</h1>
+                    <h2>Thank you for checking out my portfolio!</h2>
+            </div>
+        </div>
+    </div>
 
 
-
-
-      
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 
-
+<script src="src/navbar.js"></script>
 <script src="dist/bundle.js"></script>
 <script>
     window.onload = function () {
@@ -77,4 +84,5 @@
         setTimeout(loadAfterTime, 4000)
     }
 </script>
+
 </html>
