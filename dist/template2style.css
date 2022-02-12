@@ -362,83 +362,8 @@ body.nav-active .nav__list-item:nth-child(10) {
           transition-delay: 1.7s;
 }
 
-/* #Jumbo text
-================================================== */
-
-.jumbo {
-  position: absolute;
-  box-sizing: border-box;
-  display: block;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  max-width: 1000px;
-  padding: 0 40px;
-}
-
-@media (max-width: 480px) {
-  .jumbo {
-    top: 35%;
-  }
-}
-
-.jumbo-content {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  display: block;
-}
-
-.title {
-  font-size: 80px;
-  margin-bottom: 12px;
-  text-align: left;
-  line-height: 0.4;
-  margin-block-start: 0.83em;
-  margin-block-end: 0.83em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-}
-
-@media (max-width: 768px) {
-  .title {
-    font-size: 80px;
-  }
-}
-@media (max-width: 480px) {
-  .title {
-    font-size: 52px;
-  }
-}
-
-.subtitle {
-  color: rgb(59 130 246) !important;
-}
-
-.landing {
-  height: 100vh !important;
-  display: block;
-}
-
 /* #Join Waitlist
 ================================================== */
-
-
-/* .button {
-    display: inline-block;
-    border-radius: 6px;
-    background-color: #1DA1F2;
-    border: none;
-    color: #FFFFFF;
-    text-align: center;
-    font-size: 14px;
-    padding: 10px;
-    width: 100px;
-    transition: all 0.5s;
-    cursor: pointer;
-    font-weight: bold;
-  } */
 
 .button span {
 cursor: pointer;

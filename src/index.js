@@ -52,7 +52,7 @@ const db = getFirestore(app);
 
 // collection ref - CHANGE THIS TO CHANGE THE FIRESTORE COLLECTION YOU PULL FROM
 const colRef = collection(db, 'posts-g-sheets-6');
-const q = query(collection(db, 'posts-g-sheets-6'));
+var q = query(collection(db, 'posts-g-sheets-6'));
 
 
 // // // *--- QUERIES ---* // // //
@@ -260,6 +260,16 @@ function leastRecent() {
   console.log('leastRecent has run');
   orderCol = 'createdAt';
   orderDir = 'asc';
+  clear();
+  getFirstReviews();
+}
+
+// Sort by least Recent BUILDING
+function filterLinkedIn() {
+  console.log('filterLinkedIn has run');
+  // orderCol = 'createdAt';
+  // orderDir = 'asc';
+  q = query(collection(db, 'posts-g-sheets-6'), where("company", "==", ["linkedin"]));
   clear();
   getFirstReviews();
 }
