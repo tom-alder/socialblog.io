@@ -142,7 +142,7 @@ a:hover {
 
 .nav {
 	position: fixed;
-	z-index: 20;
+	z-index: 25;
 	height: 100%;
 }
 .nav:after {
@@ -448,7 +448,7 @@ transition: 0.5s;
 }
 
 .button span:after {
-    content: '\00bb';
+    content: '\276F';
     position: absolute;
     opacity: 0;
     top: 0;
