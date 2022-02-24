@@ -2,9 +2,7 @@
 
 // NOTE: You get console 'Uncaught TypeError' if you render pages that dont use all of these js functions
 
-import {
-  initializeApp
-} from 'firebase/app'
+import { initializeApp } from "firebase/app";
 import {
   getFirestore,
   collection,
@@ -25,8 +23,8 @@ import {
   startAt,
   get,
   endBefore,
-  endAt
-} from 'firebase/firestore'
+  endAt,
+} from "firebase/firestore";
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -36,7 +34,7 @@ const firebaseConfig = {
   storageBucket: "linkedin-portfolio-v2.appspot.com",
   messagingSenderId: "575135045635",
   appId: "1:575135045635:web:08e3811e7803e06e129636",
-  measurementId: "G-ZDJ82ELVP8"
+  measurementId: "G-ZDJ82ELVP8",
 };
 
 const app = initializeApp(firebaseConfig);
@@ -51,9 +49,9 @@ const db = getFirestore(app);
 // const db = getFirestore()
 
 // collection ref - CHANGE THIS TO CHANGE THE FIRESTORE COLLECTION YOU PULL FROM
-const colRef = collection(db, 'posts-g-sheets-6');
-var q = query(collection(db, 'posts-g-sheets-6'));
-
+const colRef = collection(db, "posts-g-sheets-reduced-5");
+var q = query(collection(db, "posts-g-sheets-reduced-5"));
+// const q = query(collection(db, 'posts-g-sheets-reduced-5'), where("category", "==", ["strategy"]));
 
 // // // *--- QUERIES ---* // // //
 
@@ -68,109 +66,128 @@ var q = query(collection(db, 'posts-g-sheets-6'));
 
 // querying to filter for certain topics and sort by date
 // var q = query(colRef, where("topic", "==", "test"), orderBy('date', 'desc'))
-// var q = query(colRef, orderBy('numViews', 'desc'), limit(6))
-// var q = query(colRef, orderBy('numComments', 'desc'), limit(6))
+// var q = query(colRef, orderBy('numViews', 'desc'), limit(4))
+// var q = query(colRef, orderBy('numComments', 'desc'), limit(4))
 
 // CLEAN CONSOLE LOG FOR THE VALUE OF Q:
 onSnapshot(q, (snapshot) => {
-  var consoleData = []
+  var consoleData = [];
   snapshot.docs.forEach((doc) => {
     consoleData.push({
       ...doc.data(),
-      id: doc.id
-    })
-  })
-  console.log(consoleData)
-})
+      id: doc.id,
+    });
+  });
+  console.log(consoleData);
+});
 
 // // //*--- LOAD MORE ---* // // //
 
-// LOAD MORE BUTTON 
-const container = document.querySelector('.containerload');
+// LOAD MORE BUTTON
+const container = document.querySelector(".containerload");
 
 // Store last document
 let latestDoc = null;
 
-
 // // // CLIENT SORT // // //
 
 // Set initial query
-var currentFirstQuery = query(q, orderBy('createdAt', 'desc'), limit(6));
-var currentNextQuery = query(q, orderBy('createdAt', 'desc'), startAfter(latestDoc), limit(6));
-var orderCol = 'createdAt';
-var orderDir = 'desc'
+var currentFirstQuery = query(q, orderBy("createdAt", "desc"), limit(4));
+var currentNextQuery = query(
+  q,
+  orderBy("createdAt", "desc"),
+  startAfter(latestDoc),
+  limit(4)
+);
+var orderCol = "createdAt";
+var orderDir = "desc";
 
 // function to update query
-function recalcFirstQuery () {
-  currentFirstQuery = query(q, orderBy(orderCol, orderDir), limit(6));
+function recalcFirstQuery() {
+  currentFirstQuery = query(q, orderBy(orderCol, orderDir), limit(4));
 }
 
-function recalcNextQuery () {
-  currentNextQuery = query(q, orderBy(orderCol, orderDir), startAfter(latestDoc), limit(6));
+function recalcNextQuery() {
+  currentNextQuery = query(
+    q,
+    orderBy(orderCol, orderDir),
+    startAfter(latestDoc),
+    limit(4)
+  );
 }
 
 const getFirstReviews = async () => {
-    console.log('getFirstReviews has run!')
+  console.log("getFirstReviews has run!");
 
-    recalcFirstQuery();
-    var load = currentFirstQuery;
+  recalcFirstQuery();
+  var load = currentFirstQuery;
 
-    // Retrieve the first 5 data
-    const data = await getDocs(load);
+  // Retrieve the first 5 data
+  const data = await getDocs(load);
 
-    // To output the retrieved first 5 data
-    data.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        // console.log("Summary: ", doc.data().summary , " => ", doc.data().createdAt);
-        // use toDate to easily read dates
-        console.log("Summary: ", doc.data().summary , " => ", doc.data().createdAt.toDate());
-    });
+  // To output the retrieved first 5 data
+  data.forEach((doc) => {
+    // doc.data() is never undefined for query doc snapshots
+    // console.log("Summary: ", doc.data().summary , " => ", doc.data().createdAt);
+    // use toDate to easily read dates
+    console.log(
+      "Summary: ",
+      doc.data().summary,
+      " => ",
+      doc.data().createdAt.toDate()
+    );
+  });
 
-    // Run renderPosts based on value of data
-    renderPosts(data);
+  // Run renderPosts based on value of data
+  renderPosts(data);
 
-    // Update latestDoc reference 
-    latestDoc =  data.docs[data.docs.length-1]
+  // Update latestDoc reference
+  latestDoc = data.docs[data.docs.length - 1];
 
-    // // Unattach event listeners if no more documents
-    if (data.empty) {
-      loadMore.removeEventListener('click', handleClick)
-    }
-}
+  // // Unattach event listeners if no more documents
+  if (data.empty) {
+    loadMore.removeEventListener("click", handleClick);
+  }
+};
 
 const getNextReviews = async () => {
-    console.log('getNextReviews has run!')
+  console.log("getNextReviews has run!");
 
-    recalcNextQuery();
-    var next = currentNextQuery;
-        
-    // Automatically pulls the remaining data in the collection
-    const data_next = await getDocs(next);
-        
-    // Outputs the remaining data in the collection
-    data_next.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        // console.log("Summary: ", doc.data().summary , " => ", doc.data().createdAt);
-        // use toDate to easily read dates
-        console.log("Summary: ", doc.data().summary , " => ", doc.data().createdAt.toDate());
-    });
+  recalcNextQuery();
+  var next = currentNextQuery;
 
-    // Run renderPosts based on value of data
-    renderPosts(data_next);
+  // Automatically pulls the remaining data in the collection
+  const data_next = await getDocs(next);
 
-    // Update latestDoc reference 
-    latestDoc =  data_next.docs[data_next.docs.length-1]
+  // Outputs the remaining data in the collection
+  data_next.forEach((doc) => {
+    // doc.data() is never undefined for query doc snapshots
+    // console.log("Summary: ", doc.data().summary , " => ", doc.data().createdAt);
+    // use toDate to easily read dates
+    console.log(
+      "Summary: ",
+      doc.data().summary,
+      " => ",
+      doc.data().createdAt.toDate()
+    );
+  });
 
-    // // Unattach event listeners if no more documents
-    if (data_next.empty) {
-      loadMore.removeEventListener('click', handleClick)
-    }
-}
+  // Run renderPosts based on value of data
+  renderPosts(data_next);
 
-function renderPosts (data) {
+  // Update latestDoc reference
+  latestDoc = data_next.docs[data_next.docs.length - 1];
+
+  // // Unattach event listeners if no more documents
+  if (data_next.empty) {
+    loadMore.removeEventListener("click", handleClick);
+  }
+};
+
+function renderPosts(data) {
   loadAfterSecondTime();
-  let template = '';
-  data.docs.forEach(doc => {
+  let template = "";
+  data.docs.forEach((doc) => {
     const grabData = doc.data();
     template += `
     <div class="mix company-${grabData.company} blog-card" data-ref="item">
@@ -200,158 +217,175 @@ function renderPosts (data) {
         </div>
       </div>
     </div> 
-    `
+    `;
   });
   container.innerHTML += template;
 }
 
+// Clear latest doc and html container
+function clear() {
+  container.innerHTML = "";
+  latestDoc = null;
+}
+
 // // // END CLIENT SORT
 
-
 // // Set initial query
-// var currentQuery = query(q, orderBy('numViews', 'asc'), startAfter(latestDoc), limit(6));
+// var currentQuery = query(q, orderBy('numViews', 'asc'), startAfter(latestDoc), limit(4));
 // var orderCol = 'numViews';
 
 // // function to update query
 // function recalcQuery () {
-//   currentQuery = query(q, orderBy(orderCol, 'asc'), startAfter(latestDoc), limit(6));
+//   currentQuery = query(q, orderBy(orderCol, 'asc'), startAfter(latestDoc), limit(4));
 // }
-
 
 // // // *--- SORT BY ---* // // //
 
 // Sort by least Views WORKING (NOT IN USE)
 function leastViews() {
-  console.log('leastViews has run');
-  orderCol = 'numViews';
-  orderDir = 'desc';
+  console.log("leastViews has run");
+  orderCol = "numViews";
+  orderDir = "desc";
   clear();
   getNextPosts();
 }
 
 // Sort by most Views WORKING
 function mostViews() {
-  console.log('mostViews has run');
-  orderCol = 'numViews';
-  orderDir = 'desc';
+  console.log("mostViews has run");
+  orderCol = "numViews";
+  orderDir = "desc";
   clear();
   getFirstReviews();
 }
 // Sort by most Comments WORKING
 function mostComments() {
-  console.log('mostComments has run');
-  orderCol = 'numComments';
-  orderDir = 'desc';
+  console.log("mostComments has run");
+  orderCol = "numComments";
+  orderDir = "desc";
   clear();
   getFirstReviews();
 }
 
 // Sort by most Recent BUILDING
 function mostRecent() {
-  console.log('mostRecent has run');
-  orderCol = 'createdAt';
-  orderDir = 'desc';
+  console.log("mostRecent has run");
+  orderCol = "createdAt";
+  orderDir = "desc";
   clear();
   getFirstReviews();
 }
 
 // Sort by least Recent BUILDING
 function leastRecent() {
-  console.log('leastRecent has run');
-  orderCol = 'createdAt';
-  orderDir = 'asc';
+  console.log("leastRecent has run");
+  orderCol = "createdAt";
+  orderDir = "asc";
   clear();
   getFirstReviews();
 }
 
-// Sort by least Recent BUILDING
-function filterLinkedIn() {
-  console.log('filterLinkedIn has run');
+// // // *--- FILTER BY ---* // // //
+
+// Filter by topic (strategy) WORKING
+function filterStrategy() {
+  console.log("filterStrategy has run");
   // orderCol = 'createdAt';
   // orderDir = 'asc';
-  q = query(collection(db, 'posts-g-sheets-6'), where("company", "==", ["linkedin"]));
+  q = query(colRef, where("category", "array-contains", "strategy"));
+  // q = query(colRef, where("regions", "array-contains", "west_coast"));
   clear();
   getFirstReviews();
 }
 
-// Clear latest doc and html container
-function clear() {
-  container.innerHTML = '';
-  latestDoc = null;
+// Filter by topic (crypto) BUILDING
+function filterCrypto() {
+  console.log("filterCrypto has run");
+  // orderCol = 'createdAt';
+  // orderDir = 'asc';
+  q = query(colRef, where("category", "array-contains", "crypto"));
+  // q = query(colRef, where("regions", "array-contains", "west_coast"));
+  clear();
+  getFirstReviews();
 }
 
 // // // *--- SORT AND FILTER TOGGLES ---* // // //
 
 // Most Views (dropdown)
-var mostViewsDropdown = document.getElementById('mostViewsID');
-mostViewsDropdown.onclick = function() {
-    console.log('Sort by most Views');
-    mostViews();
-}
+var mostViewsDropdown = document.getElementById("mostViewsID");
+mostViewsDropdown.onclick = function () {
+  console.log("Sort by most Views");
+  mostViews();
+};
 
 // Most comments (dropdown)
-var mostCommentsDropdown = document.getElementById('mostCommentsID');
-mostCommentsDropdown.onclick = function() {
-    console.log('Sort by most Comments');
-    mostComments();
-}
+var mostCommentsDropdown = document.getElementById("mostCommentsID");
+mostCommentsDropdown.onclick = function () {
+  console.log("Sort by most Comments");
+  mostComments();
+};
 
 // Most Recent (dropdown)
-var mostRecentDropdown = document.getElementById('mostRecentID');
-mostRecentDropdown.onclick = function() {
-    console.log('Sort by most Recent');
-    mostRecent();
-}
+var mostRecentDropdown = document.getElementById("mostRecentID");
+mostRecentDropdown.onclick = function () {
+  console.log("Sort by most Recent");
+  mostRecent();
+};
 
 // Least Recent (dropdown)
-var leastRecentDropdown = document.getElementById('leastRecentID');
-leastRecentDropdown.onclick = function() {
-    console.log('Sort by least Recent');
-    leastRecent();
-}
+var leastRecentDropdown = document.getElementById("leastRecentID");
+leastRecentDropdown.onclick = function () {
+  console.log("Sort by least Recent");
+  leastRecent();
+};
 
-// Filter Linkedin (dropdown) NOT IN USE
-var filterLinkedInDropdown = document.getElementById('filterLinkedInID');
-filterLinkedInDropdown.onclick = function() {
-    console.log('Filter by LinkedIn');
-    filterLinkedIn();
-}
+// Filter Strategy (dropdown)
+var filterStrategyDropdown = document.getElementById("filterStrategyID");
+filterStrategyDropdown.onclick = function () {
+  console.log("Filter by Strategy");
+  filterStrategy();
+};
+
+// Filter Crypto (dropdown)
+var filterCryptoDropdown = document.getElementById("filterCryptoID");
+filterCryptoDropdown.onclick = function () {
+  console.log("Filter by Crypto");
+  filterCrypto();
+};
 
 // Load more docs (button)
-const loadMore = document.querySelector('.load-more button');
+const loadMore = document.querySelector(".load-more button");
 
 const handleClick = () => {
   console.log(latestDoc);
-  console.log('^ on load more button');
+  console.log("^ on load more button");
   getNextReviews();
-}
+};
 
 // For some reason this breaks grid page...
-loadMore.addEventListener('click', handleClick);
+loadMore.addEventListener("click", handleClick);
 
 // wait for DOM content to load
-window.addEventListener('DOMContentLoaded', () => getFirstReviews());
+window.addEventListener("DOMContentLoaded", () => getFirstReviews());
 // window.addEventListener('DOMContentLoaded', () => leastViews());
-
 
 // // //
 // // // *--- NOT IN USE ---* // // //
 // // //
 
-
 // Get next posts
 const getNextPosts = async () => {
-  console.log('getNextPosts has run');
+  console.log("getNextPosts has run");
   loadAfterSecondTime();
   recalcQuery();
   var load = currentQuery;
   const data = await getDocs(load);
   console.log(latestDoc);
-  console.log('^ after await getDocs');
+  console.log("^ after await getDocs");
 
   // Output docs TESTING
-  let template = '';
-  data.docs.forEach(doc => {
+  let template = "";
+  data.docs.forEach((doc) => {
     const grabData = doc.data();
     template += `
     <div class="mix company-${grabData.company} blog-card" data-ref="item">
@@ -382,7 +416,7 @@ const getNextPosts = async () => {
         </div>
       </div>
     </div> 
-    `
+    `;
   });
   container.innerHTML += template;
 
@@ -401,34 +435,33 @@ const getNextPosts = async () => {
   // container.innerHTML += template;
 
   // // Update latestDoc
-  latestDoc = data.docs[data.docs.length -1]
+  latestDoc = data.docs[data.docs.length - 1];
   console.log(latestDoc);
-  console.log('^ after latestDoc updated');
+  console.log("^ after latestDoc updated");
 
   // // Unattach event listeners if no more documents
   if (data.empty) {
-    loadMore.removeEventListener('click', handleClick)
+    loadMore.removeEventListener("click", handleClick);
   }
-}
-
-
+};
 
 // // // *--- FUNCTIONS TO RUN QUERIES ---* // // //
 
 // Get collection data - WORKING postcard with labels
 onSnapshot(q, (snapshot) => {
-  var posts = []
+  var posts = [];
   snapshot.docs.forEach((doc) => {
     posts.push({
       ...doc.data(),
-      id: doc.id
-    })
-  })
+      id: doc.id,
+    });
+  });
 
   // console.log(posts)
-  document.getElementById('postcard-mixitup').innerHTML = `
-    ${posts.map(function(grabData) {
-      return `
+  document.getElementById("postcard-mixitup").innerHTML = `
+    ${posts
+      .map(function (grabData) {
+        return `
         <div class="mix company-${grabData.company} blog-card" data-ref="item">
         
           <div class="linkedin-post">
@@ -440,30 +473,32 @@ onSnapshot(q, (snapshot) => {
             ${grabData.company}
           </div>
         </div> 
-      `
-    }).join('')}
-    `
-})
+      `;
+      })
+      .join("")}
+    `;
+});
 
 // Clear Filter WORKING
-var filterNone = document.querySelector('.clear')
-filterNone.addEventListener('click', (e) => {
-  e.preventDefault()
-  q = query(colRef, orderBy('numViews', 'desc'), limit(6))
-  console.log(q)
+var filterNone = document.querySelector(".clear");
+filterNone.addEventListener("click", (e) => {
+  e.preventDefault();
+  q = query(colRef, orderBy("numViews", "desc"), limit(4));
+  console.log(q);
   onSnapshot(q, (snapshot) => {
-    var posts = []
+    var posts = [];
     snapshot.docs.forEach((doc) => {
       posts.push({
         ...doc.data(),
-        id: doc.id
-      })
-    })
+        id: doc.id,
+      });
+    });
 
-    console.log(posts)
-    document.getElementById('postcard-mixitup').innerHTML = `
-    ${posts.map(function(grabData) {
-      return `
+    console.log(posts);
+    document.getElementById("postcard-mixitup").innerHTML = `
+    ${posts
+      .map(function (grabData) {
+        return `
       <div class="mix company-${grabData.company} blog-card" data-ref="item">
         
       <div class="linkedin-post">
@@ -475,31 +510,33 @@ filterNone.addEventListener('click', (e) => {
         ${grabData.company}
       </div>
     </div>
-      `
-    }).join('')}
-    `
-  })
-})
+      `;
+      })
+      .join("")}
+    `;
+  });
+});
 
 // Canva Filter WORKING
-var filterCanva = document.querySelector('.canva')
-filterCanva.addEventListener('click', (e) => {
-  e.preventDefault()
-  q = query(colRef, where("company", "==", ["canva"]))
-  console.log(q)
+var filterCanva = document.querySelector(".canva");
+filterCanva.addEventListener("click", (e) => {
+  e.preventDefault();
+  q = query(colRef, where("company", "==", ["canva"]));
+  console.log(q);
   onSnapshot(q, (snapshot) => {
-    var posts = []
+    var posts = [];
     snapshot.docs.forEach((doc) => {
       posts.push({
         ...doc.data(),
-        id: doc.id
-      })
-    })
+        id: doc.id,
+      });
+    });
 
-    console.log(posts)
-    document.getElementById('postcard-mixitup').innerHTML = `
-    ${posts.map(function(grabData) {
-      return `
+    console.log(posts);
+    document.getElementById("postcard-mixitup").innerHTML = `
+    ${posts
+      .map(function (grabData) {
+        return `
       <div class="mix company-${grabData.company} blog-card" data-ref="item">
         <div class="linkedin-post">
           <div class="card-border"></div>
@@ -510,31 +547,33 @@ filterCanva.addEventListener('click', (e) => {
           ${grabData.company}
         </div>
       </div>
-      `
-    }).join('')}
-    `
-  })
-})
+      `;
+      })
+      .join("")}
+    `;
+  });
+});
 
 // Apple Filter WORKING
-var filterApple = document.querySelector('.apple')
-filterApple.addEventListener('click', (e) => {
-  e.preventDefault()
-  q = query(colRef, where("company", "array-contains-any", ["apple"]))
-  console.log(q)
+var filterApple = document.querySelector(".apple");
+filterApple.addEventListener("click", (e) => {
+  e.preventDefault();
+  q = query(colRef, where("company", "array-contains-any", ["apple"]));
+  console.log(q);
   onSnapshot(q, (snapshot) => {
-    var posts = []
+    var posts = [];
     snapshot.docs.forEach((doc) => {
       posts.push({
         ...doc.data(),
-        id: doc.id
-      })
-    })
+        id: doc.id,
+      });
+    });
 
-    console.log(posts)
-    document.getElementById('postcard-mixitup').innerHTML = `
-    ${posts.map(function(grabData) {
-      return `
+    console.log(posts);
+    document.getElementById("postcard-mixitup").innerHTML = `
+    ${posts
+      .map(function (grabData) {
+        return `
       <div class="mix company-${grabData.company} blog-card" data-ref="item">
         <div class="linkedin-post">
           <div class="card-border"></div>
@@ -545,12 +584,12 @@ filterApple.addEventListener('click', (e) => {
           ${grabData.company}
         </div>
       </div> 
-      `
-    }).join('')}
-    `
-  })
-})
-
+      `;
+      })
+      .join("")}
+    `;
+  });
+});
 
 // // // *--- GET COLLECITON DATA ---* // // //
 
@@ -572,20 +611,22 @@ filterApple.addEventListener('click', (e) => {
 // Get collection data - individual datapoints
 // This updates in real time
 onSnapshot(q, (snapshot) => {
-  let posts = []
+  let posts = [];
   snapshot.docs.forEach((doc) => {
     posts.push({
       ...doc.data(),
-      id: doc.id
-    })
-  })
-  document.getElementById('datapoint').innerHTML = `
+      id: doc.id,
+    });
+  });
+  document.getElementById("datapoint").innerHTML = `
     <h3>Results (${posts.length})</h3>
-    ${posts.map(function(grabData) {
-      return grabData.topic + ' (' + grabData.id + ')'
-    }).join(' - ')}
-    `
-})
+    ${posts
+      .map(function (grabData) {
+        return grabData.topic + " (" + grabData.id + ")";
+      })
+      .join(" - ")}
+    `;
+});
 
 // Get collection data - WORKING postcard no labels
 // onSnapshot(q, (snapshot) => {
@@ -600,7 +641,7 @@ onSnapshot(q, (snapshot) => {
 //       return `
 //       <div class="blog-card">
 //       <div class="linkedin-post">
-//       <iframe src="${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>   
+//       <iframe src="${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
 //       </div>
 //       <div>
 //       ${grabData.company}
@@ -608,39 +649,37 @@ onSnapshot(q, (snapshot) => {
 //       <div>
 //       ${grabData.id}
 //       </div>
-//     </div> 
+//     </div>
 //       `
 //     }).join('')}
 //     `
 // })
 
-// adding docs 
-const addPostForm = document.querySelector('.add')
-addPostForm.addEventListener('submit', (e) => {
-  e.preventDefault()
+// adding docs
+const addPostForm = document.querySelector(".add");
+addPostForm.addEventListener("submit", (e) => {
+  e.preventDefault();
 
   addDoc(colRef, {
-      topic: addPostForm.topic.value,
-      date: addPostForm.date.value,
-      embedlink: addPostForm.embedlink.value,
-    })
-    .then(() => {
-      addPostForm.reset()
-    })
-})
+    topic: addPostForm.topic.value,
+    date: addPostForm.date.value,
+    embedlink: addPostForm.embedlink.value,
+  }).then(() => {
+    addPostForm.reset();
+  });
+});
 
 // deleting docs
-const deletePostForm = document.querySelector('.delete')
-deletePostForm.addEventListener('submit', (e) => {
-  e.preventDefault()
+const deletePostForm = document.querySelector(".delete");
+deletePostForm.addEventListener("submit", (e) => {
+  e.preventDefault();
 
-  const docRef = doc(db, 'posts', deletePostForm.id.value)
+  const docRef = doc(db, "posts", deletePostForm.id.value);
 
-  deleteDoc(docRef)
-    .then(() => {
-      deletePostForm.reset()
-    })
-})
+  deleteDoc(docRef).then(() => {
+    deletePostForm.reset();
+  });
+});
 
 // get a single document
 // Need to replace 'CBZoVLAvkVOpBsR3mL2x' with a valid ID
@@ -652,16 +691,15 @@ deletePostForm.addEventListener('submit', (e) => {
 //     })
 
 // updating a document
-const updateForm = document.querySelector('.update')
-updateForm.addEventListener('submit', (e) => {
-  e.preventDefault()
+const updateForm = document.querySelector(".update");
+updateForm.addEventListener("submit", (e) => {
+  e.preventDefault();
 
-  const docRef = doc(db, 'posts', updateForm.id.value)
+  const docRef = doc(db, "posts", updateForm.id.value);
 
   updateDoc(docRef, {
-      topic: 'updated topic'
-    })
-    .then(() => {
-      updateForm.reset()
-    })
-})
+    topic: "updated topic",
+  }).then(() => {
+    updateForm.reset();
+  });
+});
