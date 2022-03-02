@@ -12,8 +12,7 @@
     <link
       href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"
       rel="stylesheet"
-      id="bootstrap-css"
-    />
+      id="bootstrap-css" />
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href="dist/style.css" />
@@ -41,8 +40,7 @@
                 <button
                   type="button"
                   class="btn btn-default dropdown-toggle"
-                  data-toggle="dropdown"
-                >
+                  data-toggle="dropdown">
                   Topic <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu scrollable-menu" role="menu">
@@ -66,7 +64,6 @@
                   </li>
                   <li><a href="#">Product Management</a></li>
                   <li><a href="#">NFTs</a></li>
-                  <li><a href="#">Crypto</a></li>
                   <li><a href="#">Fintech</a></li>
                 </ul>
               </div>
@@ -75,14 +72,12 @@
               <button
                 type="button"
                 class="btn btn-default dropdown-toggle"
-                data-toggle="dropdown"
-              >
+                data-toggle="dropdown">
                 Sort <span class="caret"></span>
               </button>
               <ul
                 class="dropdown-menu scrollable-menu dropdown-menu-right"
-                role="menu"
-              >
+                role="menu">
                 <li>
                   <a
                     id="mostViewsID"
@@ -90,6 +85,15 @@
                     href="#"
                     onclick="mostViews();return false;"
                     >Most views</a
+                  >
+                </li>
+                <li>
+                  <a
+                    id="mostLikesID"
+                    title="Click to do sort by most Likes"
+                    href="#"
+                    onclick="mostLikes();return false;"
+                    >Most likes</a
                   >
                 </li>
                 <li>
@@ -128,8 +132,7 @@
         <div class="load-more container-center">
           <button
             class="button-clean"
-            onclick="loadAfterSecondTime();return false;"
-          >
+            onclick="loadAfterSecondTime();return false;">
             Load More
           </button>
         </div>

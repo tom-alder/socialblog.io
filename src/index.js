@@ -258,6 +258,16 @@ function mostViews() {
   clear();
   getFirstReviews();
 }
+
+// Sort by most Likes WORKING
+function mostLikes() {
+  console.log("mostLikes has run");
+  orderCol = "numLikes";
+  orderDir = "desc";
+  clear();
+  getFirstReviews();
+}
+
 // Sort by most Comments WORKING
 function mostComments() {
   console.log("mostComments has run");
@@ -287,6 +297,17 @@ function leastRecent() {
 
 // // // *--- FILTER BY ---* // // //
 
+// Filter by topic (all) WORKING
+function filterAll() {
+  console.log("filterAll has run");
+  // orderCol = 'createdAt';
+  // orderDir = 'asc';
+  q = query(colRef);
+  // q = query(colRef, where("regions", "array-contains", "west_coast"));
+  clear();
+  getFirstReviews();
+}
+
 // Filter by topic (strategy) WORKING
 function filterStrategy() {
   console.log("filterStrategy has run");
@@ -309,49 +330,130 @@ function filterCrypto() {
   getFirstReviews();
 }
 
+
+var filterSS = new SlimSelect({
+  select: '#filter',
+  placeholder: 'Topic',
+  showSearch: false,
+  allowDeselectOption: false,
+  valuesUseText: true, // Use text instead of innerHTML for selected values - default false
+  data: [
+    {'placeholder': true, 'text': 'Topic'},
+    {innerHTML: '<i class="fa-solid fa-book mr-3"></i> All', text: 'All', value: 'all'},
+    {innerHTML: '<i class="fa-solid fa-chess mr-3"></i> Strategy', text: 'Strategy', value: 'strategy'},
+    {innerHTML: '<i class="fa-solid fa-cubes mr-3"></i> Crypto', text: 'Crypto', value: 'crypto'},
+  ],
+  onChange: (info) => {
+    console.log(info)
+
+  }
+})
+
+  $(document).ready(function () {
+    $("#filter").on("change", function () {
+      if ($("#filter").val() == "all") {
+        filterAll();
+      }
+      if ($("#filter").val() == "strategy") {
+        filterStrategy();
+      }
+      else if ($("#filter").val() == "crypto") {
+        filterCrypto();
+      }
+    });
+  });
+
+var sortSS = new SlimSelect({
+  select: '#sort',
+  placeholder: 'Sort',
+  showSearch: false,
+  allowDeselectOption: false,
+  valuesUseText: true, // Use text instead of innerHTML for selected values - default false
+  data: [
+    {'placeholder': true, 'text': 'Sort'},
+    {innerHTML: '<i class="fa-solid fa-eye mr-3"></i> Most views', text: 'Most views', value: 'most views'},
+    {innerHTML: '<i class="fa-solid fa-thumbs-up mr-3"></i> Most likes', text: 'Most likes', value: 'most likes'},
+    {innerHTML: '<i class="fa-solid fa-comment mr-3"></i> Most comments', text: 'Most comments', value: 'most comments'},
+    {innerHTML: '<i class="fa-solid fa-calendar-plus mr-3"></i> Newest', text: 'Newest', value: 'newest'},
+    {innerHTML: '<i class="fa-solid fa-calendar-minus mr-3"></i> Oldest', text: 'Oldest', value: 'oldest'},
+  ],
+  onChange: (info) => {
+    console.log(info)
+  }
+})
+
+  $(document).ready(function () {
+    $("#sort").on("change", function () {
+      if ($("#sort").val() == "most views") {
+        mostViews();
+      }
+      else if ($("#sort").val() == "most likes") {
+        mostLikes();
+      }
+      else if ($("#sort").val() == "most comments") {
+        mostComments();
+      }
+      else if ($("#sort").val() == "newest") {
+        mostRecent();
+      }
+      else if ($("#sort").val() == "oldest") {
+        leastRecent();
+      }
+    });
+  });
+
+
 // // // *--- SORT AND FILTER TOGGLES ---* // // //
+// // // *--- These all need to be uncommented for loadmoreclientsort.html to work! ---* // // //
 
-// Most Views (dropdown)
-var mostViewsDropdown = document.getElementById("mostViewsID");
-mostViewsDropdown.onclick = function () {
-  console.log("Sort by most Views");
-  mostViews();
-};
+// // Most Views (dropdown)
+// var mostViewsDropdown = document.getElementById("mostViewsID");
+// mostViewsDropdown.onclick = function () {
+//   console.log("Sort by most Views");
+//   mostViews();
+// };
 
-// Most comments (dropdown)
-var mostCommentsDropdown = document.getElementById("mostCommentsID");
-mostCommentsDropdown.onclick = function () {
-  console.log("Sort by most Comments");
-  mostComments();
-};
+// // Most Likes (dropdown)
+// var mostLikesDropdown = document.getElementById("mostLikesID");
+// mostLikesDropdown.onclick = function () {
+//   console.log("Sort by most Likes");
+//   mostLikes();
+// };
 
-// Most Recent (dropdown)
-var mostRecentDropdown = document.getElementById("mostRecentID");
-mostRecentDropdown.onclick = function () {
-  console.log("Sort by most Recent");
-  mostRecent();
-};
+// // Most comments (dropdown)
+// var mostCommentsDropdown = document.getElementById("mostCommentsID");
+// mostCommentsDropdown.onclick = function () {
+//   console.log("Sort by most Comments");
+//   mostComments();
+// };
 
-// Least Recent (dropdown)
-var leastRecentDropdown = document.getElementById("leastRecentID");
-leastRecentDropdown.onclick = function () {
-  console.log("Sort by least Recent");
-  leastRecent();
-};
+// // Most Recent (dropdown)
+// var mostRecentDropdown = document.getElementById("mostRecentID");
+// mostRecentDropdown.onclick = function () {
+//   console.log("Sort by most Recent");
+//   mostRecent();
+// };
 
-// Filter Strategy (dropdown)
-var filterStrategyDropdown = document.getElementById("filterStrategyID");
-filterStrategyDropdown.onclick = function () {
-  console.log("Filter by Strategy");
-  filterStrategy();
-};
+// // Least Recent (dropdown)
+// var leastRecentDropdown = document.getElementById("leastRecentID");
+// leastRecentDropdown.onclick = function () {
+//   console.log("Sort by least Recent");
+//   leastRecent();
+// };
 
-// Filter Crypto (dropdown)
-var filterCryptoDropdown = document.getElementById("filterCryptoID");
-filterCryptoDropdown.onclick = function () {
-  console.log("Filter by Crypto");
-  filterCrypto();
-};
+// // Filter Strategy (dropdown)
+// var filterStrategyDropdown = document.getElementById("filterStrategyID");
+// filterStrategyDropdown.onclick = function () {
+//   console.log("Filter by Strategy");
+//   filterStrategy();
+// };
+
+// // Filter Crypto (dropdown)
+// var filterCryptoDropdown = document.getElementById("filterCryptoID");
+// filterCryptoDropdown.onclick = function () {
+//   console.log("Filter by Crypto");
+//   filterCrypto();
+// };
 
 // Load more docs (button)
 const loadMore = document.querySelector(".load-more button");
