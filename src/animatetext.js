@@ -3,7 +3,7 @@ function setupTypedReplace() {
     var typed_class = "typed-replaced";
 
     // the original text content to replace, but also use
-    var replace_text = "portfolio";
+    var replace_text = "LinkedIn portfolio";
 
     var options = {
       strings: [

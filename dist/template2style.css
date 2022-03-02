@@ -150,7 +150,21 @@ a:hover {
 .nav:after {
 	-webkit-transition-delay: 0s;
           transition-delay: 0s;
-	background: rgba(202, 202, 202);
+		
+			/* ff 3.6+ */
+			background:-moz-radial-gradient(circle at 69% 21%, rgba(96, 165, 250, 1) 0%, rgba(191, 219, 254, 1) 100%);
+
+			/* safari 5.1+,chrome 10+ */
+			background:-webkit-radial-gradient(circle at 69% 21%, rgba(96, 165, 250, 1) 0%, rgba(191, 219, 254, 1) 100%);
+		
+			/* opera 11.10+ */
+			background:-o-radial-gradient(circle at 69% 21%, rgba(96, 165, 250, 1) 0%, rgba(191, 219, 254, 1) 100%);
+		
+			/* ie 10+ */
+			background:-ms-radial-gradient(circle at 69% 21%, rgba(96, 165, 250, 1) 0%, rgba(191, 219, 254, 1) 100%);
+		
+			/* global 92%+ browsers support */
+			background:radial-gradient(circle at 69% 21%, rgba(96, 165, 250, 1) 0%, rgba(191, 219, 254, 1) 100%);
   transition: 1s;
 }
 .nav:before {
@@ -400,17 +414,22 @@ right: 0;
 /* #Filter Buttons
 ================================================== */
 .ss-main {
-	margin: 50px !important;
+	margin: 0px 10px !important;
 	width: 240px !important;
+	align-items: center !important;
+	justify-content: center !important;
+
 }
 
 .ss-single-selected {
+	margin-left: 25px;
 	padding-left: 15px !important;
 	padding-right: 12px !important;
-	padding-top: 1.75rem!important;
-    padding-bottom: 1.75rem!important;
+	padding-top: 1.5rem!important;
+    padding-bottom: 1.5rem!important;
 	justify-content: center !important;
 	align-items: center !important;
+
 
 	min-height: 40px !important;
 	width: 190px !important;
@@ -447,6 +466,8 @@ right: 0;
 }
 
 .ss-content {
+	margin-left: 25px;
+
 	width: 190px !important;
 	margin-top: 10px !important;
 	border-radius: 0.5rem;
@@ -615,16 +636,7 @@ right: 0;
     color: black;
 }
 
-
-
 /* PERFECT ALIGNING RULES */
-
-#postcard-mixitup {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 300px);
-    justify-content: space-evenly;
-    grid-gap: 50px 30px;
-}
 
 .containerload {
     display: grid;
@@ -633,6 +645,8 @@ right: 0;
     grid-gap: 50px 30px;
     align-items: center;
 	max-width: 1285px;
+	/* Set this once you have imported all posts */
+	/* min-height: 890px; */
 	justify-self: center;
 }
 

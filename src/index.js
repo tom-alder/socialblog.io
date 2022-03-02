@@ -66,8 +66,8 @@ var q = query(collection(db, "posts-g-sheets-reduced-5"));
 
 // querying to filter for certain topics and sort by date
 // var q = query(colRef, where("topic", "==", "test"), orderBy('date', 'desc'))
-// var q = query(colRef, orderBy('numViews', 'desc'), limit(4))
-// var q = query(colRef, orderBy('numComments', 'desc'), limit(4))
+// var q = query(colRef, orderBy('numViews', 'desc'), limit(6))
+// var q = query(colRef, orderBy('numComments', 'desc'), limit(6))
 
 // CLEAN CONSOLE LOG FOR THE VALUE OF Q:
 onSnapshot(q, (snapshot) => {
@@ -92,19 +92,19 @@ let latestDoc = null;
 // // // CLIENT SORT // // //
 
 // Set initial query
-var currentFirstQuery = query(q, orderBy("createdAt", "desc"), limit(4));
+var currentFirstQuery = query(q, orderBy("createdAt", "desc"), limit(6));
 var currentNextQuery = query(
   q,
   orderBy("createdAt", "desc"),
   startAfter(latestDoc),
-  limit(4)
+  limit(6)
 );
 var orderCol = "createdAt";
 var orderDir = "desc";
 
 // function to update query
 function recalcFirstQuery() {
-  currentFirstQuery = query(q, orderBy(orderCol, orderDir), limit(4));
+  currentFirstQuery = query(q, orderBy(orderCol, orderDir), limit(6));
 }
 
 function recalcNextQuery() {
@@ -112,7 +112,7 @@ function recalcNextQuery() {
     q,
     orderBy(orderCol, orderDir),
     startAfter(latestDoc),
-    limit(4)
+    limit(6)
   );
 }
 
@@ -231,12 +231,12 @@ function clear() {
 // // // END CLIENT SORT
 
 // // Set initial query
-// var currentQuery = query(q, orderBy('numViews', 'asc'), startAfter(latestDoc), limit(4));
+// var currentQuery = query(q, orderBy('numViews', 'asc'), startAfter(latestDoc), limit(6));
 // var orderCol = 'numViews';
 
 // // function to update query
 // function recalcQuery () {
-//   currentQuery = query(q, orderBy(orderCol, 'asc'), startAfter(latestDoc), limit(4));
+//   currentQuery = query(q, orderBy(orderCol, 'asc'), startAfter(latestDoc), limit(6));
 // }
 
 // // // *--- SORT BY ---* // // //
@@ -585,7 +585,7 @@ onSnapshot(q, (snapshot) => {
 var filterNone = document.querySelector(".clear");
 filterNone.addEventListener("click", (e) => {
   e.preventDefault();
-  q = query(colRef, orderBy("numViews", "desc"), limit(4));
+  q = query(colRef, orderBy("numViews", "desc"), limit(6));
   console.log(q);
   onSnapshot(q, (snapshot) => {
     var posts = [];
