@@ -2,19 +2,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
 
 body{
-  font-family: 'Poppins', sans-serif !important;
-  font-weight: 300;
-	font-size: 15px;
-	line-height: 1.7;
-	color: #2c2c2c;
-	background-color: #fff;
-	overflow-x: hidden;
-	-webkit-transition: all 300ms linear;
-	transition: all 300ms linear;
-  margin: 0px;
-  /* display: block; */
-  animation: fade-in-top 1s ease 0s 1 normal none;
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #2c2c2c;
+    background-color: #fff;
+    overflow-x: hidden;
+    -webkit-transition: all 300ms linear;
+    transition: all 300ms linear;
+    margin: 0px;
 }
+
+/* #9CA3AF 
+
+
+*/
+
 
 @keyframes fade-in-top {
 	0%{
@@ -65,7 +69,14 @@ a:hover {
 } 
 
 .logo {
-	margin-top: -5px;
+	margin-top: -8px;
+    max-height: 40px;
+    user-drag: none; 
+user-select: none;
+-moz-user-select: none;
+-webkit-user-drag: none;
+-webkit-user-select: none;
+-ms-user-select: none;
 }
 
 .header-wrapper{
@@ -104,7 +115,6 @@ a:hover {
 	display: inline-block;
 	float: right;
 	transition : all 0.6s ease-out;
-
 }
 .menu-icon {
 	height: 30px;
@@ -157,31 +167,37 @@ a:hover {
 	position: fixed;
 	z-index: 30;
 	height: 100%;
+    border-right: 5px, solid, #3f3f3f !important; 
 }
 
 .nav:after {
 	-webkit-transition-delay: 0s;
           transition-delay: 0s;
+
+          background-color: hsla(0, 0%, 50%, 0.1);
+          /* background-color: #333; */
+          backdrop-filter: blur(24px);
 		
 			/* ff 3.6+ */
-			background:-moz-radial-gradient(circle at 15% 21%, rgb(0, 76, 168) -5%, rgb(9, 37, 65) 100%);
+			/* background:-moz-radial-gradient(circle at 15% 21%, rgb(0, 76, 168) -5%, rgb(9, 37, 65) 100%); */
 
 			/* safari 5.1+,chrome 10+ */
-			background:-webkit-radial-gradient(circle at 15% 21%, rgb(0, 76, 168) -5%, rgb(9, 37, 65) 100%);
+			/* background:-webkit-radial-gradient(circle at 15% 21%, rgb(0, 76, 168) -5%, rgb(9, 37, 65) 100%); */
 		
 			/* opera 11.10+ */
-			background:-o-radial-gradient(circle at 15% 21%, rgb(0, 76, 168) -5%, rgb(9, 37, 65) 100%);
+			/* background:-o-radial-gradient(circle at 15% 21%, rgb(0, 76, 168) -5%, rgb(9, 37, 65) 100%); */
 		
 			/* ie 10+ */
-			background:-ms-radial-gradient(circle at 15% 21%, rgb(0, 76, 168) -5%, rgb(9, 37, 65) 100%);
+			/* background:-ms-radial-gradient(circle at 15% 21%, rgb(0, 76, 168) -5%, rgb(9, 37, 65) 100%); */
 		
 			/* global 92%+ browsers support */
-			background:radial-gradient(circle at 15% 21%, rgb(0, 76, 168) -5%, rgb(9, 37, 65) 100%);
-
+			/* background:radial-gradient(circle at 15% 21%, rgb(0, 76, 168) -5%, rgb(9, 37, 65) 100%); */
 
   transition: 1s;
-  max-width: 100%;
+  max-width: 80%;
 }
+
+
 .nav:before {
 	-webkit-transition-delay: .2s;
           transition-delay: .2s;
@@ -202,7 +218,6 @@ a:hover {
 .nav:before {
     transform: translateX(150%);
     width: 80%;
-
 }
 .nav:after {
     transform: translateX(-150%);
@@ -216,13 +231,11 @@ a:hover {
     }
   }
 
-
-
 .nav__content {
 	position: fixed;
 	visibility: hidden;
 	top: 50%;
-	margin-top: 20px;
+	/* margin-top: 20px; */
 	-webkit-transform: translate(0%, -50%);
           transform: translate(0%, -50%);
 	width: 100%;
@@ -269,6 +282,7 @@ a:hover {
 	margin-bottom: 0; */
 }
 
+
 @media (max-width: 480px) {
   .nav__list-item {
     font-size: 5vh;
@@ -278,7 +292,8 @@ a:hover {
 .nav__list-item a{ 
 	position: relative;
 	text-decoration: none;
-    color: rgba(255, 255, 255, 0.75); 
+    /* color: rgba(255, 255, 255, 0.75);  */
+    color: rgba(88, 88, 88, 0.75); 
 	overflow: hidden; 
 	cursor: pointer;
 	padding-left: 5px;
@@ -290,7 +305,20 @@ a:hover {
     -webkit-transition: all 200ms linear;
     transition: all 200ms linear; 
 }
-.nav__list-item a:after{ 
+
+.hover {
+    color: rgba(88, 88, 88, 0.75);
+    transition: .25s ease all;
+}
+
+.hover:hover {
+    transform: scale(1.1);
+    color: rgb(17, 17, 17); 
+    transition: .25s ease all;
+}
+
+
+.nav__list-item .underline a:after{ 
 	position: absolute;
 	content: '';
 	top: 97%;
@@ -311,10 +339,12 @@ a:hover {
     right: 50%;
 }
 .nav__list-item a:hover{
-  color: rgba(255, 255, 255); 
+  color: rgb(17, 17, 17); 
+  /* color: #fafafa;  */
 }
 .nav__list-item.active-nav a{
-  color: rgba(255, 255, 255); 
+  color: #fafafa; 
+  /* color: rgb(17, 17, 17);  */
 }
 .nav__list-item.active-nav a:after{ 
 	height: 4px;
@@ -421,6 +451,28 @@ body.nav-active .nav__list-item:nth-child(10) {
 
 /* #Join Waitlist
 ================================================== */
+
+#waitlistfade1{
+    -webkit-animation: 3s ease 0s normal forwards 1 fadein;
+    animation: 3s ease 0s normal forwards 1 fadein;
+}
+
+#waitlistfade2{
+    -webkit-animation: 3.5s ease 0s normal forwards 1 fadein;
+    animation: 3.5s ease 0s normal forwards 1 fadein;
+}
+
+@keyframes fadein{
+    0% { opacity:0; }
+    66% { opacity:0; }
+    100% { opacity:1; }
+}
+
+@-webkit-keyframes fadein{
+    0% { opacity:0; }
+    66% { opacity:0; }
+    100% { opacity:1; }
+}
 
 .button span {
 cursor: pointer;
@@ -539,10 +591,6 @@ right: 0;
 }
 
 
-/* #TO BE ORGANISED
-================================================== */
-
-
 
 /* #POSTCARDS
 ================================================== */
@@ -593,89 +641,6 @@ right: 0;
 }
 
 /* BUTTONS */
-
-.button-clean {
-    width: auto;
-    height: 60px;
-    align-items: center;
-    background-color: #FFFFFF;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: .50rem;
-    box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
-    box-sizing: border-box;
-    color: rgba(0, 0, 0, 0.65);
-    cursor: pointer;
-    display: inline-flex;
-    font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    justify-content: center;
-    line-height: 1.25;
-    margin: 0;
-    min-height: 3rem;
-    padding: calc(.875rem - 1px) calc(1.5rem - 1px);
-    position: relative;
-    text-decoration: none;
-    transition: all 300ms;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    vertical-align: baseline;
-}
-
-.button-clean:focus {
-    border-color: rgba(0, 0, 0, 0.15);
-    /* box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px; */
-    color: rgba(0, 0, 0, 0.65);
-    background-color: #00c3ff17;
-}
-
-.button-clean:hover {
-    border-color: rgba(0, 0, 0, 0.15);
-    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
-    color: rgba(0, 0, 0);
-    transform: translateY(-2px);
-    /* background-color: #00c3ff17; */
-}
-
-.active {
-    background-color: #00c3ff17;
-    border-color: rgba(0, 0, 0, 0.15);
-    /* box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px; */
-    color: rgba(0, 0, 0, 0.65);
-    transform: translateY(0);
-    pointer-events: none;
-}
-
-.clear {
-    width: auto;
-    height: 60px;
-    align-items: center;
-    background-color: #fafafa;
-    border: 0px;
-    color: rgba(107, 107, 107, 0.85);
-    cursor: pointer;
-    display: inline-flex;
-    font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    justify-content: center;
-    line-height: 1.25;
-    margin: 0;
-    min-height: 3rem;
-    padding: calc(.875rem - 1px) calc(1.5rem - 1px);
-    position: relative;
-    text-decoration: none;
-    transition: all 300ms;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    vertical-align: baseline;
-}
-
-.clear:hover {
-    color: black;
-}
 
 /* POSTCARD ALIGNING RULES */
 
@@ -730,12 +695,12 @@ right: 0;
     max-height: 520px;
 }
 
-/* STYLING */
-
-.linkedin-post:hover {
+@media (min-width: 480px) {
+    .linkedin-post:hover {
     transform: scale(1.04);
     box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
         0 15px 40px rgba(166, 173, 201, 0.2);
+    }
 }
 
 
@@ -886,4 +851,13 @@ right: 0;
     100% {
         transform: translate3d(100%, 0, 0);
    }
+}
+
+
+
+/* FOOTER */
+
+.footer-subscribe {
+    max-height: 52px;
+    margin-top: 15px !important;
 }
