@@ -22,6 +22,8 @@
 		};
 		init();
 	}();
+	
+
 
 	// When the user scrolls down 80px from the top of the document, resize the navbar's padding and the logo's font size
 window.onscroll = function() {scrollFunction()};
@@ -43,3 +45,26 @@ function scrollFunction() {
 }
 	
 })(jQuery); 
+
+
+$(document).ready(function(){
+
+	// Toggle the blurred class
+	function sidebar(){
+	  var trigger = $('.menu-icon'),
+	  menu = $('.nav');
+	
+	  trigger.on('click',function(){
+		console.log("trigger")
+	  //  $(this).toggleClass('active');
+	  //  menu.toggleClass('closed');
+	   $('#blurme').toggleClass('blurred'); // just here
+	  });
+	}
+	 function deploy(){
+	  sidebar();
+	 }
+	
+	 deploy();
+	
+	});
