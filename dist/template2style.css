@@ -199,7 +199,8 @@ user-select: none;
           transition-delay: 0s;
 
           background-color: hsla(0, 0%, 50%, 0.1);
-          backdrop-filter: blur(24px);
+          -webkit-backdrop-filter: blur(18px);
+backdrop-filter: blur(18px);
     transition: 1s;
     transform: translateX(-150%);
     width: 40%;
@@ -834,6 +835,6 @@ right: 0;
 /* FOOTER */
 
 .footer-subscribe {
-    max-height: 52px;
+    max-height: 55px;
     margin-top: 15px !important;
 }
