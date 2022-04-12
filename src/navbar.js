@@ -4,17 +4,20 @@
 
 	var app = function () {
 		var body = undefined;
+		var blurme = undefined;
 		var menu = undefined;
 		var menuItems = undefined;
 		var init = function init() {
 			body = document.querySelector('body');
+			blurme = document.querySelector('#blurme');
 			menu = document.querySelector('.menu-icon');
 			menuItems = document.querySelectorAll('.nav__list-item');
 			applyListeners();
 		};
 		var applyListeners = function applyListeners() {
 			menu.addEventListener('click', function () {
-				return toggleClass(body, 'nav-active');
+				return toggleClass(body, 'nav-active'),
+				toggleClass(blurme,'blurred');
 			});
 		};
 		var toggleClass = function toggleClass(element, stringClass) {
@@ -23,7 +26,6 @@
 		init();
 	}();
 	
-
 
 	// When the user scrolls down 80px from the top of the document, resize the navbar's padding and the logo's font size
 window.onscroll = function() {scrollFunction()};
@@ -44,27 +46,18 @@ function scrollFunction() {
   }
 }
 	
-})(jQuery); 
+})
+(jQuery); 
 
 
-$(document).ready(function(){
+// $(document).ready(function(){
 
-	// Toggle the blurred class
-	function sidebar(){
-	  var trigger = $('.menu-icon'),
-	  menu = $('.nav');
+// 	// Toggle the blurred class
 	
-	  trigger.on('click',function(){
-		console.log("trigger")
-	  //  $(this).toggleClass('active');
-	  //  menu.toggleClass('closed');
-	   $('#blurme').toggleClass('blurred'); // just here
-	  });
-	}
-	 function deploy(){
-	  sidebar();
-	 }
+// 	 function deploy(){
+// 	  sidebar();
+// 	 }
 	
-	 deploy();
+// 	 deploy();
 	
-	});
+// 	});
