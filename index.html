@@ -4,12 +4,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0" />
   <title>Tom Alder | Home</title>
 
 
 
   <!-- LOAD JS LIBRARIES -->
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://kit.fontawesome.com/e1e5245f06.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
@@ -26,38 +28,48 @@
   <!-- LOAD FIRESTORE JS -->
   <script src="src/index.js"></script>
 
+  <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
+  <script>
+    ScrollReveal({
+      duration: 1000
+    })
+  </script>
 
 </head>
 
 <body>
+
   <!-- Navbar -->
   <div id="top-nav" class="container fixed z-20 h-14 min-w-full bg-white"></div>
-  <div class="nav">
-    <div class="nav__content">
-      <ul class="nav__list ">
-        <li class="nav__list-item sm:text-4xl text-3xl mb-4">
-          <a href="#" class="hover"><i class="text-blue-400 fa-solid fa-house mr-3 text-2xl"></i> Home</a>
-        </li>
-        <li class="nav__list-item sm:text-4xl text-3xl mb-4">
-          <a href="#" class="hover">
-            <i class="text-blue-400 fa-solid fa-circle-user mr-3 text-2xl "></i> About</a>
-        </li>
-        <li class="nav__list-item sm:text-4xl text-3xl mb-4">
-          <a href="#" class="hover">
-            <i class="text-blue-400 fa-solid fa-envelope mr-3 text-2xl"></i> Contact</a>
-        </li>
-        <li class="nav__list-item mt-24">
-          <a href="#">
-            <i class="fa-brands fa-linkedin-in text-2xl hover"></i></a>
-          <a href="#">
-            <i class="fa-brands fa-twitter text-2xl hover"></i></a>
-          <a href="#">
-            <i class="fa-brands fa-github text-2xl hover"></i> </a>
-        </li>
-      </ul>
+  
+
+    <div class="nav">
+      <div class="nav__content">
+        <ul class="nav__list ">
+          <li class="nav__list-item sm:text-4xl text-3xl mb-4">
+            <a href="#" class="hover"><i class="text-blue-400 fa-solid fa-house mr-3 text-2xl"></i> Home</a>
+          </li>
+          <li class="nav__list-item sm:text-4xl text-3xl mb-4">
+            <a href="#" class="hover">
+              <i class="text-blue-400 fa-solid fa-circle-user mr-3 text-2xl "></i> About</a>
+          </li>
+          <li class="nav__list-item sm:text-4xl text-3xl mb-4">
+            <a href="#" class="hover">
+              <i class="text-blue-400 fa-solid fa-envelope mr-3 text-2xl"></i> Contact</a>
+          </li>
+          <li class="nav__list-item mt-24">
+            <a href="#">
+              <i class="fa-brands fa-linkedin-in text-2xl hover"></i></a>
+            <a href="#">
+              <i class="fa-brands fa-twitter text-2xl hover"></i></a>
+            <a href="#">
+              <i class="fa-brands fa-github text-2xl hover"></i> </a>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
-  <div class="cd-header z-20">
+
+  <div class="navfade load-hidden cd-header z-20">
     <div id="top-nav-content" class="mx-auto max-w-6xl items-center px-8 py-8 xl:px-5">
       <div class="logo-wrap align-middle">
         <a href="#"><img class="logo hover mx-auto" src="img/talogo-removebg.png" alt="ta logo"></a>
@@ -72,7 +84,7 @@
       </div>
     </div>
   </div>
-  
+
 
   <!-- Hero -->
   <div id="blurme">
@@ -83,26 +95,26 @@
             <div
               class="w-full space-y-6 pb-6 sm:max-w-md sm:pr-5 md:space-y-4 md:pb-0 lg:max-w-lg lg:space-y-8 lg:pr-0 xl:space-y-9">
               <div>
-                <h1 class="mb-4 text-6xl font-extrabold tracking-tight">
+                <h1 class="heyfade1 load-hidden mb-4 text-6xl font-extrabold tracking-tight">
                   <span class="block text-gray-900 xl:inline">Hey 👋</span>
                 </h1>
-                <h1 class="text-6xl font-extrabold tracking-tight">
+                <h1 class="heyfade2 load-hidden text-6xl font-extrabold tracking-tight">
                   <span class="block text-blue-500 xl:inline">I'm Tom</span>
                 </h1>
-                <h1 class="hero-text mx-auto mt-10 text-lg text-gray-500 sm:max-w-md md:max-w-3xl lg:text-xl">
+                <h1 class="welcomefade load-hidden hero-text mx-auto mt-10 text-lg text-gray-500 sm:max-w-md md:max-w-3xl lg:text-xl">
                   Thank you for checking out
                 </h1>
                 <h1
-                  class="hero-text m my-0 mx-auto mt-0 space-y-0 text-lg text-gray-500 sm:max-w-md md:max-w-3xl lg:text-xl">
+                  class="welcomefade load-hidden hero-text m my-0 mx-auto mt-0 space-y-0 text-lg text-gray-500 sm:max-w-md md:max-w-3xl lg:text-xl">
                   my <span class="typed-replaced text-black"></span>
                 </h1>
               </div>
               <div class="space-y-4 py-12">
-                <p id="waitlistfade1" class="mx-auto text-xs text-gray-400 sm:text-base md:max-w-2xl">
+                <p class="load-hidden waitlistfade1 mx-auto text-xs text-gray-400 sm:text-base md:max-w-2xl">
                   Get free strategy and product insights:
                 </p>
                 <div class="relative flex flex-row space-x-4 pb-20 sm:pb-0">
-                  <iframe id="waitlistfade2"
+                  <iframe class="load-hidden waitlistfade2"
                     src="https://embeds.beehiiv.com/57f928d8-78ef-46d0-b1c5-7154b8b24faa?slim=true"
                     data-test-id="beehiiv-embed" frameborder="0" scrolling="no"
                     style="margin: 0; border-radius: 0px !important; background-color: transparent;"></iframe>
@@ -120,16 +132,20 @@
               </div>
             </div>
           </div>
-          <object data="./img/undraw_content_re_33px.svg" class="w-full md:w-1/2"></object>
+          <object data="./img/undraw_content_re_33px.svg" class="graphicfade load-hidden w-full md:w-1/2"></object>
+          
         </div>
+        
       </div>
+      
+
     </section>
     <!-- INTRO CALLOUT -->
     <section class="w-full bg-white pt-16 sm:pt-0">
       <div class="mx-auto max-w-6xl px-12 text-center">
         <div class="space-y-12 md:text-center">
-          <div class="mb-20 max-w-3xl space-y-5 sm:mx-auto sm:space-y-4">
-            <h2 class="relative mb-16 text-4xl font-extrabold tracking-tight sm:text-5xl">
+          <div id="hideme" class=" mb-20 max-w-3xl space-y-5 sm:mx-auto sm:space-y-4">
+            <h2 class="load-hidden callout1 relative mb-16 text-4xl font-extrabold tracking-tight sm:text-5xl">
               I posted on LinkedIn every day for
               <span
                 class="numbers relative inline-block w-14 text-4xl font-extrabold tracking-tight text-blue-500 sm:w-20 sm:text-5xl"><span
@@ -137,9 +153,9 @@
               </span>
               days
             </h2>
-            <p class="text-xl text-gray-500">
+            <p class="callout2 text-xl text-gray-500">
               In that time I grew from 0 to
-              <span class="value inline-block w-[3.7rem]">10000</span>
+              <span class=" inline-block w-[3.7rem]"><span class="value"> 10000</span></span>
               followers. Here is a time capsule of every post along the way:
             </p>
           </div>
@@ -172,7 +188,7 @@
             </div>
             <div class="load-more container-center">
               <button type="button"
-                class="flex w-auto items-center rounded-lg bg-gray-100 px-6 py-3 text-gray-500 hover:bg-gray-200 hover:text-gray-600"
+                class="flex items-center align-middle rounded-lg bg-gray-100 px-6 py-3 text-gray-500 hover:bg-gray-200 hover:text-gray-600"
                 style="vertical-align: middle" onclick="loadAfterSecondTime()">
                 Load More
               </button>
@@ -180,7 +196,7 @@
           </div>
           <hr>
           <div class="mt-20">
-              <p class="mx-auto text-xl text-gray-400">
+            <p class="mx-auto text-xl text-gray-400">
               Want your own portfolio of LinkedIn posts?
               <a class="text-gray-700 hover:text-blue-500 transition" href="#">Contact Me</a>
             </p>
@@ -195,20 +211,21 @@
           <p class="mx-auto text-gray-400 text-base md:max-w-2xl">
             Get free strategy and product insights:
           </p>
-          <iframe class="footer-subscribe" src="https://embeds.beehiiv.com/57f928d8-78ef-46d0-b1c5-7154b8b24faa?slim=true"
-            data-test-id="beehiiv-embed" frameborder="0" scrolling="no"
+          <iframe class="footer-subscribe"
+            src="https://embeds.beehiiv.com/57f928d8-78ef-46d0-b1c5-7154b8b24faa?slim=true" data-test-id="beehiiv-embed"
+            frameborder="0" scrolling="no"
             style="margin: 0; border-radius: 0px !important; background-color: transparent;"></iframe>
         </div>
-    
-          <span class="mt-2 inline-flex justify-center space-x-7 sm:ml-auto sm:justify-start">
-            <a href="#">
-              <i class="fa-brands fa-linkedin-in text-2xl hover"></i></a>
-            <a href="#">
-              <i class="fa-brands fa-twitter text-2xl hover"></i></a>
-            <a href="#">
-              <i class="fa-brands fa-github text-2xl hover"></i> </a>
-          </span>
-    
+
+        <span class="mt-2 inline-flex justify-center space-x-7 sm:ml-auto sm:justify-start">
+          <a href="#">
+            <i class="fa-brands fa-linkedin-in text-2xl hover"></i></a>
+          <a href="#">
+            <i class="fa-brands fa-twitter text-2xl hover"></i></a>
+          <a href="#">
+            <i class="fa-brands fa-github text-2xl hover"></i> </a>
+        </span>
+
       </div>
     </section>
   </div>
@@ -220,16 +237,56 @@
   <!-- Beehiiv attribution -->
   <script type="text/javascript" async src="https://embeds.beehiiv.com/attribution.js"></script>
 
+  <script>
+    var slideUp = {
+      distance: '25px',
+      origin: 'bottom',
+    };
+    
+    ScrollReveal().reveal('.navfade', {
+      distance: '25px',
+      origin: 'bottom',
+      delay: 1000
+    });
+    ScrollReveal().reveal('.heyfade1', {
+      distance: '25px',
+      origin: 'bottom',
+      delay: 1500
+    });
+    ScrollReveal().reveal('.heyfade2', {
+      distance: '25px',
+      origin: 'bottom',
+      delay: 1700
+    });
+    ScrollReveal().reveal('.welcomefade', {
+      distance: '25px',
+      origin: 'bottom',
+      delay: 2200
+    });
+    ScrollReveal().reveal('.graphicfade', {
+      distance: '25px',
+      origin: 'bottom',
+      delay: 3400
+    });
+    ScrollReveal().reveal('.waitlistfade1', {
+      distance: '25px',
+      origin: 'bottom',
+      delay: 2700
+    });
+    ScrollReveal().reveal('.waitlistfade2', {
+      distance: '25px',
+      origin: 'bottom',
+      delay: 2900
+    });
+  </script>
+
 </body>
 
 <script src="dist/bundle.js"></script>
 <script>
-
-
-
-
   window.onload = function () {
     setTimeout(loadAfterTime, 4000);
+
   };
 
   function loadAfterTime() {

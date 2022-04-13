@@ -16,8 +16,8 @@
 		};
 		var applyListeners = function applyListeners() {
 			menu.addEventListener('click', function () {
-				return toggleClass(body, 'nav-active'),
-				toggleClass(blurme,'blurred');
+				return toggleClass(blurme,'blurred'), toggleClass(blurme,'backdrop-blur'), toggleClass(body, 'nav-active');
+				
 			});
 		};
 		var toggleClass = function toggleClass(element, stringClass) {

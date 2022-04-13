@@ -32,7 +32,7 @@ function setupTypedReplace() {
       backDelay: options.backDelay,
       cursorChar: options.cursorChar,
       attr: options.attr,
-      // startDelay: 700,
+      startDelay: 3000,
       onComplete: function (t) {
         // existing text has now been removed so let's actually clear everything out
         // and setup the proper Typed loop we want. If we don't do this, the original
@@ -55,7 +55,7 @@ function setupTypedReplace() {
     var docViewBottom = docViewTop + $(window).height();
 
     var elemTop = $(elem).offset().top;
-    var elemBottom = elemTop + $(elem).height();
+    var elemBottom = elemTop;
 
     return elemBottom <= docViewBottom && elemTop >= docViewTop;
   }
@@ -63,6 +63,21 @@ function setupTypedReplace() {
   function testScroll() {
     if (isScrolledIntoView($(".numbers")) && !viewed) {
       viewed = true;
+      ScrollReveal().reveal('.callout1', {
+        distance: '25px',
+        origin: 'bottom',
+        delay: 500
+      });
+
+    ScrollReveal().reveal('.callout2', {
+      distance: '25px',
+      origin: 'bottom',
+      delay: 1000
+    });
+
+      document.getElementById("hideme").style.opacity = "1";
+      
+
 
       $(".value").each(function () {
         $(this)
