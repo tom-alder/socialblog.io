@@ -32,7 +32,7 @@ function setupTypedReplace() {
       backDelay: options.backDelay,
       cursorChar: options.cursorChar,
       attr: options.attr,
-      startDelay: 3000,
+      startDelay: 4000,
       onComplete: function (t) {
         // existing text has now been removed so let's actually clear everything out
         // and setup the proper Typed loop we want. If we don't do this, the original
@@ -87,7 +87,7 @@ function setupTypedReplace() {
               Counter: $(this).text(),
             },
             {
-              duration: 4000,
+              duration: 5000,
               easing: "swing",
               step: function (now) {
                 $(this).text(Math.ceil(now));

@@ -109,12 +109,12 @@
                   my <span class="typed-replaced text-black"></span>
                 </h1>
               </div>
-              <div class="space-y-4 py-12">
+              <div class="py-12">
                 <p class="load-hidden waitlistfade1 mx-auto text-xs text-gray-400 sm:text-base md:max-w-2xl">
                   Get free strategy and product insights:
                 </p>
-                <div class="relative flex flex-row space-x-4 pb-20 sm:pb-0">
-                  <iframe class="load-hidden waitlistfade2"
+                <div class="relative flex flex-row space-x-4 pb-0 sm:pb-0">
+                  <iframe class="subscribe load-hidden waitlistfade2"
                     src="https://embeds.beehiiv.com/57f928d8-78ef-46d0-b1c5-7154b8b24faa?slim=true"
                     data-test-id="beehiiv-embed" frameborder="0" scrolling="no"
                     style="margin: 0; border-radius: 0px !important; background-color: transparent;"></iframe>
@@ -132,14 +132,12 @@
               </div>
             </div>
           </div>
-          <object data="./img/undraw_content_re_33px.svg" class="graphicfade load-hidden w-full md:w-1/2"></object>
-          
+          <object data="./img/undraw_content_re_33px.svg" class="graphicfade load-hidden w-full md:w-1/2 sm:mb-8 pointer-events-none"></object>
         </div>
-        
       </div>
-      
-
     </section>
+
+
     <!-- INTRO CALLOUT -->
     <section class="w-full bg-white pt-16 sm:pt-0">
       <div class="mx-auto max-w-6xl px-12 text-center">
@@ -196,9 +194,14 @@
           </div>
           <hr>
           <div class="mt-20">
-            <p class="mx-auto text-xl text-gray-400">
+            <p class="ctafade mx-auto text-xl text-gray-400">
               Want your own portfolio of LinkedIn posts?
               <a class="text-gray-700 hover:text-blue-500 transition" href="#">Contact Me</a>
+              <!-- <button
+                      class="button flex items-center rounded-lg bg-blue-500 px-4 py-3 text-sm text-white hover:bg-blue-600 sm:mb-0 sm:w-auto sm:px-6 sm:text-lg"
+                      style="vertical-align: middle">
+                      <span>Join Waitlist</span>
+                    </button> -->
             </p>
           </div>
         </div>
@@ -211,7 +214,7 @@
           <p class="mx-auto text-gray-400 text-base md:max-w-2xl">
             Get free strategy and product insights:
           </p>
-          <iframe class="footer-subscribe"
+          <iframe class="subscribe"
             src="https://embeds.beehiiv.com/57f928d8-78ef-46d0-b1c5-7154b8b24faa?slim=true" data-test-id="beehiiv-embed"
             frameborder="0" scrolling="no"
             style="margin: 0; border-radius: 0px !important; background-color: transparent;"></iframe>
@@ -229,6 +232,7 @@
       </div>
     </section>
   </div>
+  <div class="unclick"></div>
 
   <!-- AlpineJS Library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.8.0/alpine.js"></script>
@@ -241,6 +245,7 @@
     var slideUp = {
       distance: '25px',
       origin: 'bottom',
+      delay: 500
     };
     
     ScrollReveal().reveal('.navfade', {
@@ -266,7 +271,8 @@
     ScrollReveal().reveal('.graphicfade', {
       distance: '25px',
       origin: 'bottom',
-      delay: 3400
+      delay: 3400,
+      mobile: false
     });
     ScrollReveal().reveal('.waitlistfade1', {
       distance: '25px',
@@ -278,6 +284,7 @@
       origin: 'bottom',
       delay: 2900
     });
+    ScrollReveal().reveal('.ctafade', slideUp);
   </script>
 
 </body>

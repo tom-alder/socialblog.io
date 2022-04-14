@@ -16,9 +16,22 @@
 		};
 		var applyListeners = function applyListeners() {
 			menu.addEventListener('click', function () {
-				return toggleClass(blurme,'blurred'), toggleClass(blurme,'backdrop-blur'), toggleClass(body, 'nav-active');
+				return toggleClass(blurme,'blurred'),  toggleClass(body, 'nav-active');
 				
-			});
+			})
+			// if (body.classList.contains('.nav-active')) {
+			// 	// do some stuff
+			// 	blurme.addEventListener('click', function () {
+			// 		return toggleClass(blurme,'blurred'),  toggleClass(body, 'nav-active');
+			// 	});
+			// }
+
+			blurme.addEventListener("click", () => {
+				if (body.classList.contains("nav-active")) {
+				  body.classList.remove("nav-active"),
+				  blurme.classList.remove("blurred")
+				   }
+				}, true);
 		};
 		var toggleClass = function toggleClass(element, stringClass) {
 			if (element.classList.contains(stringClass)) element.classList.remove(stringClass);else element.classList.add(stringClass);
@@ -49,15 +62,3 @@ function scrollFunction() {
 })
 (jQuery); 
 
-
-// $(document).ready(function(){
-
-// 	// Toggle the blurred class
-	
-// 	 function deploy(){
-// 	  sidebar();
-// 	 }
-	
-// 	 deploy();
-	
-// 	});

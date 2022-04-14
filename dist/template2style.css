@@ -156,6 +156,12 @@ html.sr .load-hidden {
 /* #Sidebar style
 ================================================== */
 
+.unclick {
+    z-index: 20;
+    width: 100%;
+    height: 100%;
+}
+
 .nav {
   position: fixed;
   z-index: 21;
@@ -214,9 +220,11 @@ html.sr .load-hidden {
   margin-top: 80px;
   -webkit-transform: translate(0%, -50%);
   transform: translate(0%, -50%);
-  width: 100%;
+  max-width: 400px;
   text-align: left;
 }
+
+
 
 @media (max-width: 480px) {
   .nav__content {
@@ -280,8 +288,8 @@ html.sr .load-hidden {
 
 .hover {
   color: rgba(88, 88, 88, 0.75);
-  transition: 0.2s ease-in-out all;
-  -webkit-transition: 0.2s ease-in-out all;
+  transition: 0.15s ease-in-out all;
+  -webkit-transition: 0.15s ease-in-out all;
 }
 
 .hover:hover {
@@ -383,15 +391,16 @@ body.nav-active .nav__list-item:nth-child(4) {
   -webkit-filter: blur(0.25rem) !important;
   filter: blur(0.25rem) !important;
   background-color: white;
-
   opacity: 0.7;
+  pointer-events: auto;
+  cursor: pointer;
 }
 
 #blurme {
   height: 100%;
   width: 100%;
   /* position: fixed; */
-  z-index: 5;
+  z-index: 50 !important;
   -webkit-transition: all 0.3s ease-in-out !important;
   transition: all 0.3s ease-in-out !important;
 }
@@ -429,6 +438,7 @@ body.nav-active .nav__list-item:nth-child(4) {
   opacity: 1;
   right: 0;
 }
+
 
 /* #Filter Buttons
 ================================================== */
@@ -796,7 +806,7 @@ body.nav-active .nav__list-item:nth-child(4) {
 
 /* FOOTER */
 
-.footer-subscribe {
+.subscribe {
   max-height: 55px;
   margin-top: 15px !important;
 }

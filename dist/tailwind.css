@@ -504,6 +504,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   }
 }
 
+.pointer-events-none {
+  pointer-events: none;
+}
+
 .fixed {
   position: fixed;
 }
@@ -526,6 +530,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .z-50 {
   z-index: 50;
+}
+
+.z-0 {
+  z-index: 0;
 }
 
 .mx-auto {
@@ -687,6 +695,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .max-w-3xl {
   max-width: 48rem;
+}
+
+.max-w-sm {
+  max-width: 24rem;
 }
 
 .flex-row {
@@ -857,6 +869,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-bottom: 2.5rem;
 }
 
+.pb-5 {
+  padding-bottom: 1.25rem;
+}
+
+.pb-0 {
+  padding-bottom: 0px;
+}
+
 .text-center {
   text-align: center;
 }
@@ -1007,6 +1027,34 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .sm\:ml-auto {
     margin-left: auto;
+  }
+
+  .sm\:mb-10 {
+    margin-bottom: 2.5rem;
+  }
+
+  .sm\:mb-96 {
+    margin-bottom: 24rem;
+  }
+
+  .sm\:mb-40 {
+    margin-bottom: 10rem;
+  }
+
+  .sm\:-mb-32 {
+    margin-bottom: -8rem;
+  }
+
+  .sm\:mb-32 {
+    margin-bottom: 8rem;
+  }
+
+  .sm\:mb-12 {
+    margin-bottom: 3rem;
+  }
+
+  .sm\:mb-8 {
+    margin-bottom: 2rem;
   }
 
   .sm\:inline-block {
