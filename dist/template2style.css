@@ -32,6 +32,13 @@ html.sr .load-hidden {
     visibility: hidden;
 }
 
+@media (max-width: 640px) {
+    html.sr .graphicfade {
+        visibility: visible !important;
+    }
+  }
+
+
 /* #Primary style
 ================================================== */
 
@@ -225,13 +232,12 @@ html.sr .load-hidden {
 }
 
 
-
-@media (max-width: 480px) {
+/* @media (max-width: 480px) {
   .nav__content {
     top: 42%;
     margin-top: 0px;
   }
-}
+} */
 
 .nav__list {
   /* position: relative; */
