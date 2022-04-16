@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0" />
+  <title>Tom Alder | About</title>
+  <link rel="icon" type="image/x-icon" href="/img/ta-favicon/favicon.ico">
+
+
+  <!-- LOAD JS LIBRARIES -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://kit.fontawesome.com/e1e5245f06.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.27.1/slimselect.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.27.1/slimselect.min.css" rel="stylesheet">
+  </link>
+
+  <!-- LOAD CSS LIBRARIES -->
+
+  <link rel="stylesheet" href="dist/template2style.css" />
+  <link rel="stylesheet" href="dist/tailwind.css" />
+
+  <!-- LOAD FIRESTORE JS -->
+  <script src="src/index.js"></script>
+
+  <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
+  <script>
+    ScrollReveal({
+      duration: 1000
+    })
+  </script>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <div id="top-nav" class="container fixed z-20 h-14 min-w-full bg-white"></div>
+    <div class="nav">
+      <div class="nav__content">
+        <ul class="nav__list ">
+          <li class="nav__list-item sm:text-4xl text-3xl mb-4">
+            <a href="index.html" class="hover"><i class="text-blue-400 fa-solid fa-house mr-3 text-2xl"></i> Home</a>
+          </li>
+          <li class="nav__list-item sm:text-4xl text-3xl mb-4">
+            <a href="about.html" class="hover">
+              <i class="text-blue-400 fa-solid fa-circle-user mr-3 text-2xl "></i> About</a>
+          </li>
+          <li class="nav__list-item sm:text-4xl text-3xl mb-4">
+            <a href="contact.html" class="hover">
+              <i class="text-blue-400 fa-solid fa-envelope mr-3 text-2xl"></i> Contact</a>
+          </li>
+          <li class="nav__list-item mt-24">
+            <a href="#">
+              <i class="fa-brands fa-linkedin-in text-2xl hover"></i></a>
+            <a href="#">
+              <i class="fa-brands fa-twitter text-2xl hover"></i></a>
+            <a href="#">
+              <i class="fa-brands fa-github text-2xl hover"></i> </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  <div class="navfade load-hidden cd-header z-20">
+    <div id="top-nav-content" class="mx-auto max-w-6xl items-center px-8 py-8 xl:px-5">
+      <div class="logo-wrap align-middle">
+        <a href="index.html"><img class="logo hover mx-auto" src="img/talogo-removebg.png" alt="ta logo"></a>
+      </div>
+      <div class="nav-but-wrap">
+        <label for="dotted-menu" class="dotted-icon dotted-menu"></label>
+        <div class="menu-icon">
+          <span class="menu-icon__line menu-icon__line-left"></span>
+          <span class="menu-icon__line"></span>
+          <span class="menu-icon__line menu-icon__line-right"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Hero -->
+  <div id="blurme">
+    
+    <section class="text-gray-600 body-font relative">
+      <div class="container px-5 pt-24 mx-auto flex sm:flex-nowrap flex-wrap">
+        <div class="lg:w-2/3 md:w-1/2 bg-gray-300 rounded-lg overflow-hidden sm:mr-10 p-10 flex items-end justify-start relative px-10">
+          <iframe width="100%" height="100%" class="absolute inset-0" frameborder="0" title="map" marginheight="0" marginwidth="0" scrolling="no" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d424143.2713279725!2d150.65178291856375!3d-33.84792702366487!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b129838f39a743f%3A0x3017d681632a850!2sSydney%20NSW!5e0!3m2!1sen!2sau!4v1650121514664!5m2!1sen!2sau" style=""></iframe>
+          <div class="">
+            <div class="bg-white relative flex flex-wrap py-6 rounded-xl shadow-md min-w-full w-96">
+              <div class="lg:w-1/2 px-6 ">
+                <h2 class="title-font font-semibold text-black text-xs">Location</h2>
+                <p class="mt-1">Sydney, Australia</p>
+              </div>
+              <div class="lg:w-1/2 px-6">
+                <h2 class="title-font font-semibold text-black  text-xs">Email</h2>
+                <a class="text-blue-500 leading-relaxed">tom@email.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lg:w-1/3 md:w-1/2 bg-white flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0">
+          <h2 class="sm:text-3xl text-2xl font-extrabold tracking-tight text-center pb-3">Contact</h2>
+          <p class="leading-relaxed mb-5 text-gray-600">Feel free to contact me using the form below!</p>
+          <div class="relative mb-4">
+            <label for="name" class="leading-7 text-sm text-gray-600">Name</label>
+            <input type="text" id="name" name="name" class="w-full bg-white rounded border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+          </div>
+          <div class="relative mb-4">
+            <label for="email" class="leading-7 text-sm text-gray-600">Email</label>
+            <input type="email" id="email" name="email" class="w-full bg-white rounded border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+          </div>
+          <div class="relative mb-4">
+            <label for="message" class="leading-7 text-sm text-gray-600">Message</label>
+            <textarea id="message" name="message" class="w-full bg-white rounded border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>
+          </div>
+          <button type="button"
+                class="flex flex-col items-center align-middle font-extrabold  rounded-lg text-white bg-blue-500 px-6 py-3 hover:bg-blue-600"
+                style="vertical-align: middle">
+                Send
+              </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <section class="body-font bg-gray-50 text-gray-700">
+      <div class="container flex flex-col sm:flex-row mx-auto max-w-6xl items-center pb-10 sm:pb-0 px: xl:px-5 mt-20">
+        <div class="py-10 px-3">
+          <p class="mx-auto text-gray-400 text-base md:max-w-2xl">
+            Get free strategy and product insights:
+          </p>
+          <iframe class="subscribe"
+            src="https://embeds.beehiiv.com/57f928d8-78ef-46d0-b1c5-7154b8b24faa?slim=true" data-test-id="beehiiv-embed"
+            frameborder="0" scrolling="no"
+            style="margin: 0; border-radius: 0px !important; background-color: transparent;"></iframe>
+        </div>
+
+        <span class="mt-2 inline-flex justify-center space-x-7 sm:ml-auto sm:justify-start">
+          <a href="#">
+            <i class="fa-brands fa-linkedin-in text-2xl hover"></i></a>
+          <a href="#">
+            <i class="fa-brands fa-twitter text-2xl hover"></i></a>
+          <a href="#">
+            <i class="fa-brands fa-github text-2xl hover"></i> </a>
+        </span>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- AlpineJS Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.8.0/alpine.js"></script>
+  <script src="src/navbar.js"></script>
+  <script src="src/animatetext.js"></script>
+  <!-- Beehiiv attribution -->
+  <script type="text/javascript" async src="https://embeds.beehiiv.com/attribution.js"></script>
+
+  <script>
+    var slideUp = {
+      distance: '25px',
+      origin: 'bottom',
+      delay: 500
+    };
+    
+    ScrollReveal().reveal('.navfade', {
+      distance: '25px',
+      origin: 'bottom',
+      delay: 1000
+    });
+    ScrollReveal().reveal('.heyfade1', {
+      distance: '25px',
+      origin: 'bottom',
+      delay: 1500
+    });
+    ScrollReveal().reveal('.heyfade2', {
+      distance: '25px',
+      origin: 'bottom',
+      delay: 1700
+    });
+    ScrollReveal().reveal('.welcomefade', {
+      distance: '25px',
+      origin: 'bottom',
+      delay: 2200
+    });
+    ScrollReveal().reveal('.photofade', {
+      distance: '25px',
+      origin: 'bottom',
+      delay: 2700
+    });
+    ScrollReveal().reveal('.aboutfade', {
+      distance: '25px',
+      origin: 'bottom',
+      delay: 3200
+    });
+  </script>
+
+</body>
+
+<script src="dist/bundle.js"></script>
+<script>
+  window.onload = function () {
+    setTimeout(loadAfterTime, 4000);
+
+  };
+
+  function loadAfterTime() {
+    // code you need to execute goes here.
+    console.log("4 seconds");
+    $(function () {
+      // $('.iframe').css('opacity', '1')
+      $(".card-preloader").css("opacity", "0");
+    });
+  }
+
+  function loadAfterSecondTime() {
+    $(function () {
+      // $('.iframe').css('opacity', '0')
+      $(".card-preloader").css("opacity", "1");
+    });
+    setTimeout(loadAfterTime, 4000);
+  }
+</script>
+
+</html>

@@ -32,7 +32,7 @@ function setupTypedReplace() {
       backDelay: options.backDelay,
       cursorChar: options.cursorChar,
       attr: options.attr,
-      startDelay: 4000,
+      startDelay: 4500,
       onComplete: function (t) {
         // existing text has now been removed so let's actually clear everything out
         // and setup the proper Typed loop we want. If we don't do this, the original
