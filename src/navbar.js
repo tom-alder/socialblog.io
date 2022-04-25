@@ -10,7 +10,7 @@
 		var init = function init() {
 			body = document.querySelector('body');
 			blurme = document.querySelector('#blurme');
-			menu = document.querySelector('.menu-icon');
+			menu = document.querySelector('#togglenav');
 			menuItems = document.querySelectorAll('.nav__list-item');
 			applyListeners();
 		};
@@ -29,7 +29,8 @@
 			blurme.addEventListener("click", () => {
 				if (body.classList.contains("nav-active")) {
 				  body.classList.remove("nav-active"),
-				  blurme.classList.remove("blurred")
+				  blurme.classList.remove("blurred"),
+				  document.getElementById("togglenav").checked = false;
 				   }
 				}, true);
 		};
