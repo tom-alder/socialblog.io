@@ -49,8 +49,8 @@ const db = getFirestore(app);
 // const db = getFirestore()
 
 // collection ref - CHANGE THIS TO CHANGE THE FIRESTORE COLLECTION YOU PULL FROM
-const colRef = collection(db, "posts-g-sheets-reduced-5");
-var q = query(collection(db, "posts-g-sheets-reduced-5"));
+const colRef = collection(db, "fully-tagged");
+var q = query(collection(db, "fully-tagged"));
 // const q = query(collection(db, 'posts-g-sheets-reduced-5'), where("category", "==", ["strategy"]));
 
 // // // *--- QUERIES ---* // // //
@@ -277,7 +277,7 @@ function mostComments() {
   getFirstReviews();
 }
 
-// Sort by most Recent BUILDING
+// Sort by most Recent WORKING
 function mostRecent() {
   console.log("mostRecent has run");
   orderCol = "createdAt";
@@ -286,7 +286,7 @@ function mostRecent() {
   getFirstReviews();
 }
 
-// Sort by least Recent BUILDING
+// Sort by least Recent WORKING
 function leastRecent() {
   console.log("leastRecent has run");
   orderCol = "createdAt";
@@ -319,12 +319,78 @@ function filterStrategy() {
   getFirstReviews();
 }
 
-// Filter by topic (crypto) BUILDING
+// Filter by topic (product) WORKING
+function filterProduct() {
+  console.log("filterProduct has run");
+  // orderCol = 'createdAt';
+  // orderDir = 'asc';
+  q = query(colRef, where("category", "array-contains", "product"));
+  // q = query(colRef, where("regions", "array-contains", "west_coast"));
+  clear();
+  getFirstReviews();
+}
+
+// Filter by topic (fintech) WORKING
+function filterFintech() {
+  console.log("filterFintech has run");
+  // orderCol = 'createdAt';
+  // orderDir = 'asc';
+  q = query(colRef, where("category", "array-contains", "fintech"));
+  // q = query(colRef, where("regions", "array-contains", "west_coast"));
+  clear();
+  getFirstReviews();
+}
+
+// Filter by topic (crypto) Working
 function filterCrypto() {
   console.log("filterCrypto has run");
   // orderCol = 'createdAt';
   // orderDir = 'asc';
   q = query(colRef, where("category", "array-contains", "crypto"));
+  // q = query(colRef, where("regions", "array-contains", "west_coast"));
+  clear();
+  getFirstReviews();
+}
+
+// Filter by topic (NFTs) Working
+function filterNFTs() {
+  console.log("filterNFTs has run");
+  // orderCol = 'createdAt';
+  // orderDir = 'asc';
+  q = query(colRef, where("category", "array-contains", "NFTs"));
+  // q = query(colRef, where("regions", "array-contains", "west_coast"));
+  clear();
+  getFirstReviews();
+}
+
+// Filter by topic (big tech) Working
+function filterBigTech() {
+  console.log("filterBigTech has run");
+  // orderCol = 'createdAt';
+  // orderDir = 'asc';
+  q = query(colRef, where("category", "array-contains", "big tech"));
+  // q = query(colRef, where("regions", "array-contains", "west_coast"));
+  clear();
+  getFirstReviews();
+}
+
+// Filter by topic (Startups) Working
+function filterStartups() {
+  console.log("filterStartups has run");
+  // orderCol = 'createdAt';
+  // orderDir = 'asc';
+  q = query(colRef, where("category", "array-contains", "startups"));
+  // q = query(colRef, where("regions", "array-contains", "west_coast"));
+  clear();
+  getFirstReviews();
+}
+
+// Filter by topic (Creator Economy) Working
+function filterCreatorEconomy() {
+  console.log("filterCreatorEconomy has run");
+  // orderCol = 'createdAt';
+  // orderDir = 'asc';
+  q = query(colRef, where("category", "array-contains", "creator economy"));
   // q = query(colRef, where("regions", "array-contains", "west_coast"));
   clear();
   getFirstReviews();
@@ -339,13 +405,18 @@ var filterSS = new SlimSelect({
   valuesUseText: true, // Use text instead of innerHTML for selected values - default false
   data: [
     {'placeholder': true, 'text': 'Topic'},
-    {innerHTML: '<i class="fa-solid fa-book mr-3"></i> All', text: 'All', value: 'all'},
-    {innerHTML: '<i class="fa-solid fa-chess mr-3"></i> Strategy', text: 'Strategy', value: 'strategy'},
-    {innerHTML: '<i class="fa-solid fa-cubes mr-3"></i> Crypto', text: 'Crypto', value: 'crypto'},
+    {innerHTML: '<i class="fa-solid fa-book mr-3 w-3 ml-[0.07rem]"></i> All', text: 'All', value: 'all'},
+    {innerHTML: '<i class="fa-solid fa-chess mr-3  w-3"></i> Strategy', text: 'Strategy', value: 'strategy'},
+    {innerHTML: '<i class="fa-solid fa-box-open mr-[0.84rem] w-3 ml-[-0.07rem]"></i> Product', text: 'Product', value: 'product'},
+    {innerHTML: '<i class="fa-solid fa-credit-card mr-[0.65rem]"></i> Fintech', text: 'Fintech', value: 'fintech'},
+    {innerHTML: '<i class="fa-solid fa-cubes mr-[0.65rem]"></i> Crypto', text: 'Crypto', value: 'crypto'},
+    {innerHTML: '<i class="fa-solid fa-image mr-3"></i> NFTs', text: 'NFTs', value: 'NFTs'},
+    {innerHTML: '<i class="fa-solid fa-globe mr-3"></i> Big Tech', text: 'Big Tech', value: 'big tech'},
+    {innerHTML: '<i class="fa-solid fa-rocket mr-3"></i> Startups', text: 'Startups', value: 'startups'},
+    {innerHTML: '<i class="fa-solid fa-pen mr-3"></i> Creator Economy', text: 'Creator Economy', value: 'creator economy'},
   ],
   onChange: (info) => {
     console.log(info)
-
   }
 })
 
@@ -357,8 +428,26 @@ var filterSS = new SlimSelect({
       if ($("#filter").val() == "strategy") {
         filterStrategy();
       }
-      else if ($("#filter").val() == "crypto") {
+      if ($("#filter").val() == "product") {
+        filterProduct();
+      }
+      if ($("#filter").val() == "fintech") {
+        filterFintech();
+      }
+      if ($("#filter").val() == "crypto") {
         filterCrypto();
+      }
+      if ($("#filter").val() == "NFTs") {
+        filterNFTs();
+      }
+      if ($("#filter").val() == "big tech") {
+        filterBigTech();
+      }
+      if ($("#filter").val() == "startups") {
+        filterStartups();
+      }
+      if ($("#filter").val() == "creator economy") {
+        filterCreatorEconomy();
       }
     });
   });
@@ -403,58 +492,6 @@ var sortSS = new SlimSelect({
   });
 
 
-// // // *--- SORT AND FILTER TOGGLES ---* // // //
-// // // *--- These all need to be uncommented for loadmoreclientsort.html to work! ---* // // //
-
-// // Most Views (dropdown)
-// var mostViewsDropdown = document.getElementById("mostViewsID");
-// mostViewsDropdown.onclick = function () {
-//   console.log("Sort by most Views");
-//   mostViews();
-// };
-
-// // Most Likes (dropdown)
-// var mostLikesDropdown = document.getElementById("mostLikesID");
-// mostLikesDropdown.onclick = function () {
-//   console.log("Sort by most Likes");
-//   mostLikes();
-// };
-
-// // Most comments (dropdown)
-// var mostCommentsDropdown = document.getElementById("mostCommentsID");
-// mostCommentsDropdown.onclick = function () {
-//   console.log("Sort by most Comments");
-//   mostComments();
-// };
-
-// // Most Recent (dropdown)
-// var mostRecentDropdown = document.getElementById("mostRecentID");
-// mostRecentDropdown.onclick = function () {
-//   console.log("Sort by most Recent");
-//   mostRecent();
-// };
-
-// // Least Recent (dropdown)
-// var leastRecentDropdown = document.getElementById("leastRecentID");
-// leastRecentDropdown.onclick = function () {
-//   console.log("Sort by least Recent");
-//   leastRecent();
-// };
-
-// // Filter Strategy (dropdown)
-// var filterStrategyDropdown = document.getElementById("filterStrategyID");
-// filterStrategyDropdown.onclick = function () {
-//   console.log("Filter by Strategy");
-//   filterStrategy();
-// };
-
-// // Filter Crypto (dropdown)
-// var filterCryptoDropdown = document.getElementById("filterCryptoID");
-// filterCryptoDropdown.onclick = function () {
-//   console.log("Filter by Crypto");
-//   filterCrypto();
-// };
-
 // Load more docs (button)
 const loadMore = document.querySelector(".load-more button");
 
@@ -471,9 +508,7 @@ loadMore.addEventListener("click", handleClick);
 window.addEventListener("DOMContentLoaded", () => getFirstReviews());
 // window.addEventListener('DOMContentLoaded', () => leastViews());
 
-// // //
-// // // *--- NOT IN USE ---* // // //
-// // //
+
 
 // Get next posts
 const getNextPosts = async () => {
@@ -547,261 +582,7 @@ const getNextPosts = async () => {
   }
 };
 
-// // // *--- FUNCTIONS TO RUN QUERIES ---* // // //
 
-// Get collection data - WORKING postcard with labels
-onSnapshot(q, (snapshot) => {
-  var posts = [];
-  snapshot.docs.forEach((doc) => {
-    posts.push({
-      ...doc.data(),
-      id: doc.id,
-    });
-  });
-
-  // console.log(posts)
-  document.getElementById("postcard-mixitup").innerHTML = `
-    ${posts
-      .map(function (grabData) {
-        return `
-        <div class="mix company-${grabData.company} blog-card" data-ref="item">
-        
-          <div class="linkedin-post">
-            <div class="card-border"></div>
-            <iframe src="https://www.linkedin.com/embed/feed/update/${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post" loading="lazy">
-            </iframe>
-          </div>
-          <div>
-            ${grabData.company}
-          </div>
-        </div> 
-      `;
-      })
-      .join("")}
-    `;
-});
-
-// Clear Filter WORKING
-var filterNone = document.querySelector(".clear");
-filterNone.addEventListener("click", (e) => {
-  e.preventDefault();
-  q = query(colRef, orderBy("numViews", "desc"), limit(6));
-  console.log(q);
-  onSnapshot(q, (snapshot) => {
-    var posts = [];
-    snapshot.docs.forEach((doc) => {
-      posts.push({
-        ...doc.data(),
-        id: doc.id,
-      });
-    });
-
-    console.log(posts);
-    document.getElementById("postcard-mixitup").innerHTML = `
-    ${posts
-      .map(function (grabData) {
-        return `
-      <div class="mix company-${grabData.company} blog-card" data-ref="item">
-        
-      <div class="linkedin-post">
-        <div class="card-border"></div>
-        <iframe src="https://www.linkedin.com/embed/feed/update/${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post">
-        </iframe>
-      </div>
-      <div>
-        ${grabData.company}
-      </div>
-    </div>
-      `;
-      })
-      .join("")}
-    `;
-  });
-});
-
-// Canva Filter WORKING
-var filterCanva = document.querySelector(".canva");
-filterCanva.addEventListener("click", (e) => {
-  e.preventDefault();
-  q = query(colRef, where("company", "==", ["canva"]));
-  console.log(q);
-  onSnapshot(q, (snapshot) => {
-    var posts = [];
-    snapshot.docs.forEach((doc) => {
-      posts.push({
-        ...doc.data(),
-        id: doc.id,
-      });
-    });
-
-    console.log(posts);
-    document.getElementById("postcard-mixitup").innerHTML = `
-    ${posts
-      .map(function (grabData) {
-        return `
-      <div class="mix company-${grabData.company} blog-card" data-ref="item">
-        <div class="linkedin-post">
-          <div class="card-border"></div>
-          <iframe src="https://www.linkedin.com/embed/feed/update/${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post">
-          </iframe>
-        </div>
-        <div>
-          ${grabData.company}
-        </div>
-      </div>
-      `;
-      })
-      .join("")}
-    `;
-  });
-});
-
-// Apple Filter WORKING
-var filterApple = document.querySelector(".apple");
-filterApple.addEventListener("click", (e) => {
-  e.preventDefault();
-  q = query(colRef, where("company", "array-contains-any", ["apple"]));
-  console.log(q);
-  onSnapshot(q, (snapshot) => {
-    var posts = [];
-    snapshot.docs.forEach((doc) => {
-      posts.push({
-        ...doc.data(),
-        id: doc.id,
-      });
-    });
-
-    console.log(posts);
-    document.getElementById("postcard-mixitup").innerHTML = `
-    ${posts
-      .map(function (grabData) {
-        return `
-      <div class="mix company-${grabData.company} blog-card" data-ref="item">
-        <div class="linkedin-post">
-          <div class="card-border"></div>
-          <iframe src="https://www.linkedin.com/embed/feed/update/${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post">
-          </iframe>
-        </div>
-        <div>
-          ${grabData.company}
-        </div>
-      </div> 
-      `;
-      })
-      .join("")}
-    `;
-  });
-});
-
-// // // *--- GET COLLECITON DATA ---* // // //
-
-// Get collection data (Point in time)
-// This does not update the page in real time as new docs are added
-// No 'subscription to the data'
-// getDocs(colRef)
-//   .then((snapshot) => {
-//     let posts = []
-//     snapshot.docs.forEach((doc) => {
-//       posts.push({ ...doc.data(), id: doc.id })
-//     })
-//     console.log(posts)
-//   })
-//   .catch(err => {
-//     console.log(err.message)
-//   })
-
-// Get collection data - individual datapoints
-// This updates in real time
-onSnapshot(q, (snapshot) => {
-  let posts = [];
-  snapshot.docs.forEach((doc) => {
-    posts.push({
-      ...doc.data(),
-      id: doc.id,
-    });
-  });
-  document.getElementById("datapoint").innerHTML = `
-    <h3>Results (${posts.length})</h3>
-    ${posts
-      .map(function (grabData) {
-        return grabData.topic + " (" + grabData.id + ")";
-      })
-      .join(" - ")}
-    `;
-});
-
-// Get collection data - WORKING postcard no labels
-// onSnapshot(q, (snapshot) => {
-//     let posts = []
-//     snapshot.docs.forEach((doc) => {
-//       posts.push({ ...doc.data(), id: doc.id })
-//     })
-//     console.log(posts)
-//     document.getElementById('postcard-mixitup').innerHTML = `
-
-//     ${posts.map(function(grabData) {
-//       return `
-//       <div class="blog-card">
-//       <div class="linkedin-post">
-//       <iframe src="${grabData.embedlink}" height="420" width="500" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
-//       </div>
-//       <div>
-//       ${grabData.company}
-//       </div>
-//       <div>
-//       ${grabData.id}
-//       </div>
-//     </div>
-//       `
-//     }).join('')}
-//     `
-// })
-
-// adding docs
-const addPostForm = document.querySelector(".add");
-addPostForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  addDoc(colRef, {
-    topic: addPostForm.topic.value,
-    date: addPostForm.date.value,
-    embedlink: addPostForm.embedlink.value,
-  }).then(() => {
-    addPostForm.reset();
-  });
-});
-
-// deleting docs
-const deletePostForm = document.querySelector(".delete");
-deletePostForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  const docRef = doc(db, "posts", deletePostForm.id.value);
-
-  deleteDoc(docRef).then(() => {
-    deletePostForm.reset();
-  });
-});
-
-// get a single document
-// Need to replace 'CBZoVLAvkVOpBsR3mL2x' with a valid ID
-
-// const docRef = doc(db, 'posts', 'CBZoVLAvkVOpBsR3mL2x')
-// getDoc(docRef)
-//     .then((doc) => {
-//         console.log(doc.data(), doc.id)
-//     })
-
-// updating a document
-const updateForm = document.querySelector(".update");
-updateForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  const docRef = doc(db, "posts", updateForm.id.value);
-
-  updateDoc(docRef, {
-    topic: "updated topic",
-  }).then(() => {
-    updateForm.reset();
-  });
-});
+// // //
+// // // *--- NOT IN USE ---* // // //
+// // //
