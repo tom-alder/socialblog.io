@@ -49,8 +49,8 @@ const db = getFirestore(app);
 // const db = getFirestore()
 
 // collection ref - CHANGE THIS TO CHANGE THE FIRESTORE COLLECTION YOU PULL FROM
-const colRef = collection(db, "fully-tagged");
-var q = query(collection(db, "fully-tagged"));
+const colRef = collection(db, "fully-tagged-2");
+var q = query(collection(db, "fully-tagged-2"));
 // const q = query(collection(db, 'posts-g-sheets-reduced-5'), where("category", "==", ["strategy"]));
 
 // // // *--- QUERIES ---* // // //
@@ -520,7 +520,7 @@ const getNextPosts = async () => {
   console.log(latestDoc);
   console.log("^ after await getDocs");
 
-  // Output docs TESTING
+  // Output docs WORKING
   let template = "";
   data.docs.forEach((doc) => {
     const grabData = doc.data();
