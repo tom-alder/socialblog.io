@@ -770,6 +770,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: inline-block;
 }
 
+.inline {
+  display: inline;
+}
+
 .flex {
   display: flex;
 }
@@ -824,6 +828,22 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .max-h-72 {
   max-height: 18rem;
+}
+
+.max-h-3 {
+  max-height: 0.75rem;
+}
+
+.max-h-10 {
+  max-height: 2.5rem;
+}
+
+.max-h-14 {
+  max-height: 3.5rem;
+}
+
+.max-h-16 {
+  max-height: 4rem;
 }
 
 .w-full {
