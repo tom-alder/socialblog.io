@@ -182,8 +182,8 @@ const getNextReviews = async () => {
   if (data_next.empty) {
     loadMore.removeEventListener("click", handleClick);
   }
-};
-
+}; 
+ 
 function renderPosts(data) {
   loadAfterSecondTime();
   let template = "";
