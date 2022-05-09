@@ -399,12 +399,12 @@ function filterCreatorEconomy() {
 
 var filterSS = new SlimSelect({
   select: '#filter',
-  placeholder: 'Topic',
+  placeholder: 'Choose a topic:',
   showSearch: false,
   allowDeselectOption: false,
   valuesUseText: true, // Use text instead of innerHTML for selected values - default false
   data: [
-    {'placeholder': true, 'text': 'Topic'},
+    {'placeholder': true, 'text': 'Choose a topic:'},
     {innerHTML: '<i class="fa-solid fa-book mr-3 w-3 ml-[0.07rem]"></i> All', text: 'All', value: 'all'},
     {innerHTML: '<i class="fa-solid fa-chess mr-3  w-3"></i> Strategy', text: 'Strategy', value: 'strategy'},
     {innerHTML: '<i class="fa-solid fa-box-open mr-[0.84rem] w-3 ml-[-0.07rem]"></i> Product', text: 'Product', value: 'product'},
@@ -454,12 +454,12 @@ var filterSS = new SlimSelect({
 
 var sortSS = new SlimSelect({
   select: '#sort',
-  placeholder: 'Sort',
+  placeholder: 'Sort by:',
   showSearch: false,
   allowDeselectOption: false,
   valuesUseText: true, // Use text instead of innerHTML for selected values - default false
   data: [
-    {'placeholder': true, 'text': 'Sort'},
+    {'placeholder': true, 'text': 'Sort by:'},
     {innerHTML: '<i class="fa-solid fa-eye mr-3"></i> Most views', text: 'Most views', value: 'most views'},
     {innerHTML: '<i class="fa-solid fa-thumbs-up mr-3"></i> Most likes', text: 'Most likes', value: 'most likes'},
     {innerHTML: '<i class="fa-solid fa-comment mr-3"></i> Most comments', text: 'Most comments', value: 'most comments'},
