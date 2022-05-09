@@ -115,7 +115,7 @@
                     Say hello on
                   </h1>
                   <h1 class=" hero-text mx-auto text-sm sm:text-md text-gray-500 sm:max-w-md md:max-w-3xl">
-                    <a href="https://www.linkedin.com/in/tom-alder/" class="underline hover:text-blue-500 hover:underline">LinkedIn</a> or <a href="https://twitter.com/tomaldertweets" class="underline hover:text-blue-500 hover:underline">Twitter</a>
+                    <a href="https://www.linkedin.com/in/tom-alder/" target="_blank" rel="noopener noreferrer" class="underline hover:text-blue-500 hover:underline">LinkedIn</a> or <a href="https://twitter.com/tomaldertweets" target="_blank" rel="noopener noreferrer" class="underline hover:text-blue-500 hover:underline">Twitter</a>
                   </h1>
                 </div>
               </div>
@@ -179,8 +179,18 @@
           <p class="sm:w-3/4 md:w-1/2 mx-auto leading-relaxed text-base text-gray-500 text-left font-light">This means that 99% of my content is effectively in the internet graveyard.</p>
           <p class="sm:w-3/4 md:w-1/2 mx-auto leading-relaxed text-base text-gray-500 text-left font-light">Similarly, when you discover a new creator, you can only read their posts from newest to oldest.</p>
           <p class="sm:w-3/4 md:w-1/2 mx-auto leading-relaxed text-base text-gray-500 text-left font-light">This makes it hard to navigate (potentially years worth of) older content, or quickly locate their most popular posts.</p>
-          <p class="sm:w-3/4 md:w-1/2 mx-auto leading-relaxed text-base text-gray-500 text-left font-bold">This site posits a solution to these problems.</p>
-          <p class="sm:w-3/4 md:w-1/2 mx-auto leading-relaxed text-base text-gray-500 text-left font-light">I set out to build:</p>
+          <!-- <p class="sm:w-3/4 md:w-1/2 mx-auto leading-relaxed text-base text-gray-500 text-left font-bold">This site posits a solution to these problems.</p> -->
+          <p class="sm:w-3/4 md:w-1/2 mx-auto leading-relaxed text-base text-gray-500 text-left font-bold">I surveyed 30 people (15 regular creators and 15 eager readers) to validate these pain points.</p>
+          <p class="sm:w-3/4 md:w-1/2 mx-auto leading-relaxed text-base text-gray-500 text-left font-light">A consistent theme started to emerge:</p>
+          <ul class="sm:w-3/4 md:w-1/2 px-4 mx-auto leading-relaxed text-base text-gray-500 text-left font-light list-disc">
+            <li class="px-5">"A person would likely be looking for specific content and would want to find either the content that fits a certain category or also has a lot of likes / engagement"</li>
+            <li class="px-5">"Features I would enjoy include “Filter posts by” - kind of like YouTube and opensea (e.g. oldest, most liked, advanced search)"</li>
+            <li class="px-5">"Chronological order + side bar with top posts (most liked, highest #comments) + filter by topic/category"</li>
+            <li class="px-5">"I recommend creating a user experience that is easy to navigate by industry, job function, and/or interests"</li>
+            <li class="px-5">"I'd like a few scrollable carousels that separate content by type or topic (maybe this is something the creator can customize)'"</li>
+            <li class="px-5">"A better UI for their posts - easier to skim through all their content. Maybe a grid format rather than a straight feed"</li>
+          </ul>
+          <p class="sm:w-3/4 md:w-1/2 mx-auto leading-relaxed text-base text-gray-500 text-left font-light">I translated these comments into user stories, and eventually set out to build:</p>
           <ol class="sm:w-3/4 md:w-1/2 px-4 mx-auto leading-relaxed text-base text-gray-500 text-left font-light list-decimal">
             <li class="px-5">An organised writing portfolio</li>
             <li class="px-5">An aesthetic personal landing page</li>
@@ -189,7 +199,7 @@
           </ol>
           <h2 class="sm:text-3xl text-2xl font-extrabold tracking-tight text-center pt-6 pb-3">How did I build it?</h2>
           <p class="sm:w-3/4 md:w-1/2 mx-auto leading-relaxed text-base text-gray-500 text-left font-light">This site also represents ~6 months of learning to code.</p>
-          <p class="sm:w-3/4 md:w-1/2 mx-auto leading-relaxed text-base text-gray-500 text-left font-light">I started by following <a>The Odin Project</a>, an open-source web dev curriculum. </p>
+          <p class="sm:w-3/4 md:w-1/2 mx-auto leading-relaxed text-base text-gray-500 text-left font-light">I started by following <a href="https://www.theodinproject.com/" target="_blank" rel="noopener noreferrer" class="underline text-black hover:underline hover:text-blue-500">The Odin Project</a>, an open-source web dev curriculum. </p>
           <p class="sm:w-3/4 md:w-1/2 mx-auto leading-relaxed text-base text-gray-500 text-left font-light">Their landing page does a good job of summarising why I chose it as a learning path:</p>
           <div class="py-8"><img class="sm:w-3/4 md:w-1/2 mx-auto rounded-xl odin-screenshot data-zoomable" src="img/odinlanding.png" alt=""></div>
           <p class="sm:w-3/4 md:w-1/2 mx-auto leading-relaxed text-base text-gray-500 text-left font-light">After a few weeks of flexbox exercises and GitHub-hosted recipe sites, I decided to pause The Odin Project and start building my own website.</p>
@@ -223,15 +233,15 @@
 
     <!-- Footer -->
     <section class="body-font bg-gray-50 text-gray-700">
-      <div class="container flex flex-col sm:flex-row mx-auto max-w-6xl items-center pb-10 sm:pb-0 px: xl:px-5 mt-20">
-        <div class="py-10 px-3">
+      <div class="container flex flex-col sm:flex-row mx-auto max-w-6xl items-center pb-10 sm:pb-0 px-10 xl:px-5 mt-20">
+        <div class="py-10 flex flex-col justify-center">
           <p class="mx-auto text-gray-400 text-base md:max-w-2xl">
             Get free strategy and product insights:
           </p>
           <iframe class="subscribe"
             src="https://embeds.beehiiv.com/57f928d8-78ef-46d0-b1c5-7154b8b24faa?slim=true" data-test-id="beehiiv-embed"
             frameborder="0" scrolling="no"
-            style="margin: 0; border-radius: 0px !important; background-color: parent;"></iframe>
+            style="margin: 0; border-radius: 0px !important; background-color: transparent;"></iframe>
         </div>
 
         <span class="mt-2 inline-flex justify-center space-x-7 sm:ml-auto sm:justify-start">
