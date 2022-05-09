@@ -1040,6 +1040,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   resize: none;
 }
 
+.list-inside {
+  list-style-position: inside;
+}
+
 .list-decimal {
   list-style-type: decimal;
 }
@@ -1469,6 +1473,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .pr-3 {
   padding-right: 0.75rem;
+}
+
+.pb-2 {
+  padding-bottom: 0.5rem;
 }
 
 .text-left {
