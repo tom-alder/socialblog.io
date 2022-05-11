@@ -13,15 +13,19 @@
 
   <!-- SIMPLE PASSWORD -->
 
-  <SCRIPT language="JavaScript"> 
+  <script language="JavaScript"> 
     var password; 
     var pass1="projectlink"; 
     password=prompt("Hey it's Tom - since you're here you should've received a password to access my unreleased site. Please enter it below!",' '); 
-    if (password==pass1) 
-    alert('Correct Password! Click OK to enter and enjoy the site :)'); 
-    { window.location="https://tom-alder.github.io/linkedin-portfolio-v2/home.html"; 
-    } 
-    </SCRIPT>
+    if (password==pass1) {
+      alert('Correct Password! Click OK to enter and enjoy the site :)');
+      { window.location="home.html" } 
+    } else {
+      { window.location="index.html" }
+    }
+     
+    
+    </script>
 
 </head>
 
