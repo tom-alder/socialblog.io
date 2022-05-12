@@ -9,7 +9,7 @@
   },
   "emulators": {
     "hosting": {
-      "port": 5034
+      "port": 5035
     },
     "ui": {
       "enabled": true

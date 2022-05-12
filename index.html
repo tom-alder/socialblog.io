@@ -9,28 +9,74 @@
   <title>Tom Alder | Enter Password</title>
   <link rel="icon" type="image/x-icon" href="/img/ta-favicon/favicon.ico">
 
+  <link rel="stylesheet" href="src/style.css" />
+  <link rel="stylesheet" href="dist/tailwind.css" />
+  <link rel="stylesheet" href="tailwind.css" />
 
 
   <!-- SIMPLE PASSWORD -->
 
-  <script language="JavaScript"> 
+  <!-- <script language="JavaScript"> 
     var password; 
     var pass1="projectlink"; 
-    password=prompt("Hey it's Tom - since you're here you should've received a password to access my unreleased site. Please enter it below!",' '); 
+    password=prompt("Hey it's Tom - since you're here you should've received a password to access my unreleased site. Please enter it below!",''); 
     if (password==pass1) {
       alert('Correct Password! Click OK to enter and enjoy the site :)');
       { window.location="home.html" } 
     } else {
       { window.location="index.html" }
     }
-     
-    
-    </script>
+  </script> -->
+  <script type="text/javascript">
+    function isValid() {
+      const element = document.getElementById("myAnchor");
+      var password = document.getElementById('password').value;
+      if (password == "projectlink") {
+        // alert('Correct!')
+        element.innerHTML = "Correct - enjoy!";
+        window.setTimeout(function () {
+          // Move to a new location or you can do something else
+          window.location.href = "home.html";
+        }, 1500);
+        // { window.location="home.html" };
+      } else {
+        // alert('Wrong Password')
+        element.innerHTML = "Incorrect password, please try again!";
+      }
+    }
+  </script>
 
 </head>
 
-<body>
+<body class="overflow-hidden">
+  <div class="flex justify-center items-center h-screen">
+    <form name="PassWordField" action="" class="">
+      <div class="max-w-sm sm:max-w-md mx-8">
+        <h3 class="text-lg text-black font-bold ">Hey it's Tom</h3>
+        <h3 class="text-sm text-gray-500 font-bold mt-2">Since you're here you should've received a password to access
+          my unreleased site. Please enter it below!</h3>
+        <div class="mt-6 flex gap-3">
+          <input type="password" id="password" name="password" placeholder="Enter password here"
+            class="bg-gray-200 hover:bg-gray-100 text-gray-900 p-3 rounded-lg focus:outline-none focus:shadow-outline flex-1 h-12 w-20">
+          <input type="button" value="OK" id="button" onclick="isValid();"
+            class="text-md font-normal bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg focus:outline-none focus:shadow-outline px-6 flex-initial h-12">
+        </div>
+        <div class="h-10 mt-8 text-blue-500" id="myAnchor">
+        </div>
+      </div>
+    </form>
+  </div>
 
+
+  <script>
+    var input = document.getElementById("password");
+    input.addEventListener("keypress", function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        document.getElementById("button").click();
+      }
+    });
+  </script>
 </body>
 
 
